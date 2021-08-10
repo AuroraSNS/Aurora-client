@@ -5,8 +5,8 @@ import WeatherStatistics from './WeatherStatistics';
 
 const RightSideBar = ({ isMain }) => (
     <Wrapper>
-        <WeatherStatistics isMain={isMain} />
-        <Weather />
+        {/* <WeatherStatistics isMain={isMain} /> */}
+        {/* <Weather /> */}
     </Wrapper>
 );
 

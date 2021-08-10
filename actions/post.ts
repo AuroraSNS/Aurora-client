@@ -60,10 +60,6 @@ export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST' as const;
 export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS' as const;
 export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
 
-export const UNLIKE_POST_REQUEST = 'UNLIKE_POST_REQUEST' as const;
-export const UNLIKE_POST_SUCCESS = 'UNLIKE_POST_SUCCESS' as const;
-export const UNLIKE_POST_FAILURE = 'UNLIKE_POST_FAILURE' as const;
-
 // 액션 크리에이터
 export const firstLoadAllPost = (time, accessToken) => async (dispatch) => {
     try {

@@ -1,139 +1,102 @@
-import axios from 'axios';
+// 액션 상수
+export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;
+export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS' as const;
+export const LOG_IN_FAILURE = 'LOG_IN_FAILURE' as const;
 
-axios.defaults.withCredentials = true;
+export const LOG_OUT_REQUEST = 'LOG_OUT_REQUEST' as const;
+export const LOG_OUT_SUCCESS = 'LOG_OUT_SUCCESS' as const;
+export const LOG_OUT_FAILURE = 'LOG_OUT_FAILURE' as const;
 
-/* ------- action 상수 ------ */
 export const SIGN_UP_REQUEST = 'SIGN_UP_REQUEST' as const;
 export const SIGN_UP_SUCCESS = 'SIGN_UP_SUCCESS' as const;
+export const SIGN_UP_FAILURE = 'SIGN_UP_FAILURE' as const;
+export const SIGN_UP_CLEAR = 'SIGN_UP_CLEAR' as const;
 
-export const GOOGLE_AUTH_URL_REQUEST = 'GOOGLE_AUTH_URL_REQUEST' as const;
+export const LOAD_PROFILE_REQUEST = 'LOAD_PROFILE_REQUEST' as const;
+export const LOAD_PROFILE_SUCCESS = 'LOAD_PROFILE_SUCCESS' as const;
+export const LOAD_PROFILE_FAILURE = 'LOAD_PROFILE_FAILURE' as const;
 
-export const SIGN_IN_REQUEST = 'SIGN_IN_REQUEST' as const;
-export const GET_ACCESS_TOKEN = 'GET_ACCESS_TOKEN' as const;
-export const GET_USER = 'GET_USER' as const;
+export const MODIFY_PROFILE_REQUEST = 'MODIFY_PROFILE_REQUEST' as const;
+export const MODIFY_PROFILE_SUCCESS = 'MODIFY_PROFILE_SUCCESS' as const;
+export const MODIFY_PROFILE_FAILURE = 'MODIFY_PROFILE_FAILURE' as const;
+export const MODIFY_PROFILE_CLEAR = 'MODIFY_PROFILE_CLEAR' as const;
 
-export const SIGN_OUT = 'LOG_OUT' as const;
+// 액션 크리에이터
+export const logInRequest = (data: LoginFormData) => ({
+    type: LOG_IN_REQUEST,
+    data,
+});
 
-export const UPDATE_USER_PROFILE = 'UPDATE_USER_PROFILE' as const;
+export const logInSuccess = () => ({
+    type: LOG_IN_SUCCESS,
+});
 
-export const WITHDRAWAL = 'WITHDRAWAL' as const;
+export const logInFailure = (error: string) => ({
+    type: LOG_IN_FAILURE,
+    error,
+});
 
-/* ------- dispatch 함수 ------ */
-// signup request
-export const signupRequestAction = (data) => async (dispatch) => {
-    try {
-        const response = await axios.post(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/signup',
-            data,
-        );
-        dispatch({ type: SIGN_UP_REQUEST, payload: response });
-    } catch (err) {
-        dispatch({ type: SIGN_UP_REQUEST, payload: err.response.data });
-    }
-};
+export const logOutRequest = () => ({
+    type: LOG_OUT_REQUEST,
+});
 
-// signup success
-export const signupSuccessAction = (token) => async (dispatch) => {
-    // body에 activationToken 정보 담아서 post 요청
-    try {
-        const response = await axios.post(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/activation',
-            { activationToken: `${token}` },
-        );
-        dispatch({ type: SIGN_UP_SUCCESS, payload: response });
-    } catch (err) {
-        dispatch({ type: SIGN_UP_SUCCESS, payload: err.response.data });
-    }
-};
+export const logOutSuccess = () => ({
+    type: LOG_OUT_SUCCESS,
+});
 
-// google OAuth
-export const getGoogleAuthURLAction = () => async (dispatch) => {
-    const response = await axios.get(
-        'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/auth/google/url',
-    );
-    dispatch({ type: GOOGLE_AUTH_URL_REQUEST, payload: response.data });
-};
+export const logOutFailure = (error: string) => ({
+    type: LOG_OUT_FAILURE,
+    error,
+});
 
-// login request
-export const signinRequestAction = (data) => async (dispatch) => {
-    try {
-        const response = await axios.post(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/signin',
-            data,
-        );
-        dispatch({ type: SIGN_IN_REQUEST, payload: response });
-    } catch (err) {
-        dispatch({ type: SIGN_IN_REQUEST, payload: err.response.data });
-    }
-};
+export const signUpRequest = (data: SignUpFormData) => ({
+    type: SIGN_UP_REQUEST,
+    data,
+});
 
-// get access token
-export const getAccessTokenAction = () => async (dispatch) => {
-    try {
-        const response = await axios.get(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/access-token',
-        );
-        dispatch({ type: GET_ACCESS_TOKEN, payload: response });
-    } catch (err) {
-        dispatch({ type: GET_ACCESS_TOKEN, payload: err.response.data });
-    }
-};
+export const signUpSuccess = () => ({
+    type: SIGN_UP_SUCCESS,
+});
 
-// signin success (get user info)
-export const signinSuccessAction = (token) => async (dispatch) => {
-    try {
-        const response = await axios.get(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/user',
-            {
-                headers: {
-                    Authorization: `${token}`,
-                },
-            },
-        );
-        dispatch({ type: GET_USER, payload: response });
-    } catch (err) {
-        dispatch({ type: GET_USER, payload: err.response.data });
-    }
-};
+export const signUpFailure = (error: string) => ({
+    type: SIGN_UP_FAILURE,
+    error,
+});
 
-// logout
-export const signoutAction = (token) => async (dispatch) => {
-    try {
-        const response = await axios.get(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/signout',
-        );
-        dispatch({ type: SIGN_OUT, payload: response });
-    } catch (err) {
-        dispatch({ type: SIGN_OUT, payload: err.response.data });
-    }
-};
+export const signUpClear = () => ({
+    type: SIGN_UP_CLEAR,
+});
 
-// update user profile
-export const updateUerProfileAction = (data, token) => async (dispatch) => {
-    const response = await axios.patch(
-        'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/user',
-        data,
-        {
-            headers: {
-                Authorization: `${token}`,
-            },
-        },
-    );
-    dispatch({ type: UPDATE_USER_PROFILE, payload: response });
-};
+export const loadProfileRequest = (token: string) => ({
+    type: LOAD_PROFILE_REQUEST,
+    token,
+});
 
-// withdrawal
-export const withdrawal = (accessToken) => async (dispatch) => {
-    try {
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.delete(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/user',
-            { headers },
-        );
-        dispatch({ type: WITHDRAWAL, payload: response });
-    } catch (err) {
-        dispatch({ type: WITHDRAWAL, payload: err.response.data });
-    }
-};
+export const loadProfileSuccess = (data: Me) => ({
+    type: LOAD_PROFILE_SUCCESS,
+    data,
+});
+
+export const loadProfileFailure = (error: string) => ({
+    type: LOAD_PROFILE_FAILURE,
+    error,
+});
+
+export const modifyProfileRequest = (data: FormData) => ({
+    type: MODIFY_PROFILE_REQUEST,
+    data,
+});
+
+export const modifyProfileSuccess = (data: ProfileModifyFormData) => ({
+    type: MODIFY_PROFILE_SUCCESS,
+    data,
+});
+
+export const modifyProfileFailure = (error: string) => ({
+    type: MODIFY_PROFILE_FAILURE,
+    error,
+});
+
+export const modifyProfileClear = () => ({
+    type: MODIFY_PROFILE_CLEAR,
+});

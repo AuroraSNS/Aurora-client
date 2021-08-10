@@ -1,9 +1,7 @@
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useMemo } from 'react';
 
 import PostRegisterForm from './PostRegisterForm';
-import { Icon } from '../../Theme';
 
 const PostRegisterModal = ({ onClose }) => {
     const style = useMemo(() => ({ marginRight: '1rem' }), []);
@@ -77,9 +75,5 @@ const StyledModalBody = styled.div`
         }
     }
 `;
-
-PostRegisterForm.propTypes = {
-    onClose: PropTypes.func.isRequired,
-};
 
 export default PostRegisterModal;

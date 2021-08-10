@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import AppLayout from '../components/AppLayout';
+import AppLayout from '../layout/AppLayout';
 import Loading from '../components/Loading';
 import PostCard from '../components/home/postCard/PostCard';
 import UserProfile from '../components/userProfile/UserProfile';

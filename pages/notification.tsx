@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import AppLayout from '../components/AppLayout';
+import AppLayout from '../layout/AppLayout';
 import { RootState } from '../reducers';
 
 const Notification = () => {

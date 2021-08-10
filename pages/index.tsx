@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import AppLayout from '../components/AppLayout';
+import AppLayout from '../layout/AppLayout';
 import Loading from '../components/Loading';
 import PostCard from '../components/home/postCard/PostCard';
 import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';
@@ -18,55 +18,50 @@ const Home = () => {
 
     const [page, setPage] = useState(2);
 
-    let filterPosts = [];
-    if (filterWeather.length > 0) {
-        filterPosts = Posts.filter((ele) => filterWeather.includes(ele.mood));
-    }
+    // let filterPosts = [];
+    // if (filterWeather.length > 0) {
+    //     filterPosts = Posts.filter((ele) => filterWeather.includes(ele.mood));
+    // }
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            dispatch(firstLoadAllPost(Time, accessToken));
-            dispatch(loadLikePost(accessToken));
-        } else {
-            router.push('/user/signin');
-        }
-    }, [isLoggedIn]);
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         dispatch(firstLoadAllPost(Time, accessToken));
+    //         dispatch(loadLikePost(accessToken));
+    //     } else {
+    //         router.push('/user/signin');
+    //     }
+    // }, [isLoggedIn]);
 
-    useEffect(() => {
-        dispatch(loadAllStatistics());
-        dispatch({
-            type: CHANGE_TIME,
-            payload: new Date().toISOString(),
-        });
-    }, []);
+    // useEffect(() => {
+    //     dispatch(loadAllStatistics());
+    //     dispatch({
+    //         type: CHANGE_TIME,
+    //         payload: new Date().toISOString(),
+    //     });
+    // }, []);
 
-    const onClickMore = useCallback(() => {
-        dispatch(moreLoadAllPost(page, Time, accessToken));
-        setPage((prev) => prev + 1);
-    }, [page]);
+    // const onClickMore = useCallback(() => {
+    //     dispatch(moreLoadAllPost(page, Time, accessToken));
+    //     setPage((prev) => prev + 1);
+    // }, [page]);
 
     return (
-        <>
-            {isLoggedIn && (
-                <AppLayout filter isMain>
-                    <PostRegisterBar />
-                    <PostCardList>
-                        {firstLoadAllPostDone ? (
-                            filterWeather.length > 0 ? (
-                                filterPosts.map((post) => <PostCard key={post._id} post={post} />)
-                            ) : (
-                                Posts.map((post) => <PostCard key={post._id} post={post} />)
-                            )
-                        ) : (
-                            <Loading />
-                        )}
-                        {totalPosts > Posts.length && (
-                            <LoadMoreBtn onClick={onClickMore}>더 많은 게시물 보기</LoadMoreBtn>
-                        )}
-                    </PostCardList>
-                </AppLayout>
-            )}
-        </>
+        <AppLayout title="Home" filter isMain>
+            <PostRegisterBar />
+
+            <PostCardList>
+                {/* {firstLoadAllPostDone ? (
+                    filterWeather.length > 0 ? (
+                        filterPosts.map((post) => <PostCard key={post._id} post={post} />)
+                    ) : (
+                        Posts.map((post) => <PostCard key={post._id} post={post} />)
+                    )
+                ) : (
+                    <Loading />
+                )}
+                {totalPosts > Posts.length && <LoadMoreBtn onClick={onClickMore}>더 많은 게시물 보기</LoadMoreBtn>} */}
+            </PostCardList>
+        </AppLayout>
     );
 };
 

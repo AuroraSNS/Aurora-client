@@ -2,8 +2,6 @@ import styled from 'styled-components';
 import { Progress } from 'antd';
 import { useSelector } from 'react-redux';
 
-import { Icon } from './Theme';
-
 const WeatherStatistics = ({ isMain }) => {
     const { Statistics } = useSelector((state) => state.post);
 

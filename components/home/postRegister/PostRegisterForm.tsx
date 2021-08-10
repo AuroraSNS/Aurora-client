@@ -4,7 +4,6 @@ import { Button, Radio } from 'antd';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { addPost } from '../../../actions/post';
-import { Icon } from '../../Theme';
 
 import useInput from '../../../hooks/useInput';
 import { RootState } from '../../../reducers';
