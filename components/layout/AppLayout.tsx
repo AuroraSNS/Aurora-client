@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import React, { ReactChild } from 'react';
 import Head from 'next/head';
-import Header from './Header';
-import RightSideBar from '../components/RightSideBar';
-import Global from '../styles/Global';
+import Header from './header/Header';
+import RightSideBar from './aside/RightSideBar';
+import Global from '../../styles/Global';
 import Navigation from './Navigation';
 
 type Props = {
@@ -43,7 +43,9 @@ const Container = styled.div`
     padding-top: 80px;
     main {
         flex: 1;
+        display: flex;
         padding-left: 230px;
+        padding-right: 295px;
         height: 300vh;
     }
 `;
@@ -51,8 +53,8 @@ const Container = styled.div`
 const MainComponent = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
     align-items: center;
+    width: 100%;
 `;
 
 export default AppLayout;

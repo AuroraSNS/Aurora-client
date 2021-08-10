@@ -25,6 +25,13 @@ const Global = createGlobalStyle`
   * {
   box-sizing: border-box;
   }
+  button,input, input:focus{
+    border: none;
+    outline: none;
+  }
+  button {
+    cursor: pointer;
+  }
 `;
 
 export default Global;

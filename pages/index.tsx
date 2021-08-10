@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 
-import AppLayout from '../layout/AppLayout';
+import AppLayout from '../components/layout/AppLayout';
 import Loading from '../components/Loading';
 import PostCard from '../components/home/postCard/PostCard';
 import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';

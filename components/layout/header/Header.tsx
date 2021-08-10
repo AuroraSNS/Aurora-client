@@ -2,7 +2,7 @@ import Link from 'next/link';
 import styled from 'styled-components';
 
 import React from 'react';
-import FilterBar from '../components/FilterBar';
+import FilterBar from './FilterBar';
 import UserInfo from './UserInfo';
 
 type Props = {

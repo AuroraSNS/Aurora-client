@@ -3,7 +3,7 @@ import { Dropdown, Menu } from 'antd';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { RootState } from '../reducers';
+import { RootState } from '../../../reducers';
 
 const UserInfo = () => {
     const { me } = useSelector((state: RootState) => state.user);
