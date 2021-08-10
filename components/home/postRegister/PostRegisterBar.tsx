@@ -1,18 +1,15 @@
 import styled from 'styled-components';
-import { useState, useCallback } from 'react';
-import { useSelector } from 'react-redux';
-import PostRegisterModal from './PostRegisterModal';
+import { useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
+import { postRegisterModalOpen } from '../../../actions/modal';
 
 const PostBar = () => {
+    const dispatch = useDispatch();
     const { me } = useSelector((state: RootState) => state.user);
-    const [showModal, setShowModal] = useState(false);
 
     const onClickModal = useCallback(() => {
-        setShowModal(true);
-    }, []);
-    const onCloseModal = useCallback(() => {
-        setShowModal(false);
+        dispatch(postRegisterModalOpen());
     }, []);
 
     return (
@@ -30,13 +27,13 @@ const PostBar = () => {
                 </>
                 <span>{me?.username}님, 오늘 당신의 날씨는 어떤가요?</span>
             </Wrapper>
-            {showModal && <PostRegisterModal onClose={onCloseModal} />}
         </>
     );
 };
 
 const Wrapper = styled.div`
-    width: 719px;
+    width: 100%;
+    max-width: 719px;
     height: 96px;
     background: #ffffff;
     box-shadow: 5px 5px 15px rgba(156, 156, 156, 0.25);
@@ -47,7 +44,8 @@ const Wrapper = styled.div`
     padding: 28px 46px 30px 38px;
     margin: 2rem 0 1rem;
     span {
-        width: 575px;
+        width: 100%;
+        max-width: 575px;
         height: 38px;
         background: #f0f2f5;
         border-radius: 30px;

@@ -8,15 +8,17 @@ import Loading from '../components/Loading';
 import PostCard from '../components/home/postCard/PostCard';
 import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';
 import { firstLoadAllPost, moreLoadAllPost, CHANGE_TIME, loadAllStatistics, loadLikePost } from '../actions/post';
+import PostRegisterModal from '../components/home/postRegister/PostRegisterModal';
+import { RootState } from '../reducers';
 
 const Home = () => {
-    const router = useRouter();
+    // const router = useRouter();
 
-    const dispatch = useDispatch();
-    const { Time, Posts, firstLoadAllPostDone, filterWeather, totalPosts } = useSelector((state) => state.post);
-    const { isLoggedIn, accessToken } = useSelector((state) => state.user);
-
-    const [page, setPage] = useState(2);
+    // const dispatch = useDispatch();
+    // const { Time, Posts, firstLoadAllPostDone, filterWeather, totalPosts } = useSelector((state) => state.post);
+    // const { isLoggedIn, accessToken } = useSelector((state) => state.user);
+    const { isPostRegisterModalVisible } = useSelector((state: RootState) => state.modal);
+    // const [page, setPage] = useState(2);
 
     // let filterPosts = [];
     // if (filterWeather.length > 0) {
@@ -61,6 +63,7 @@ const Home = () => {
                 )}
                 {totalPosts > Posts.length && <LoadMoreBtn onClick={onClickMore}>더 많은 게시물 보기</LoadMoreBtn>} */}
             </PostCardList>
+            {isPostRegisterModalVisible && <PostRegisterModal />}
         </AppLayout>
     );
 };

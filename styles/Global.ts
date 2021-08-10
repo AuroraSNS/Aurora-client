@@ -23,9 +23,12 @@ const Global = createGlobalStyle`
   }
 
   * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: Inter;
+    font-style: normal;
+    letter-spacing: -0.005em;
   }
-  button,input, input:focus{
+  button,input,textarea,input:focus,textarea:focus{
     border: none;
     outline: none;
   }

@@ -33,15 +33,17 @@ const Wrapper = styled.header`
     height: 80px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    width: 100%;
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
+    justify-content: space-between;
 `;
 
 const Logo = styled.div`
     /* border: 1px solid gray; */
+    margin-left: 37px;
     flex: none;
     img {
         width: 150px;

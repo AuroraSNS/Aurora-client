@@ -49,11 +49,25 @@ const Navbar = styled.nav`
     /* border: 1px solid black; */
     flex: none;
     width: 230px;
-    display: flex;
-    flex-direction: column;
     align-items: center;
     position: fixed;
     margin-top: 50px;
+    ul {
+        display: flex;
+        flex-direction: column;
+    }
+    @media screen and (max-width: 768px) {
+        bottom: 0;
+        width: 100%;
+        ul {
+            flex-direction: row;
+            width: 100%;
+            justify-content: space-evenly;
+        }
+        span {
+            display: none;
+        }
+    }
 `;
 
 const Tap = styled.a<{ selected: string; name: string }>`

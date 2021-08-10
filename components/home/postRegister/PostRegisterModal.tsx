@@ -1,77 +1,72 @@
 import styled from 'styled-components';
-import { useMemo } from 'react';
+import { useCallback } from 'react';
 
+import { useDispatch } from 'react-redux';
 import PostRegisterForm from './PostRegisterForm';
+import { postRegisterModalClose } from '../../../actions/modal';
 
-const PostRegisterModal = ({ onClose }) => {
-    const style = useMemo(() => ({ marginRight: '1rem' }), []);
+const PostRegisterModal = () => {
+    const dispatch = useDispatch();
+
+    const onClose = useCallback(() => {
+        dispatch(postRegisterModalClose());
+    }, [dispatch]);
 
     return (
         <StyledModalOverlay>
             <StyledModal>
-                <StyledModalHeader>
-                    <div>Aurora post</div>
-                    <span style={style} onClick={onClose}>
-                        {Icon.times}
-                    </span>
-                </StyledModalHeader>
-                <StyledModalBody>
-                    <PostRegisterForm onClose={onClose} />
-                </StyledModalBody>
+                <StyledModalCloseBtn onClick={onClose}>&times;</StyledModalCloseBtn>
+                <PostRegisterForm />
             </StyledModal>
         </StyledModalOverlay>
     );
 };
 
-const StyledModalOverlay = styled.div`
+const StyledModalCloseBtn = styled.button`
     position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 30px;
+    font-weight: 700;
+    color: #999;
+    background-color: transparent;
+    &:hover {
+        color: #505050;
+    }
+`;
+
+const StyledModalOverlay = styled.div`
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    right: 0;
+    bottom: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.5);
-    z-index: 50;
+    background: rgba(255, 255, 255, 0.7);
+    animation: overlay-show 0.3s;
+    @keyframes overlay-show {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+    z-index: 1;
 `;
 
 const StyledModal = styled.div`
-    background: white;
-    width: 45rem;
-    height: 38rem;
-    border-radius: 0.7rem;
-    padding: 15px;
-    z-index: 500;
-`;
-
-const StyledModalHeader = styled.div`
-    padding-bottom: 1rem;
-    border-bottom: 1.5px solid #ccc;
-    display: flex;
+    width: 286px;
+    margin-top: 236px;
     position: relative;
-    justify-content: space-between;
-    font-size: 1.4rem;
-    color: #888;
-    text-align: center;
-    div {
-        font-weight: 500;
-        width: 100%;
-    }
-    span {
-        cursor: pointer;
-    }
-`;
-
-const StyledModalBody = styled.div`
-    padding-top: 10px;
-    height: 90%;
-    input {
-        border: none;
-        padding: 0 1rem;
-        height: 3rem;
-        &:focus {
-            outline: none;
+    animation: modal-show 0.3s;
+    @keyframes modal-show {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
         }
     }
 `;

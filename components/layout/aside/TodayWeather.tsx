@@ -48,7 +48,6 @@ const TodayWeather = () => {
         fetch(API_URL)
             .then((res) => res.json())
             .then((data) => {
-                console.log(data);
                 const tmp: ITodayWeather = {
                     icon: data.weather[0].icon,
                     temp: parseInt(data.main.temp),

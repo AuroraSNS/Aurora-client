@@ -23,6 +23,9 @@ const Wrapper = styled.div`
     align-items: center;
     position: fixed;
     right: 0;
+    @media screen and (max-width: 1240px) {
+        display: none;
+    }
 `;
 
 export default RightSideBar;

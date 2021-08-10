@@ -47,6 +47,17 @@ const Container = styled.div`
         padding-left: 230px;
         padding-right: 295px;
         height: 300vh;
+        justify-content: center;
+    }
+    @media screen and (max-width: 1240px) {
+        main {
+            padding-right: 0;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        main {
+            padding-left: 0;
+        }
     }
 `;
 
@@ -55,6 +66,8 @@ const MainComponent = styled.div`
     flex-direction: column;
     align-items: center;
     width: 100%;
+    flex: 1;
+    padding: 0 20px;
 `;
 
 export default AppLayout;
