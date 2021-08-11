@@ -5,11 +5,13 @@ import { useRouter } from 'next/router';
 
 import AppLayout from '../components/layout/AppLayout';
 import Loading from '../components/Loading';
-import PostCard from '../components/home/postCard/PostCard';
+
 import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';
 import { firstLoadAllPost, moreLoadAllPost, CHANGE_TIME, loadAllStatistics, loadLikePost } from '../actions/post';
 import PostRegisterModal from '../components/home/postRegister/PostRegisterModal';
 import { RootState } from '../reducers';
+import PostCard from '../components/home/postCard/PostCardt';
+import { createSamplePosts } from '../util/sample';
 
 const Home = () => {
     // const router = useRouter();
@@ -46,12 +48,21 @@ const Home = () => {
     //     dispatch(moreLoadAllPost(page, Time, accessToken));
     //     setPage((prev) => prev + 1);
     // }, [page]);
-
+    const [samplePosts, setSamplePosts] = useState(null);
+    useEffect(() => {
+        const tmp = createSamplePosts(3);
+        setSamplePosts(tmp);
+    }, []);
     return (
         <AppLayout title="Home" filter isMain>
             <PostRegisterBar />
 
             <PostCardList>
+                {samplePosts?.map((post) => (
+                    <PostCard key={post.id} post={post} />
+                ))}
+                {/* <PostCard />
+                <PostCard /> */}
                 {/* {firstLoadAllPostDone ? (
                     filterWeather.length > 0 ? (
                         filterPosts.map((post) => <PostCard key={post._id} post={post} />)
@@ -68,33 +79,22 @@ const Home = () => {
     );
 };
 
-const PostCardList = styled.div`
+const PostCardList = styled.section`
+    /* border: 1px solid gray; */
     width: 100%;
-    height: 45rem;
+    max-width: 720px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 0.625rem;
     overflow: auto;
     -ms-overflow-style: none;
     &::-webkit-scrollbar {
         display: none;
     }
-`;
-
-const LoadMoreBtn = styled.button`
-    border: none;
-    background: none;
-    margin: 1rem 0;
-    font-size: 1rem;
-    color: #424242;
-    cursor: pointer;
-    &:hover {
-        color: #a18afc;
-        font-size: 1.1rem;
-    }
-    &:focus {
-        outline: none;
+    margin-top: 25px;
+    overflow: visible;
+    @media screen and (max-width: 768px) {
+        margin-top: 100px;
     }
 `;
 

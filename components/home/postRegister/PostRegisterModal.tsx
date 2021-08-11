@@ -45,6 +45,10 @@ const StyledModalOverlay = styled.div`
     justify-content: center;
     background: rgba(255, 255, 255, 0.7);
     animation: overlay-show 0.3s;
+    overflow: auto;
+    ::-webkit-scrollbar {
+        display: none; /* Chrome, Safari, Opera*/
+    }
     @keyframes overlay-show {
         from {
             opacity: 0;
@@ -58,7 +62,7 @@ const StyledModalOverlay = styled.div`
 
 const StyledModal = styled.div`
     width: 286px;
-    margin-top: 236px;
+    margin: auto 0;
     position: relative;
     animation: modal-show 0.3s;
     @keyframes modal-show {

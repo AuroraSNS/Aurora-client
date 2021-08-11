@@ -20,7 +20,8 @@ const Wrapper = styled.div`
     input {
         width: 100%;
         height: 30px;
-        padding-left: 7px;
+        font-size: 12px;
+        padding: 7px;
         background-color: transparent;
     }
     margin-top: 50px;

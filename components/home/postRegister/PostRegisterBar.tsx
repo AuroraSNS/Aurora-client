@@ -33,7 +33,7 @@ const PostBar = () => {
 
 const Wrapper = styled.div`
     width: 100%;
-    max-width: 719px;
+    max-width: 720px;
     height: 96px;
     background: #ffffff;
     box-shadow: 5px 5px 15px rgba(156, 156, 156, 0.25);
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
     display: flex;
     align-items: center;
     padding: 28px 46px 30px 38px;
-    margin: 2rem 0 1rem;
+    margin-top: 50px;
     span {
         width: 100%;
         max-width: 575px;
@@ -55,7 +55,12 @@ const Wrapper = styled.div`
     &:hover {
         background-color: rgba(128, 128, 128, 0.2);
     }
-    margin-bottom: 40px;
+    @media screen and (max-width: 768px) {
+        position: fixed;
+        top: 30px;
+        box-shadow: none;
+        border-radius: 0;
+    }
 `;
 
 const Avatar = styled.img`

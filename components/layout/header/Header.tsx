@@ -35,10 +35,12 @@ const Wrapper = styled.header`
     align-items: center;
     width: 100%;
     position: fixed;
+    z-index: 100;
     top: 0;
     left: 0;
     right: 0;
     justify-content: space-between;
+    background: #ffffff;
 `;
 
 const Logo = styled.div`

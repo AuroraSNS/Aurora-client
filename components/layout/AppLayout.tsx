@@ -62,12 +62,13 @@ const Container = styled.div`
 `;
 
 const MainComponent = styled.div`
+    /* border: 1px solid gray; */
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%;
     flex: 1;
-    padding: 0 20px;
+    padding: 0 30px;
 `;
 
 export default AppLayout;
