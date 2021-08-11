@@ -1,24 +1,33 @@
-export interface Me {
-    id: number;
+export interface ILogInForm {
     email: string;
+    password: string;
+}
+
+export interface IUser {
+    id: number;
     name: string;
-    imageUrl: string;
-    phoneNumber: string;
-    address: string;
+    avator: string;
+}
+
+export interface Me extends IUser {
+    email: string;
 }
 
 export interface UserState {
-    signupRequest: boolean;
-    signedUp: boolean;
-    signupError: null;
-    isLoggedIn: boolean;
-    loginLoading: boolean;
-    googleLoading: boolean;
-    loginError: null;
-    accessTokenError: null;
-    signoutError: null;
-    updateError: null;
     me: null | Me;
-    accessToken: null;
-    googleAuthURL: string;
+    logInLoading: boolean;
+    logInDone: boolean;
+    logInError: null | string;
+    logOutLoading: boolean;
+    logOutDone: boolean;
+    logOutError: null | string;
+    signUpLoading: boolean;
+    signUpDone: boolean;
+    signUpError: null | string;
+    loadProfileLoading: boolean;
+    loadProfileDone: boolean;
+    loadProfileError: null | string;
+    modifyProfileLoading: boolean;
+    modifyProfileDone: boolean;
+    modifyProfileError: null | string;
 }

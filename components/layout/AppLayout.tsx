@@ -44,9 +44,8 @@ const Container = styled.div`
     main {
         flex: 1;
         display: flex;
-        padding-left: 230px;
-        padding-right: 295px;
-        height: 300vh;
+        padding-left: 200px;
+        padding-right: 305px;
         justify-content: center;
     }
     @media screen and (max-width: 1240px) {

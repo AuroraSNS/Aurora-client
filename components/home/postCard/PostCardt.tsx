@@ -172,9 +172,20 @@ const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     cursor: pointer;
+    div {
+        position: relative;
+        width: 50%;
+    }
+    div:before {
+        content: '';
+        display: block;
+        padding-top: 100%;
+    }
     img {
-        width: 274px;
-        height: 274px;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
     }
     &.double {
         img {
@@ -189,17 +200,19 @@ const ImageContainer = styled.div`
             margin-right: 9px;
         }
         div:nth-child(3) {
-            position: relative;
+            width: 10%;
             overflow: hidden;
-            width: 60px;
-            object-fit: cover;
+            /* width: 60px; */
+
             img {
+                position: absolute;
+                object-fit: cover;
                 opacity: 0.3;
             }
 
             & > span {
-                top: 115px;
-                left: 20px;
+                top: 35%;
+                left: 30%;
                 position: absolute;
                 font-size: 36px;
                 z-index: 1;

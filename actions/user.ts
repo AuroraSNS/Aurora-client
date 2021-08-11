@@ -1,3 +1,5 @@
+import { ILogInForm, ILoginForm, Me } from '../interfaces/data/user';
+
 // 액션 상수
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;
 export const LOG_IN_SUCCESS = 'LOG_IN_SUCCESS' as const;
@@ -22,7 +24,7 @@ export const MODIFY_PROFILE_FAILURE = 'MODIFY_PROFILE_FAILURE' as const;
 export const MODIFY_PROFILE_CLEAR = 'MODIFY_PROFILE_CLEAR' as const;
 
 // 액션 크리에이터
-export const logInRequest = (data: LoginFormData) => ({
+export const logInRequest = (data: ILogInForm) => ({
     type: LOG_IN_REQUEST,
     data,
 });

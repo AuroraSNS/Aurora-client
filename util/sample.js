@@ -38,8 +38,9 @@ const createSampleImages = () => {
     return sampleImages;
 };
 
-export const sampleUser = {
+export const sampleMe = {
     id: 1,
+    email: 'test@test.com',
     name: '라이언',
     avator: 'images/profile-thumbnail.jpg',
 };

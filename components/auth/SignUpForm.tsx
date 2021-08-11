@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import GoogleOAuthSignin from './GoogleOAuthBtn';
 import FacebookOAuthSignin from './FacebookOAuthBtn';
 
-const SigninForm = () => {
+const SignUpForm = () => {
     const dispatch = useDispatch();
 
     return (
@@ -73,4 +73,4 @@ const ErrorMessage = styled.div`
     font-size: 0.9rem;
 `;
 
-export default SigninForm;
+export default SignUpForm;

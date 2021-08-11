@@ -1,159 +1,131 @@
+/* eslint-disable no-param-reassign */
+import produce from 'immer';
 import {
-    GET_ACCESS_TOKEN,
-    GET_USER,
-    GOOGLE_AUTH_URL_REQUEST,
-    SIGN_IN_REQUEST,
-    SIGN_OUT,
+    LOG_IN_REQUEST,
+    LOG_IN_SUCCESS,
+    LOG_IN_FAILURE,
+    LOG_OUT_REQUEST,
+    LOG_OUT_SUCCESS,
+    LOG_OUT_FAILURE,
+    SIGN_UP_FAILURE,
     SIGN_UP_REQUEST,
     SIGN_UP_SUCCESS,
-    UPDATE_USER_PROFILE,
-    WITHDRAWAL,
-} from '../actions/user.ts';
-import { UserState } from '../interfaces/data/user';
+    SIGN_UP_CLEAR,
+    LOAD_PROFILE_FAILURE,
+    LOAD_PROFILE_REQUEST,
+    LOAD_PROFILE_SUCCESS,
+    MODIFY_PROFILE_CLEAR,
+    MODIFY_PROFILE_FAILURE,
+    MODIFY_PROFILE_REQUEST,
+    MODIFY_PROFILE_SUCCESS,
+} from '../actions/user';
+import { UserAction } from '../interfaces/act/user';
+import { Me, UserState } from '../interfaces/data/user';
 
-//   initial state
+// initial state
 export const initialState: UserState = {
-    signupRequest: false,
-    signedUp: false,
-    signupError: null,
-    isLoggedIn: false,
-    loginLoading: false,
-    googleLoading: false,
-    loginError: null,
-    accessTokenError: null,
-    signoutError: null,
-    updateError: null,
     me: null,
-    accessToken: null,
-    googleAuthURL: '',
+    logInLoading: false,
+    logInDone: false,
+    logInError: null,
+    logOutLoading: false,
+    logOutDone: false,
+    logOutError: null,
+    signUpLoading: false,
+    signUpDone: false,
+    signUpError: null,
+    loadProfileLoading: false,
+    loadProfileDone: false,
+    loadProfileError: null,
+    modifyProfileLoading: false,
+    modifyProfileDone: false,
+    modifyProfileError: null,
 };
 
-const reducer = (state = initialState, action: UserAction) => {
-    switch (action.type) {
-        case SIGN_UP_REQUEST:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    signupRequest: true,
-                    signupError: null,
-                };
-            }
-            return {
-                ...state,
-                signupRequest: false,
-                signupError: action.payload.message,
-            };
-
-        case SIGN_UP_SUCCESS:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    signupRequest: false,
-                    signupLoading: false,
-                    signedUp: true,
-                    signupError: null,
-                };
-            }
-            return {
-                ...state,
-                signupRequest: false,
-                signupError: action.payload.message,
-            };
-
-        case GOOGLE_AUTH_URL_REQUEST:
-            return {
-                ...state,
-                googleAuthURL: `${action.payload}`,
-                googleLoading: true,
-            };
-        case SIGN_IN_REQUEST:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    loginLoading: true,
-                    loginError: null,
-                };
-            }
-            return {
-                ...state,
-                loginError: action.payload.message,
-            };
-
-        case GET_ACCESS_TOKEN:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    accessToken: action.payload.data.accessToken,
-                    accessTokenError: null,
-                };
-            }
-            return {
-                ...state,
-                accessTokenError: action.payload.message,
-                isLoggedIn: false,
-            };
-
-        case GET_USER:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    loginLoading: false,
-                    googleLoading: false,
-                    isLoggedIn: true,
-                    me: action.payload.data,
-                    loginError: null,
-                };
-            }
-            return {
-                ...state,
-                loginError: action.payload,
-                isLoggedIn: false,
-            };
-
-        case SIGN_OUT:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    isLoggedIn: false,
-                    loginError: null,
-                    signoutError: null,
-                    accessToken: null,
-                    me: null,
-                };
-            }
-            return {
-                ...state,
-                signoutError: action.payload.message,
-            };
-
-        case UPDATE_USER_PROFILE:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    me: action.payload.data,
-                    updateError: null,
-                };
-            }
-            return {
-                ...state,
-            };
-
-        case WITHDRAWAL:
-            if (action.payload.statusText === 'OK') {
-                return {
-                    ...state,
-                    me: null,
-                    isLoggedIn: false,
-                    accessToken: null,
-                };
-            }
-            return {
-                ...state,
-            };
-
-        default:
-            return state;
-    }
-};
+const reducer = (state = initialState, action: UserAction) =>
+    produce(state, (draft: UserState) => {
+        switch (action.type) {
+            case LOG_IN_REQUEST:
+                draft.logInLoading = true;
+                draft.logInDone = false;
+                draft.logInError = null;
+                break;
+            case LOG_IN_SUCCESS:
+                draft.logInLoading = false;
+                draft.logInDone = true;
+                break;
+            case LOG_IN_FAILURE:
+                draft.logInLoading = false;
+                draft.logInError = action.error;
+                break;
+            case LOG_OUT_REQUEST:
+                draft.logOutLoading = true;
+                draft.logOutDone = false;
+                draft.logOutError = null;
+                break;
+            case LOG_OUT_SUCCESS:
+                draft.logOutLoading = false;
+                draft.logOutDone = true;
+                draft.me = null;
+                break;
+            case LOG_OUT_FAILURE:
+                draft.logOutLoading = false;
+                draft.logOutError = action.error;
+                break;
+            case SIGN_UP_REQUEST:
+                draft.signUpLoading = true;
+                draft.signUpDone = false;
+                draft.signUpError = null;
+                break;
+            case SIGN_UP_SUCCESS:
+                draft.signUpLoading = false;
+                draft.signUpDone = true;
+                break;
+            case SIGN_UP_FAILURE:
+                draft.signUpLoading = false;
+                draft.signUpError = action.error;
+                break;
+            case SIGN_UP_CLEAR:
+                draft.signUpLoading = false;
+                draft.signUpDone = false;
+                draft.signUpError = null;
+                break;
+            case LOAD_PROFILE_REQUEST:
+                draft.loadProfileLoading = true;
+                draft.loadProfileDone = false;
+                draft.loadProfileError = null;
+                break;
+            case LOAD_PROFILE_SUCCESS:
+                draft.loadProfileLoading = false;
+                draft.loadProfileDone = true;
+                draft.me = action.data;
+                break;
+            case LOAD_PROFILE_FAILURE:
+                draft.loadProfileLoading = false;
+                draft.loadProfileError = action.error;
+                break;
+            case MODIFY_PROFILE_REQUEST:
+                draft.modifyProfileLoading = true;
+                draft.modifyProfileDone = false;
+                draft.modifyProfileError = null;
+                break;
+            case MODIFY_PROFILE_SUCCESS:
+                draft.modifyProfileLoading = false;
+                draft.modifyProfileDone = true;
+                draft.me = { ...(draft.me as Me), ...action.data };
+                break;
+            case MODIFY_PROFILE_FAILURE:
+                draft.modifyProfileLoading = false;
+                draft.modifyProfileError = action.error;
+                break;
+            case MODIFY_PROFILE_CLEAR:
+                draft.modifyProfileLoading = false;
+                draft.modifyProfileDone = false;
+                draft.modifyProfileError = null;
+                break;
+            default:
+                break;
+        }
+    });
 
 export default reducer;

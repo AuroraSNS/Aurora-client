@@ -51,8 +51,9 @@ const FilterBar = () => {
 };
 
 const Wrapper = styled.div`
-    flex: none;
-    width: 610px;
+    flex: 1;
+    max-width: 610px;
+    margin-right: 10px;
     height: 55px;
     display: flex;
     justify-content: space-evenly;
@@ -64,8 +65,11 @@ const Wrapper = styled.div`
     background-image: linear-gradient(white, white), radial-gradient(circle at top left, #ffbebe, #b6d8f8, #a18afc);
     background-origin: border-box;
     background-clip: content-box, border-box;
-    @media screen and (max-width: 1240px) {
-        display: none;
+    @media screen and (max-width: 768px) {
+        background-image: none;
+        div:first-child {
+            display: none;
+        }
     }
 `;
 
@@ -127,6 +131,11 @@ const WeatherContainer = styled.div`
     }
     input#moon:checked + label * {
         fill: #ac8de0;
+    }
+    @media screen and (max-width: 768px) {
+        margin-left: 10px;
+        width: 100%;
+        justify-content: space-evenly;
     }
 `;
 

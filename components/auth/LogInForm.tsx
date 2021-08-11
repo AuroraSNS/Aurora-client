@@ -1,28 +1,22 @@
 import Link from 'next/link';
 import styled from 'styled-components';
-import { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import useInput from '../../hooks/useInput';
-import { getAccessTokenAction, signinRequestAction, signinSuccessAction } from '../../actions/user.ts';
+import { logInRequest } from '../../actions/user';
 import GoogleOAuthSignin from './GoogleOAuthBtn';
 import FacebookOAuthSignin from './FacebookOAuthBtn';
+import Loading from '../Loading';
+import ErrorMessage from '../ErrorMessage';
 
-const LoginForm = () => {
+const LogInForm = () => {
     const dispatch = useDispatch();
-    const router = useRouter();
-    // const { loginLoading, loginError, accessToken, isLoggedIn } = useSelector((state) => state.user);
+    const { logInLoading, logInDone, logInError } = useSelector((state) => state.user);
 
-    // const [email, onChangeEmail] = useInput('');
-    // const [password, onChangePassword] = useInput('');
-    // const [loginErrorMsg, setLoginErrorMsg] = useState('');
-
-    // useEffect(() => {
-    //     if (loginError) {
-    //         setLoginErrorMsg(loginError);
-    //     }
-    // }, [loginError]);
+    const [email, onChangeEmail] = useInput('');
+    const [password, onChangePassword] = useInput('');
 
     // // google login
     // useEffect(() => {
@@ -46,30 +40,38 @@ const LoginForm = () => {
     //     }
     // }, [isLoggedIn]);
 
-    // const handleLogin = useCallback(
-    //     (e) => {
-    //         e.preventDefault();
-    //         dispatch(signinRequestAction({ email, password }));
-    //     },
-    //     [email, password],
-    // );
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            dispatch(logInRequest({ email, password }));
+        },
+        [dispatch, email, password],
+    );
 
     return (
-        <Form>
+        <Form onSubmit={onSubmit}>
             <img className="logo" src="images/logo.png" alt="logo" />
             <div className="title">로그인</div>
-            <input name="email" type="email" placeholder="이메일" required />
-            <input name="password" type="password" placeholder="비밀번호" required />
-            {/* {loginErrorMsg ? <ErrorMessage>{loginErrorMsg}</ErrorMessage> : ''} */}
+            <input name="email" type="email" value={email} onChange={onChangeEmail} placeholder="이메일" required />
+            <input
+                name="password"
+                type="password"
+                value={password}
+                onChange={onChangePassword}
+                placeholder="비밀번호"
+                required
+            />
+            {logInError && <ErrorMessage message="이미 존재하는 이메일입니다." />}
             <button type="submit">로그인</button>
             <span>계정이 없으신가요?</span>
             <GoogleOAuthSignin />
             <FacebookOAuthSignin />
+            {(logInLoading || logInDone) && <Loading />}
         </Form>
     );
 };
 
-const Form = styled.section`
+const Form = styled.form`
     display: flex;
     flex-direction: column;
     width: 422px;
@@ -113,11 +115,4 @@ const Form = styled.section`
         margin-bottom: 40px;
     }
 `;
-
-const ErrorMessage = styled.div`
-    padding-top: 0.2rem;
-    color: #755bdb;
-    font-size: 0.9rem;
-`;
-
-export default LoginForm;
+export default LogInForm;

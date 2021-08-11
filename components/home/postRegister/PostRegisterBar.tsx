@@ -10,21 +10,12 @@ const PostBar = () => {
 
     const onClickModal = useCallback(() => {
         dispatch(postRegisterModalOpen());
-    }, []);
+    }, [dispatch]);
 
     return (
         <>
             <Wrapper onClick={onClickModal}>
-                <>
-                    {me?.avatar[0] ? (
-                        <Avatar
-                            src={`data:image/png;base64,${Buffer.from(me.avatar[0].data.data).toString('base64')}`}
-                            alt="avatar"
-                        />
-                    ) : (
-                        <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
-                    )}
-                </>
+                <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
                 <span>{me?.username}님, 오늘 당신의 날씨는 어떤가요?</span>
             </Wrapper>
         </>
@@ -60,6 +51,7 @@ const Wrapper = styled.div`
         top: 30px;
         box-shadow: none;
         border-radius: 0;
+        z-index: 10;
     }
 `;
 

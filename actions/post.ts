@@ -1,438 +1,91 @@
-import axios from 'axios';
+import { IPost } from '../interfaces/data/post';
 
 // 액션 상수
-export const FIRST_LOAD_ALL_POST_REQUEST = 'FIRST_LOAD_ALL_POST_REQUEST' as const;
-export const FIRST_LOAD_ALL_POST_SUCCESS = 'FIRST_LOAD_ALL_POST_SUCCESS' as const;
-export const FIRST_LOAD_ALL_POST_FAILURE = 'FIRST_LOAD_ALL_POST_FAILURE' as const;
+export const LOAD_FIRST_POSTS_REQUEST = 'LOAD_FIRST_POSTS_REQUEST' as const;
+export const LOAD_FIRST_POSTS_SUCCESS = 'LOAD_FIRST_POSTS_SUCCESS' as const;
+export const LOAD_FIRST_POSTS_FAILURE = 'LOAD_FIRST_POSTS_FAILURE' as const;
 
-export const MORE_LOAD_ALL_POST_REQUEST = 'MORE_LOAD_ALL_POST_REQUEST' as const;
-export const MORE_LOAD_ALL_POST_SUCCESS = 'MORE_LOAD_ALL_POST_SUCCESS' as const;
-export const MORE_LOAD_ALL_POST_FAILURE = 'MORE_LOAD_ALL_POST_FAILURE' as const;
+export const LOAD_MORE_POSTS_REQUEST = 'LOAD_MORE_POSTS_REQUEST' as const;
+export const LOAD_MORE_POSTS_SUCCESS = 'LOAD_MORE_POSTS_SUCCESS' as const;
+export const LOAD_MORE_POSTS_FAILURE = 'LOAD_MORE_POSTS_FAILURE' as const;
 
-export const FIRST_LOAD_POST_REQUEST = 'FIRST_LOAD_POST_REQUEST' as const;
-export const FIRST_LOAD_POST_SUCCESS = 'FIRST_LOAD_POST_SUCCESS' as const;
-export const FIRST_LOAD_POST_FAILURE = 'FIRST_LOAD_POST_FAILURE' as const;
+// export const FIRST_LOAD_POST_REQUEST = 'FIRST_LOAD_POST_REQUEST' as const;
+// export const FIRST_LOAD_POST_SUCCESS = 'FIRST_LOAD_POST_SUCCESS' as const;
+// export const FIRST_LOAD_POST_FAILURE = 'FIRST_LOAD_POST_FAILURE' as const;
 
-export const MORE_LOAD_POST_REQUEST = 'MORE_LOAD_POST_REQUEST' as const;
-export const MORE_LOAD_POST_SUCCESS = 'MORE_LOAD_POST_SUCCESS' as const;
-export const MORE_LOAD_POST_FAILURE = 'MORE_LOAD_POST_FAILURE' as const;
+// export const MORE_LOAD_POST_REQUEST = 'MORE_LOAD_POST_REQUEST' as const;
+// export const MORE_LOAD_POST_SUCCESS = 'MORE_LOAD_POST_SUCCESS' as const;
+// export const MORE_LOAD_POST_FAILURE = 'MORE_LOAD_POST_FAILURE' as const;
 
-export const ADD_POST_REQUEST = 'ADD_POST_REQUEST' as const;
-export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS' as const;
-export const ADD_POST_FAILURE = 'ADD_POST_FAILURE' as const;
+// export const ADD_POST_REQUEST = 'ADD_POST_REQUEST' as const;
+// export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS' as const;
+// export const ADD_POST_FAILURE = 'ADD_POST_FAILURE' as const;
 
-export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST' as const;
-export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS' as const;
-export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE' as const;
+// export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST' as const;
+// export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS' as const;
+// export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE' as const;
 
-export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST' as const;
-export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS' as const;
-export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE' as const;
+// export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST' as const;
+// export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS' as const;
+// export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE' as const;
 
-export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST' as const;
-export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS' as const;
-export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE' as const;
+// export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST' as const;
+// export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS' as const;
+// export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE' as const;
 
-export const UPDATE_COMMENT_REQUEST = 'UPDATE_COMMENT_REQUEST' as const;
-export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS' as const;
-export const UPDATE_COMMENT_FAILURE = 'UPDATE_COMMENT_FAILURE' as const;
+// export const UPDATE_COMMENT_REQUEST = 'UPDATE_COMMENT_REQUEST' as const;
+// export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS' as const;
+// export const UPDATE_COMMENT_FAILURE = 'UPDATE_COMMENT_FAILURE' as const;
 
-export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST' as const;
-export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS' as const;
-export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE' as const;
+// export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST' as const;
+// export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS' as const;
+// export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE' as const;
 
-export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
-export const CHANGE_TIME = 'CHANGE_TIME' as const;
+// export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
+// export const CHANGE_TIME = 'CHANGE_TIME' as const;
 
-export const LOAD_ALL_STATISTICS_REQUEST = 'LOAD_ALL_STATISTICS_REQUEST' as const;
-export const LOAD_ALL_STATISTICS_SUCCESS = 'LOAD_ALL_STATISTICS_SUCCESS' as const;
-export const LOAD_ALL_STATISTICS_FAILURE = 'LOAD_ALL_STATISTICS_FAILURE' as const;
+// export const LOAD_ALL_STATISTICS_REQUEST = 'LOAD_ALL_STATISTICS_REQUEST' as const;
+// export const LOAD_ALL_STATISTICS_SUCCESS = 'LOAD_ALL_STATISTICS_SUCCESS' as const;
+// export const LOAD_ALL_STATISTICS_FAILURE = 'LOAD_ALL_STATISTICS_FAILURE' as const;
 
-export const LOAD_STATISTICS_REQUEST = 'LOAD_STATISTICS_REQUEST' as const;
-export const LOAD_STATISTICS_SUCCESS = 'LOAD_STATISTICS_SUCCESS' as const;
-export const LOAD_STATISTICS_FAILURE = 'LOAD_STATISTICS_FAILURE' as const;
+// export const LOAD_STATISTICS_REQUEST = 'LOAD_STATISTICS_REQUEST' as const;
+// export const LOAD_STATISTICS_SUCCESS = 'LOAD_STATISTICS_SUCCESS' as const;
+// export const LOAD_STATISTICS_FAILURE = 'LOAD_STATISTICS_FAILURE' as const;
 
-export const LOAD_LIKE_POST_REQUEST = 'LOAD_LIKE_POST_REQUEST' as const;
-export const LOAD_LIKE_POST_SUCCESS = 'LOAD_LIKE_POST_SUCCESS' as const;
-export const LOAD_LIKE_POST_FAILURE = 'LOAD_LIKE_POST_FAILURE' as const;
+// export const LOAD_LIKE_POST_REQUEST = 'LOAD_LIKE_POST_REQUEST' as const;
+// export const LOAD_LIKE_POST_SUCCESS = 'LOAD_LIKE_POST_SUCCESS' as const;
+// export const LOAD_LIKE_POST_FAILURE = 'LOAD_LIKE_POST_FAILURE' as const;
 
-export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST' as const;
-export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS' as const;
-export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
+// export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST' as const;
+// export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS' as const;
+// export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
 
 // 액션 크리에이터
-export const firstLoadAllPost = (time, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: FIRST_LOAD_ALL_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.get(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/posts/all?page=${1}&createdAt=${time}`,
-            { headers },
-        );
-        dispatch({
-            type: FIRST_LOAD_ALL_POST_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: FIRST_LOAD_ALL_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
+export const loadFirstPostsRequest = () => ({
+    type: LOAD_FIRST_POSTS_REQUEST,
+});
 
-export const moreLoadAllPost = (page, time, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: MORE_LOAD_ALL_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.get(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/posts/all?page=${page}&createdAt=${time}`,
-            { headers },
-        );
-        dispatch({
-            type: MORE_LOAD_ALL_POST_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: MORE_LOAD_ALL_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
+export const loadFirstPostsSuccess = (data: IPost[]) => ({
+    type: LOAD_FIRST_POSTS_SUCCESS,
+    data,
+});
 
-export const firstLoadPost = (accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: FIRST_LOAD_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.get(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/posts?page=${1}`,
-            { headers },
-        );
-        dispatch({
-            type: FIRST_LOAD_POST_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: FIRST_LOAD_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
+export const loadFirstPostsFailure = (error: string) => ({
+    type: LOAD_FIRST_POSTS_FAILURE,
+    error,
+});
 
-export const moreLoadPost = (page, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: MORE_LOAD_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.get(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/posts?page=${page}`,
-            { headers },
-        );
-        dispatch({
-            type: MORE_LOAD_POST_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: MORE_LOAD_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
+export const loadMorePostsRequest = (lastPostId: number) => ({
+    type: LOAD_MORE_POSTS_REQUEST,
+    lastPostId,
+});
 
-export const addPost = (data, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: ADD_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.post(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/post/',
-            data,
-            { headers },
-        );
-        dispatch({
-            type: ADD_POST_SUCCESS,
-            payload: response.data.post,
-        });
-    } catch (err) {
-        dispatch({
-            type: ADD_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
+export const loadMorePostsSuccess = (data: IPost[]) => ({
+    type: LOAD_MORE_POSTS_SUCCESS,
+    data,
+});
 
-export const updatePost = (id, data, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: UPDATE_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.patch(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/post/${id}`,
-            data,
-            { headers },
-        );
-        dispatch({
-            type: UPDATE_POST_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: UPDATE_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const removePost = (id, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: REMOVE_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        await axios.delete(`http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/post/${id}`, {
-            headers,
-        });
-        dispatch({
-            type: REMOVE_POST_SUCCESS,
-            payload: id,
-        });
-    } catch (err) {
-        dispatch({
-            type: REMOVE_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const addComment = (postId, data, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: ADD_COMMENT_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.post(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/comment/${postId}`,
-            data,
-            { headers },
-        );
-        dispatch({
-            type: ADD_COMMENT_SUCCESS,
-            payload: {
-                postId,
-                data: response.data,
-            },
-        });
-    } catch (err) {
-        dispatch({
-            type: ADD_COMMENT_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const updateComment = (postId, commentId, data, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: UPDATE_COMMENT_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        await axios.patch(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/comment/${commentId}`,
-            data,
-            { headers },
-        );
-        dispatch({
-            type: UPDATE_COMMENT_SUCCESS,
-            payload: {
-                postId,
-                commentId,
-                content: data.content,
-            },
-        });
-    } catch (err) {
-        dispatch({
-            type: UPDATE_COMMENT_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const removeComment = (postId, commentId, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: REMOVE_COMMENT_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        await axios.delete(
-            `http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/post/${postId}/comment/${commentId}`,
-            { headers },
-        );
-        dispatch({
-            type: REMOVE_COMMENT_SUCCESS,
-            payload: {
-                postId,
-                commentId,
-            },
-        });
-    } catch (err) {
-        dispatch({
-            type: REMOVE_COMMENT_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const loadAllStatistics = () => async (dispatch) => {
-    try {
-        dispatch({
-            type: LOAD_ALL_STATISTICS_REQUEST,
-        });
-        const response = await axios.get(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/all-moods',
-        );
-        dispatch({
-            type: LOAD_ALL_STATISTICS_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: LOAD_ALL_STATISTICS_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const loadStatistics = (accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: LOAD_STATISTICS_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.get(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/moods',
-            { headers },
-        );
-        dispatch({
-            type: LOAD_STATISTICS_SUCCESS,
-            payload: response.data,
-        });
-    } catch (err) {
-        dispatch({
-            type: LOAD_STATISTICS_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const loadLikePost = (accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: LOAD_LIKE_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const response = await axios.get(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/like',
-            { headers },
-        );
-        dispatch({
-            type: LOAD_LIKE_POST_SUCCESS,
-            payload: response.data.likes,
-        });
-    } catch (err) {
-        dispatch({
-            type: LOAD_LIKE_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const likePost = (postId, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: LIKE_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const data = {
-            id: postId,
-        };
-        const response = await axios.post(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/like',
-            data,
-            { headers },
-        );
-        dispatch({
-            type: LIKE_POST_SUCCESS,
-            payload: postId,
-        });
-    } catch (err) {
-        dispatch({
-            type: LIKE_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
-
-export const unlikePost = (postId, accessToken) => async (dispatch) => {
-    try {
-        dispatch({
-            type: UNLIKE_POST_REQUEST,
-        });
-        const headers = {
-            Authorization: accessToken,
-        };
-        const data = {
-            id: postId,
-        };
-        const response = await axios.delete(
-            'http://ec2-52-78-155-108.ap-northeast-2.compute.amazonaws.com:5000/api/like',
-            { headers, data },
-        );
-        dispatch({
-            type: UNLIKE_POST_SUCCESS,
-            payload: postId,
-        });
-    } catch (err) {
-        dispatch({
-            type: UNLIKE_POST_FAILURE,
-            payload: err.response.data,
-        });
-    }
-};
+export const loadMorePostsFailure = (error: string) => ({
+    type: LOAD_MORE_POSTS_FAILURE,
+    error,
+});

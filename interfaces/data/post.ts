@@ -1,53 +1,19 @@
+import { IUser } from './user';
+
+export interface IPost {
+    id: string;
+    auth: IUser;
+    weather: string;
+    content: string;
+    image: string[];
+}
+
 export interface PostState {
-    Posts: [];
-    loadAllStatisticsLoading: boolean;
-    loadAllStatisticsDone: boolean;
-    loadAllStatisticsError: null | string;
-    loadStatisticsLoading: boolean;
-    loadStatisticsDone: boolean;
-    loadStatisticsError: null | string;
-    firstLoadAllPostLoading: boolean;
-    firstLoadAllPostDone: boolean;
-    firstLoadAllPostError: null | string;
-    moreLoadAllPostLoading: boolean;
-    moreLoadAllPostDone: boolean;
-    moreLoadAllPostError: null | string;
-    firstLoadPostLoading: boolean;
-    firstLoadPostDone: boolean;
-    firstLoadPostError: null | string;
-    moreLoadPostLoading: boolean;
-    moreLoadPostDone: boolean;
-    moreLoadPostError: null | string;
-    addPostLoading: boolean;
-    addPostDone: boolean;
-    addPostError: null | string;
-    updatePostLoading: boolean;
-    updatePostDone: boolean;
-    updatePostError: null | string;
-    removePostLoading: boolean;
-    removePostDone: boolean;
-    removePostError: null | string;
-    addCommentLoading: boolean;
-    addCommentDone: boolean;
-    addCommentError: null | string;
-    updateCommentLoading: boolean;
-    updateCommentDone: boolean;
-    updateCommentError: null | string;
-    removeCommentLoading: boolean;
-    removeCommentDone: boolean;
-    removeCommentError: null | string;
-    filterWeather: [];
-    totalPosts: number;
-    Time: string;
-    Statistics: null | string;
-    likePosts: [];
-    loadLikePostLoading: boolean;
-    loadLikePostDone: boolean;
-    loadLikePostError: null | string;
-    likePostLoading: boolean;
-    likePostDone: boolean;
-    likePostError: null | string;
-    unlikePostLoading: boolean;
-    unlikePostDone: boolean;
-    unlikePostError: null | string;
+    Posts: null | IPost[];
+    loadFirstPostsLoading: boolean;
+    loadFirstPostsDone: boolean;
+    loadFirstPostsError: null | string;
+    loadMorePostsLoading: boolean;
+    loadMorePostsDone: boolean;
+    loadMorePostsError: null | string;
 }

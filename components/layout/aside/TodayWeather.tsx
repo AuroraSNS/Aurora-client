@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import { ITodayWeather } from '../../../interfaces/data';
 
 const COORDS = 'coords';
-const API_KEY = 'f5c65fa374871d6140493543f92cb9c6';
 
 const TodayWeather = () => {
     const [init, setInit] = useState(false);
@@ -44,7 +43,7 @@ const TodayWeather = () => {
     };
 
     const getWeather = (lat, lon) => {
-        const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}&units=metric`;
+        const API_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${process.env.NEXT_PUBLIC_API_KEY}&units=metric`;
         fetch(API_URL)
             .then((res) => res.json())
             .then((data) => {

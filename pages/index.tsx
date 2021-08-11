@@ -7,20 +7,30 @@ import AppLayout from '../components/layout/AppLayout';
 import Loading from '../components/Loading';
 
 import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';
-import { firstLoadAllPost, moreLoadAllPost, CHANGE_TIME, loadAllStatistics, loadLikePost } from '../actions/post';
+import {
+    firstLoadAllPost,
+    moreLoadAllPost,
+    CHANGE_TIME,
+    loadAllStatistics,
+    loadLikePost,
+    loadFirstPostsRequest,
+    loadMorePostsRequest,
+} from '../actions/post';
 import PostRegisterModal from '../components/home/postRegister/PostRegisterModal';
 import { RootState } from '../reducers';
 import PostCard from '../components/home/postCard/PostCardt';
 import { createSamplePosts } from '../util/sample';
+import { loadProfileRequest } from '../actions/user';
 
 const Home = () => {
     // const router = useRouter();
 
-    // const dispatch = useDispatch();
+    const dispatch = useDispatch();
     // const { Time, Posts, firstLoadAllPostDone, filterWeather, totalPosts } = useSelector((state) => state.post);
-    // const { isLoggedIn, accessToken } = useSelector((state) => state.user);
+    const { me } = useSelector((state: RootState) => state.user);
+    const { Posts, loadMorePostsLoading } = useSelector((state: RootState) => state.post);
     const { isPostRegisterModalVisible } = useSelector((state: RootState) => state.modal);
-    // const [page, setPage] = useState(2);
+    const [init, setInit] = useState(false);
 
     // let filterPosts = [];
     // if (filterWeather.length > 0) {
@@ -36,43 +46,34 @@ const Home = () => {
     //     }
     // }, [isLoggedIn]);
 
-    // useEffect(() => {
-    //     dispatch(loadAllStatistics());
-    //     dispatch({
-    //         type: CHANGE_TIME,
-    //         payload: new Date().toISOString(),
-    //     });
-    // }, []);
-
-    // const onClickMore = useCallback(() => {
-    //     dispatch(moreLoadAllPost(page, Time, accessToken));
-    //     setPage((prev) => prev + 1);
-    // }, [page]);
-    const [samplePosts, setSamplePosts] = useState(null);
     useEffect(() => {
-        const tmp = createSamplePosts(3);
-        setSamplePosts(tmp);
-    }, []);
+        dispatch(loadProfileRequest('token'));
+        dispatch(loadFirstPostsRequest());
+    }, [dispatch]);
+
+    useEffect(() => {
+        function onScroll() {
+            if (
+                window.pageYOffset + document.documentElement.clientHeight >
+                document.documentElement.scrollHeight - 300
+            ) {
+                if (loadMorePostsLoading) return;
+                dispatch(loadMorePostsRequest(1));
+            }
+        }
+        window.addEventListener('scroll', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+        };
+    }, [dispatch, loadMorePostsLoading]);
+
     return (
         <AppLayout title="Home" filter isMain>
             <PostRegisterBar />
-
             <PostCardList>
-                {samplePosts?.map((post) => (
+                {Posts?.map((post) => (
                     <PostCard key={post.id} post={post} />
                 ))}
-                {/* <PostCard />
-                <PostCard /> */}
-                {/* {firstLoadAllPostDone ? (
-                    filterWeather.length > 0 ? (
-                        filterPosts.map((post) => <PostCard key={post._id} post={post} />)
-                    ) : (
-                        Posts.map((post) => <PostCard key={post._id} post={post} />)
-                    )
-                ) : (
-                    <Loading />
-                )}
-                {totalPosts > Posts.length && <LoadMoreBtn onClick={onClickMore}>더 많은 게시물 보기</LoadMoreBtn>} */}
             </PostCardList>
             {isPostRegisterModalVisible && <PostRegisterModal />}
         </AppLayout>

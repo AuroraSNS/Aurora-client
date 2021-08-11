@@ -48,7 +48,7 @@ const Navigation = ({ page }: Props) => (
 const Navbar = styled.nav`
     /* border: 1px solid black; */
     flex: none;
-    width: 230px;
+    width: 200px;
     align-items: center;
     position: fixed;
     margin-top: 50px;
@@ -59,19 +59,21 @@ const Navbar = styled.nav`
     @media screen and (max-width: 768px) {
         bottom: 0;
         width: 100%;
+        z-index: 10;
+        background-color: white;
         ul {
+            padding-inline-start: 0;
             flex-direction: row;
             width: 100%;
             justify-content: space-evenly;
-        }
-        span {
-            display: none;
+            align-items: center;
         }
     }
 `;
 
 const Tap = styled.a<{ selected: string; name: string }>`
     /* border: 1px solid gray; */
+    width: 110px;
     font-style: normal;
     font-weight: 600;
     font-size: 16px;
@@ -100,6 +102,17 @@ const Tap = styled.a<{ selected: string; name: string }>`
         }
         svg path {
             fill: white;
+        }
+    }
+    @media screen and (max-width: 768px) {
+        margin-bottom: 0px;
+        height: 70px;
+        width: 40px;
+        span {
+            display: none;
+        }
+        svg {
+            margin: 0;
         }
     }
 `;

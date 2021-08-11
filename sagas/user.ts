@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { destroyCookie, setCookie } from 'nookies';
-import { all, fork, put, takeLatest, call } from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call, delay } from 'redux-saga/effects';
 import axios, { AxiosResponse } from 'axios';
 import {
     loadProfileFailure,
@@ -23,11 +23,11 @@ import {
     signUpSuccess,
     SIGN_UP_REQUEST,
 } from '../actions/user';
-import { LoginFormData, Me, ProfileModifyFormData, SignUpFormData } from '../interfaces/data/user';
-import { SampleUser } from '../utils/data';
+import { ILogInForm } from '../interfaces/data/user';
 import { getToken } from '.';
+import { sampleMe } from '../util/sample';
 
-function logInAPI(data: LoginFormData) {
+function logInAPI(data: ILogInForm) {
     return axios({
         method: 'POST',
         url: '/api/user/login',
@@ -37,9 +37,10 @@ function logInAPI(data: LoginFormData) {
 
 function* logIn(action: ReturnType<typeof logInRequest>) {
     try {
-        const result: AxiosResponse<{ accessToken: string; tokenType: string }> = yield call(logInAPI, action.data);
-        setCookie(null, 'accessToken', result.data.accessToken, { path: '/' });
-        localStorage.setItem('accessToken', result.data.accessToken);
+        // const result: AxiosResponse<{ accessToken: string; tokenType: string }> = yield call(logInAPI, action.data);
+        setCookie(null, 'accessToken', 'accessToken', { path: '/' });
+        localStorage.setItem('accessToken', 'accessToken');
+        yield delay(1000);
         yield put(logInSuccess());
     } catch (err) {
         yield put(logInFailure('로그인 실패'));
@@ -48,29 +49,30 @@ function* logIn(action: ReturnType<typeof logInRequest>) {
 
 function* logOut() {
     try {
-        destroyCookie(null, 'accessToken');
-        localStorage.removeItem('accessToken');
+        // destroyCookie(null, 'accessToken');
+        // localStorage.removeItem('accessToken');
+        yield delay(1000);
         yield put(logOutSuccess());
     } catch (err) {
         yield put(logOutFailure(err.message));
     }
 }
 
-function signUpAPI(data: SignUpFormData) {
-    return axios({
-        method: 'POST',
-        url: '/api/user/signup',
-        data,
-    });
-}
+// function signUpAPI(data: SignUpFormData) {
+//     return axios({
+//         method: 'POST',
+//         url: '/api/user/signup',
+//         data,
+//     });
+// }
 
 function* signUp(action: ReturnType<typeof signUpRequest>) {
-    try {
-        yield call(signUpAPI, action.data);
-        yield put(signUpSuccess());
-    } catch (err) {
-        yield put(signUpFailure(err.message));
-    }
+    // try {
+    //     yield call(signUpAPI, action.data);
+    //     yield put(signUpSuccess());
+    // } catch (err) {
+    //     yield put(signUpFailure(err.message));
+    // }
 }
 
 function loadProfileAPI(token: string) {
@@ -83,8 +85,9 @@ function loadProfileAPI(token: string) {
 
 function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     try {
-        const result: AxiosResponse<Me> = yield call(loadProfileAPI, action.token);
-        yield put(loadProfileSuccess(result.data));
+        // const result: AxiosResponse<Me> = yield call(loadProfileAPI, action.token);
+        yield delay(1000);
+        yield put(loadProfileSuccess(sampleMe));
     } catch (err) {
         yield put(loadProfileFailure(err.message));
     }
@@ -100,12 +103,12 @@ function modifyProfileAPI(data: FormData) {
 }
 
 function* modifyProfile(action: ReturnType<typeof modifyProfileRequest>) {
-    try {
-        const result: AxiosResponse<ProfileModifyFormData> = yield call(modifyProfileAPI, action.data);
-        yield put(modifyProfileSuccess(result.data));
-    } catch (err) {
-        yield put(modifyProfileFailure(err.message));
-    }
+    // try {
+    //     const result: AxiosResponse<ProfileModifyFormData> = yield call(modifyProfileAPI, action.data);
+    //     yield put(modifyProfileSuccess(result.data));
+    // } catch (err) {
+    //     yield put(modifyProfileFailure(err.message));
+    // }
 }
 
 function* watchLogIn() {

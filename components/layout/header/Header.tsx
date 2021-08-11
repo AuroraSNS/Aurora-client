@@ -50,6 +50,11 @@ const Logo = styled.div`
     img {
         width: 150px;
     }
+    @media screen and (max-width: 768px) {
+        img {
+            width: 100px;
+        }
+    }
 `;
 
 export default Header;
