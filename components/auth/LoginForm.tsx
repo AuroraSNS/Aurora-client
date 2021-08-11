@@ -6,8 +6,10 @@ import { useRouter } from 'next/router';
 
 import useInput from '../../hooks/useInput';
 import { getAccessTokenAction, signinRequestAction, signinSuccessAction } from '../../actions/user.ts';
+import GoogleOAuthSignin from './GoogleOAuthBtn';
+import FacebookOAuthSignin from './FacebookOAuthBtn';
 
-const SigninProcess = () => {
+const LoginForm = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     // const { loginLoading, loginError, accessToken, isLoggedIn } = useSelector((state) => state.user);
@@ -53,67 +55,69 @@ const SigninProcess = () => {
     // );
 
     return (
-        <InputContainer>
-            <GreetingMessage>로그인</GreetingMessage>
-            <form>
-                <Input name="email" type="email" placeholder="이메일" required />
-                <Input name="password" type="password" placeholder="비밀번호" required />
-                {/* {loginErrorMsg ? <ErrorMessage>{loginErrorMsg}</ErrorMessage> : ''} */}
-                <SigninButton type="submit" value="로그인" />
-            </form>
-
-            <Link href="../user/signup">
-                <MoveToSigninPage>계정이 없으신가요?</MoveToSigninPage>
-            </Link>
-        </InputContainer>
+        <Form>
+            <img className="logo" src="images/logo.png" alt="logo" />
+            <div className="title">로그인</div>
+            <input name="email" type="email" placeholder="이메일" required />
+            <input name="password" type="password" placeholder="비밀번호" required />
+            {/* {loginErrorMsg ? <ErrorMessage>{loginErrorMsg}</ErrorMessage> : ''} */}
+            <button type="submit">로그인</button>
+            <span>계정이 없으신가요?</span>
+            <GoogleOAuthSignin />
+            <FacebookOAuthSignin />
+        </Form>
     );
 };
 
-const GreetingMessage = styled.div`
-    margin-bottom: 1rem;
-    color: #464646;
-    font-weight: 500;
-`;
-const InputContainer = styled.div`
+const Form = styled.section`
     display: flex;
     flex-direction: column;
-    width: 24rem;
-    margin: 0 auto;
+    width: 422px;
+    padding: 38px 48px;
+    box-shadow: 8px 5px 50px 5px rgba(111, 111, 111, 0.15);
+    .logo {
+        width: 200px;
+        align-self: center;
+        margin-bottom: 30px;
+    }
+    .title {
+        font-weight: 600;
+        font-size: 18px;
+    }
+    input {
+        border-bottom: 1px solid #dcdcdc;
+        height: 40px;
+        padding: 0 10px;
+        margin-top: 30px;
+    }
+    button[type='submit'] {
+        width: 330px;
+        height: 45px;
+        border-radius: 50px;
+        background-color: rgba(177, 177, 177, 0.5);
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        margin-top: 40px;
+        &:hover {
+            background-color: rgba(172, 141, 224, 0.5);
+        }
+    }
+    & > span {
+        margin-top: 12px;
+        font-size: 12px;
+        color: #707070;
+        border-bottom: 1px solid #707070;
+        cursor: pointer;
+        align-self: center;
+        margin-bottom: 40px;
+    }
 `;
-const Input = styled.input`
-    border-style: none;
-    border-bottom: 1px solid #bcbcbc;
-    height: 3.6rem;
-    width: 23rem;
-    font-size: 0.9rem;
-`;
+
 const ErrorMessage = styled.div`
     padding-top: 0.2rem;
     color: #755bdb;
     font-size: 0.9rem;
 `;
-const SigninButton = styled.input`
-    margin-top: 2.6rem;
-    border-style: none;
-    border-radius: 1.5rem;
-    height: 2.4rem;
-    width: 23rem;
-    background-color: #a18afc;
-    opacity: 0.43;
-    color: #fff;
-    cursor: pointer;
-    &:hover {
-        background-color: #b29eff;
-        opacity: 1;
-    }
-`;
-const MoveToSigninPage = styled.a`
-    margin-top: 1rem;
-    color: #767676;
-    text-decoration: underline;
-    cursor: pointer;
-    height: 4rem;
-    align-self: center;
-`;
 
-export default SigninProcess;
+export default LoginForm;

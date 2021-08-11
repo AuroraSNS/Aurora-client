@@ -1,6 +1,6 @@
 import AppUserLayout from '../../components/user/AppUserLayout';
-import FacebookOAuthSignin from '../../components/user/FacebookOAuthSignin';
-import GoogleOAuthSignin from '../../components/user/GoogleOAuthSignin';
+import FacebookOAuthSignin from '../../components/auth/FacebookOAuthBtn';
+import GoogleOAuthSignin from '../../components/auth/GoogleOAuthBtn';
 import SigninProcess from '../../components/user/SigninProcess';
 
 const Signin = () => (

@@ -119,17 +119,14 @@ const WeatherContainer = styled.div`
     }
     .moon {
         * {
-            stroke: #e9e9e9;
-            fill: '#e9e9e9';
+            fill: #e9e9e9;
         }
         &:hover * {
-            stroke: #ac8de0;
-            fill: '#AC8DE0';
+            fill: #ac8de0;
         }
     }
     input#moon:checked + label * {
-        stroke: #ac8de0;
-        fill: '#AC8DE0';
+        fill: #ac8de0;
     }
 `;
 

@@ -11,7 +11,7 @@ import CommentForm from './CommentForm';
 import PostCardContent from './PostCardContent';
 import PostImages from './PostImages';
 import { removePost, updatePost, unlikePost, likePost } from '../../../actions/post';
-import { IconCloud, IconMoon, IconRain, IconSun } from '../../Icon';
+import { IconCloud, IconFavorite, IconMoon, IconMore, IconRain, IconSun } from '../../Icon';
 
 const PostCard = ({ post }) => {
     const dispatch = useDispatch();
@@ -131,69 +131,41 @@ const PostCard = ({ post }) => {
                     )}
                 </ImageContainer>
             </Body>
-            {/* <Card
-                cover={<PostImages images={post.images} />}
-                actions={[
-                    liked ? (
-                        <HeartTwoTone twoToneColor="#eb2f96" key="heart" onClick={onUnlike} />
-                    ) : (
-                        <HeartOutlined key="heart" onClick={onLike} />
-                    ),
-                    <MessageOutlined key="comment" onClick={onToggleComment} />,
-                    post.postedBy._id === me._id && (
-                        <Popover
-                            key="more"
-                            content={
-                                <Button.Group>
-                                    <Button onClick={onClickUpdate}>수정</Button>
-                                    <Button type="danger" loading={removePostLoading} onClick={onRemovePost}>
-                                        삭제
-                                    </Button>
-                                </Button.Group>
-                            }
-                        >
-                            <EllipsisOutlined />
-                        </Popover>
-                    ),
-                ]}
-            >
-                {editMode ? (
-                    <Card.Meta
-                        description={
-                            <PostCardContent
-                                editMode={editMode}
-                                postData={post.content}
-                                onChangePost={onChangePost}
-                                onCancelUpdate={onCancelUpdate}
-                            />
-                        }
-                    />
-                ) : (
-                    <Card.Meta description={<PostCardContent postData={post.content} />} />
-                )}
-            </Card> */}
-            {/* {commentFormOpened && (
-                <>
-                    <CommentForm post={post} />
-                    <List
-                        header={`${post.comments.length} 개의 댓글`}
-                        itemLayout="horizontal"
-                        dataSource={post.comments}
-                        renderItem={(item) => (
-                            <li>
-                                <Comment
-                                    style={commentStyle}
-                                    author={item.commentedBy.username}
-                                    content={<CommentContent item={item} postId={post._id} />}
-                                />
-                            </li>
-                        )}
-                    />
-                </>
-            )} */}
+            <Footer>
+                <IconFavorite />
+                <span className="like-cnt">12</span>
+                <span className="comment-cnt">댓글 3개</span>
+                <input type="text" />
+                <IconMore />
+            </Footer>
         </Wrapper>
     );
 };
+
+const Footer = styled.div`
+    width: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    .like-cnt {
+        margin-left: 6px;
+        margin-right: 20px;
+    }
+    .comment-cnt {
+        color: #707070;
+    }
+    input {
+        background-color: #f0f2f5;
+        border-radius: 10px;
+        height: 25px;
+        margin: 0 20px;
+        padding: 0 10px;
+        flex: 1;
+    }
+    svg {
+        cursor: pointer;
+    }
+`;
 
 const ImageContainer = styled.div`
     width: 100%;
@@ -245,6 +217,8 @@ const Wrapper = styled.article<{ weather: string }>`
     box-shadow: 0 0 30px
         ${(props) => {
             if (props.weather === 'sun') return 'rgba(237, 154, 154, 0.5)';
+            if (props.weather === 'cloud') return 'rgba(177, 176, 176, 0.7)';
+            if (props.weather === 'rain') return 'rgba(154, 198, 240, 0.5)';
             if (props.weather === 'moon') return 'rgba(172, 141, 224, 0.5)';
         }};
 `;
