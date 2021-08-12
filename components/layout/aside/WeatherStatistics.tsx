@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../Icon';
+import ToolTip from '../../ToolTip';
+import { upWeatherStick } from '../../../util/util';
 
 type Props = {
     isMain?: boolean;
@@ -19,30 +21,38 @@ const WeatherStatistics = ({ isMain }: Props) => {
                 rain={SampleStatistics.rain}
                 moon={SampleStatistics.moon}
             >
-                <div>
-                    <div className="stick">
-                        <span className="stick-sun" />
+                <ToolTip message={`${SampleStatistics.sun}%`} wh={49}>
+                    <div>
+                        <div className="stick">
+                            <span className="stick-sun" />
+                        </div>
+                        <IconSun />
                     </div>
-                    <IconSun />
-                </div>
-                <div>
-                    <div className="stick">
-                        <span className="stick-cloud" />
+                </ToolTip>
+                <ToolTip message={`${SampleStatistics.cloud}%`} wh={49}>
+                    <div>
+                        <div className="stick">
+                            <span className="stick-cloud" />
+                        </div>
+                        <IconCloud />
                     </div>
-                    <IconCloud />
-                </div>
-                <div>
-                    <div className="stick">
-                        <span className="stick-rain" />
+                </ToolTip>
+                <ToolTip message={`${SampleStatistics.rain}%`} wh={49}>
+                    <div>
+                        <div className="stick">
+                            <span className="stick-rain" />
+                        </div>
+                        <IconRain />
                     </div>
-                    <IconRain />
-                </div>
-                <div>
-                    <div className="stick">
-                        <span className="stick-moon" />
+                </ToolTip>
+                <ToolTip message={`${SampleStatistics.moon}%`} wh={49}>
+                    <div>
+                        <div className="stick">
+                            <span className="stick-moon" />
+                        </div>
+                        <IconMoon />
                     </div>
-                    <IconMoon />
-                </div>
+                </ToolTip>
             </Container>
         </Wrapper>
     );
@@ -79,6 +89,7 @@ const Container = styled.div<{
         display: flex;
         flex-direction: column;
         align-items: center;
+        cursor: pointer;
     }
     .stick {
         /* border: 1px solid gray; */
@@ -95,20 +106,20 @@ const Container = styled.div<{
             border-radius: 30px;
         }
         .stick-sun {
-            height: ${(props) => `${props.sun}%`};
             background-color: #f8cbcb;
+            animation: ${(props) => upWeatherStick(props.sun)} 1s linear forwards;
         }
         .stick-cloud {
-            height: ${(props) => `${props.cloud}%`};
             background-color: #efefef;
+            animation: ${(props) => upWeatherStick(props.cloud)} 1s linear forwards;
         }
         .stick-rain {
-            height: ${(props) => `${props.rain}%`};
             background-color: #b9d8f6;
+            animation: ${(props) => upWeatherStick(props.rain)} 1s linear forwards;
         }
         .stick-moon {
-            height: ${(props) => `${props.moon}%`};
             background-color: #d3bafc;
+            animation: ${(props) => upWeatherStick(props.moon)} 1s linear forwards;
         }
     }
 `;

@@ -34,7 +34,7 @@ const Wrapper = styled.main`
     height: 100vh;
     display: flex;
     flex-direction: row-reverse;
-    /* background: url('/images/profile-thumbnail.jpg'); */
+    background: url('/images/login-cover.png');
     background-position: right;
     & > div {
         width: 50%;

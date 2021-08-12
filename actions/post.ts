@@ -9,17 +9,10 @@ export const LOAD_MORE_POSTS_REQUEST = 'LOAD_MORE_POSTS_REQUEST' as const;
 export const LOAD_MORE_POSTS_SUCCESS = 'LOAD_MORE_POSTS_SUCCESS' as const;
 export const LOAD_MORE_POSTS_FAILURE = 'LOAD_MORE_POSTS_FAILURE' as const;
 
-// export const FIRST_LOAD_POST_REQUEST = 'FIRST_LOAD_POST_REQUEST' as const;
-// export const FIRST_LOAD_POST_SUCCESS = 'FIRST_LOAD_POST_SUCCESS' as const;
-// export const FIRST_LOAD_POST_FAILURE = 'FIRST_LOAD_POST_FAILURE' as const;
-
-// export const MORE_LOAD_POST_REQUEST = 'MORE_LOAD_POST_REQUEST' as const;
-// export const MORE_LOAD_POST_SUCCESS = 'MORE_LOAD_POST_SUCCESS' as const;
-// export const MORE_LOAD_POST_FAILURE = 'MORE_LOAD_POST_FAILURE' as const;
-
-// export const ADD_POST_REQUEST = 'ADD_POST_REQUEST' as const;
-// export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS' as const;
-// export const ADD_POST_FAILURE = 'ADD_POST_FAILURE' as const;
+export const ADD_POST_REQUEST = 'ADD_POST_REQUEST' as const;
+export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS' as const;
+export const ADD_POST_FAILURE = 'ADD_POST_FAILURE' as const;
+export const ADD_POST_CLEAR = 'ADD_POST_CLEAR' as const;
 
 // export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST' as const;
 // export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS' as const;
@@ -88,4 +81,22 @@ export const loadMorePostsSuccess = (data: IPost[]) => ({
 export const loadMorePostsFailure = (error: string) => ({
     type: LOAD_MORE_POSTS_FAILURE,
     error,
+});
+
+export const addPostRequest = (data: FormData) => ({
+    type: ADD_POST_REQUEST,
+    data,
+});
+
+export const addPostSuccess = () => ({
+    type: ADD_POST_SUCCESS,
+});
+
+export const addPostFailure = (error: string) => ({
+    type: ADD_POST_FAILURE,
+    error,
+});
+
+export const addPostClear = () => ({
+    type: ADD_POST_CLEAR,
 });

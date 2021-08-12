@@ -7,7 +7,7 @@ import Global from '../../styles/Global';
 import Navigation from './Navigation';
 
 type Props = {
-    children: Array<ReactChild>;
+    children: ReactChild | ReactChild[];
     title: string;
     filter?: boolean;
     isMain?: boolean;

@@ -4,6 +4,10 @@ import axios, { AxiosResponse } from 'axios';
 import { setCookie } from 'nookies';
 import { all, fork, put, takeLatest, throttle, call, delay } from 'redux-saga/effects';
 import {
+    addPostFailure,
+    addPostRequest,
+    addPostSuccess,
+    ADD_POST_REQUEST,
     loadFirstPostsFailure,
     loadFirstPostsRequest,
     loadFirstPostsSuccess,
@@ -51,6 +55,23 @@ function* loadMorePosts(action: ReturnType<typeof loadMorePostsRequest>) {
     }
 }
 
+// function loadMorePostsAPI(serviceId: string) {
+//     return axios({
+//         method: 'GET',
+//         url: `api/v1/services/${serviceId}`,
+//     });
+// }
+
+function* addPost(action: ReturnType<typeof addPostRequest>) {
+    try {
+        // const result: AxiosResponse<{ service: Service }> = yield call(loadServiceAPI, action.serviceId);
+        yield delay(1000);
+        yield put(addPostSuccess());
+    } catch (err) {
+        yield put(addPostFailure(err.message));
+    }
+}
+
 function* watchLoadFirstPosts() {
     yield takeLatest(LOAD_FIRST_POSTS_REQUEST, loadFirstPosts);
 }
@@ -59,6 +80,10 @@ function* watchLoadMorePosts() {
     yield throttle(5000, LOAD_MORE_POSTS_REQUEST, loadMorePosts);
 }
 
+function* watchAddPost() {
+    yield takeLatest(ADD_POST_REQUEST, addPost);
+}
+
 export default function* postSaga() {
-    yield all([fork(watchLoadFirstPosts), fork(watchLoadMorePosts)]);
+    yield all([fork(watchLoadFirstPosts), fork(watchLoadMorePosts), fork(watchAddPost)]);
 }

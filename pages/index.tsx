@@ -1,35 +1,21 @@
 import styled from 'styled-components';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useRouter } from 'next/router';
 
 import AppLayout from '../components/layout/AppLayout';
-import Loading from '../components/Loading';
 
 import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';
-import {
-    firstLoadAllPost,
-    moreLoadAllPost,
-    CHANGE_TIME,
-    loadAllStatistics,
-    loadLikePost,
-    loadFirstPostsRequest,
-    loadMorePostsRequest,
-} from '../actions/post';
-import PostRegisterModal from '../components/home/postRegister/PostRegisterModal';
+import { loadFirstPostsRequest, loadMorePostsRequest } from '../actions/post';
 import { RootState } from '../reducers';
 import PostCard from '../components/home/postCard/PostCardt';
-import { createSamplePosts } from '../util/sample';
 import { loadProfileRequest } from '../actions/user';
 
 const Home = () => {
     // const router = useRouter();
 
     const dispatch = useDispatch();
-    // const { Time, Posts, firstLoadAllPostDone, filterWeather, totalPosts } = useSelector((state) => state.post);
     const { me } = useSelector((state: RootState) => state.user);
     const { Posts, loadMorePostsLoading } = useSelector((state: RootState) => state.post);
-    const { isPostRegisterModalVisible } = useSelector((state: RootState) => state.modal);
     const [init, setInit] = useState(false);
 
     // let filterPosts = [];
@@ -75,7 +61,6 @@ const Home = () => {
                     <PostCard key={post.id} post={post} />
                 ))}
             </PostCardList>
-            {isPostRegisterModalVisible && <PostRegisterModal />}
         </AppLayout>
     );
 };

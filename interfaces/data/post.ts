@@ -1,11 +1,12 @@
-import { IUser } from './user';
+import { IAuth } from './user';
 
 export interface IPost {
     id: string;
-    auth: IUser;
-    weather: string;
+    auth: IAuth;
+    mood: string;
     content: string;
     image: string[];
+    commentCnt: number;
 }
 
 export interface PostState {
@@ -16,4 +17,7 @@ export interface PostState {
     loadMorePostsLoading: boolean;
     loadMorePostsDone: boolean;
     loadMorePostsError: null | string;
+    addPostLoading: boolean;
+    addPostDone: boolean;
+    addPostError: null | string;
 }

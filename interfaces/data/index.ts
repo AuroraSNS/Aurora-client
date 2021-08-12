@@ -1,5 +1,5 @@
 export interface ITodayWeather {
-    icon: string;
+    icon: number;
     temp: number;
     tempMin: number;
     tempMax: number;

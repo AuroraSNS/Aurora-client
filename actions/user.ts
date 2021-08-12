@@ -1,4 +1,4 @@
-import { ILogInForm, ILoginForm, Me } from '../interfaces/data/user';
+import { ILogInForm, Me } from '../interfaces/data/user';
 
 // 액션 상수
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;
@@ -51,7 +51,7 @@ export const logOutFailure = (error: string) => ({
     error,
 });
 
-export const signUpRequest = (data: SignUpFormData) => ({
+export const signUpRequest = (data) => ({
     type: SIGN_UP_REQUEST,
     data,
 });
@@ -84,12 +84,12 @@ export const loadProfileFailure = (error: string) => ({
     error,
 });
 
-export const modifyProfileRequest = (data: FormData) => ({
+export const modifyProfileRequest = (data) => ({
     type: MODIFY_PROFILE_REQUEST,
     data,
 });
 
-export const modifyProfileSuccess = (data: ProfileModifyFormData) => ({
+export const modifyProfileSuccess = (data) => ({
     type: MODIFY_PROFILE_SUCCESS,
     data,
 });

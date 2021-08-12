@@ -3,14 +3,19 @@ export interface ILogInForm {
     password: string;
 }
 
-export interface IUser {
+export interface IAuth {
     id: number;
     name: string;
     avator: string;
 }
 
-export interface Me extends IUser {
+export interface IUserInfo extends IAuth {
+    bio: string;
+}
+
+export interface Me extends IUserInfo {
     email: string;
+    bio: string;
 }
 
 export interface UserState {

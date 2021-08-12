@@ -1,24 +1,26 @@
 import styled from 'styled-components';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 import { RootState } from '../../../reducers';
-import { postRegisterModalOpen } from '../../../actions/modal';
+import PostRegisterModal from './PostRegisterModal';
 
 const PostBar = () => {
-    const dispatch = useDispatch();
     const { me } = useSelector((state: RootState) => state.user);
+    const [modal, setModal] = useState(false);
 
-    const onClickModal = useCallback(() => {
-        dispatch(postRegisterModalOpen());
-    }, [dispatch]);
+    const openPostCardModal = () => {
+        setModal(true);
+    };
+    const closePostCardModal = () => {
+        setModal(false);
+    };
 
     return (
-        <>
-            <Wrapper onClick={onClickModal}>
-                <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
-                <span>{me?.username}님, 오늘 당신의 날씨는 어떤가요?</span>
-            </Wrapper>
-        </>
+        <Wrapper onClick={openPostCardModal}>
+            <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
+            <span>{me?.name}님, 오늘 당신의 날씨는 어떤가요?</span>
+            {modal && <PostRegisterModal onClose={closePostCardModal} />}
+        </Wrapper>
     );
 };
 

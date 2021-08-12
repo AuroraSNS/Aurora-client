@@ -1,27 +1,25 @@
+/* eslint-disable jsx-a11y/no-autofocus */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import styled from 'styled-components';
-import React, { useCallback, useState, useRef, useEffect, ChangeEvent } from 'react';
+import React, { useCallback, useState, useRef, ChangeEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { addPost } from '../../../actions/post';
 
 import useInput from '../../../hooks/useInput';
 import { RootState } from '../../../reducers';
-import { IconSun, IconCloud, IconRain, IconMoon, IconGallery, IconClear } from '../../Icon';
+import { IconSun, IconCloud, IconRain, IconMoon, IconGallery, IconClear, IconImageAdd } from '../../Icon';
+import { addPostRequest } from '../../../actions/post';
 
 const PostRegisterForm = () => {
     const dispatch = useDispatch();
-    const { accessToken } = useSelector((state: RootState) => state.user);
+    const { me } = useSelector((state: RootState) => state.user);
     const { addPostLoading, addPostDone } = useSelector((state: RootState) => state.post);
 
     const [mood, setMood] = useState('');
     const [content, onChangeContent] = useInput('');
     const [images, setImages] = useState<Array<File> | null>(null);
 
-    useEffect(() => {
-        if (content.length > 0 && addPostDone) {
-            window.location.replace('/');
-        }
-    }, [content.length, addPostDone]);
+    const [dropBox, setDropBox] = useState(false);
 
     const onClickWeather = useCallback((e) => {
         if (e.target.name === 'weather') {
@@ -40,33 +38,38 @@ const PostRegisterForm = () => {
         const seletedImages = Array.from(e.target.files);
         setImages(seletedImages);
     }, []);
-    const removeImage = useCallback(
-        (name: string) => {
-            console.log(name);
-            if (!images) return;
-            const newImages = images.filter((v) => v.name !== name);
-            setImages(newImages);
-        },
-        [images],
-    );
-    const onSubmit = useCallback((e) => {
-        e.preventDefault();
 
-        // const bodyFormData = new FormData();
-        // bodyFormData.append('content', content);
-        // images.forEach((v) => {
-        //     bodyFormData.append('images[]', v);
-        // });
-        // bodyFormData.append('mood', mood);
-
-        // dispatch(addPost(bodyFormData, accessToken));
+    const onOpenDropBox = useCallback(() => {
+        setDropBox((prev) => !prev);
     }, []);
-    console.log(images);
+
+    const onClickClear = useCallback(() => {
+        if (images) {
+            setImages(null);
+        } else {
+            setDropBox((prev) => !prev);
+        }
+    }, [images]);
+
+    const onSubmit = useCallback(
+        (e) => {
+            e.preventDefault();
+            const bodyFormData = new FormData();
+            bodyFormData.append('mood', mood);
+            bodyFormData.append('content', content);
+            images?.forEach((image) => {
+                bodyFormData.append('images[]', image);
+            });
+            dispatch(addPostRequest(bodyFormData));
+        },
+        [dispatch, mood, content, images],
+    );
+
     return (
         <Form onSubmit={onSubmit} encType="multipart/form-data">
             <User>
                 <img src="images/profile-thumbnail.jpg" alt="avatar" />
-                <span>user1</span>
+                <span>{me.name}</span>
             </User>
             <WeatherTab onClick={onClickWeather}>
                 <input type="radio" name="weather" id="register-sun" value="sun" />
@@ -86,56 +89,119 @@ const PostRegisterForm = () => {
                     <IconMoon />
                 </label>
             </WeatherTab>
-            <textarea placeholder="오늘 당신의 날씨는 어떤가요?" onChange={onChangeContent} />
-            <ImagesWrapper>
-                {images?.map((image) => (
-                    <PreviewImage key={image.name}>
-                        <button
-                            type="button"
-                            onClick={() => {
-                                removeImage(image.name);
-                            }}
-                        >
-                            <IconClear />
-                        </button>
-                        <img src={URL.createObjectURL(image)} alt="preview" />
-                    </PreviewImage>
-                ))}
-            </ImagesWrapper>
+            <textarea rows={3} placeholder="오늘 당신의 날씨는 어떤가요?" onChange={onChangeContent} autoFocus />
             <AttachBtnWrapper>
-                <button type="button" onClick={imageUpload}>
-                    <input type="file" accept="image/*" multiple hidden ref={imageInput} onChange={onChangeImages} />
+                <button type="button" onClick={onOpenDropBox}>
                     <IconGallery />
                 </button>
             </AttachBtnWrapper>
+            {dropBox && (
+                <>
+                    <DropBox>
+                        {images ? (
+                            <PreviewImage className={images.length > 1 ? 'plus' : ''}>
+                                <div>
+                                    <img src={URL.createObjectURL(images[0])} alt="preview" />
+                                    {images[1] && <span>+{images.length - 1}</span>}
+                                </div>
+                            </PreviewImage>
+                        ) : (
+                            <ImageUpload onClick={imageUpload}>
+                                <IconImageAdd />
+                                {/* <span>또는 드래그 앤 드롭</span> */}
+                                <span>이미지 첨부</span>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    multiple
+                                    hidden
+                                    ref={imageInput}
+                                    onChange={onChangeImages}
+                                />
+                            </ImageUpload>
+                        )}
+                        <button type="button" onClick={onClickClear}>
+                            <IconClear />
+                        </button>
+                    </DropBox>
+                    {images && <DropBoxMsg>619x619 사이즈 권장 / 정사각형으로 보입니다</DropBoxMsg>}
+                </>
+            )}
             <button type="submit">공유</button>
         </Form>
     );
 };
 
+const DropBoxMsg = styled.span`
+    margin-top: 5px;
+    font-size: 12px;
+    color: #707070;
+    align-self: center;
+`;
+
 const PreviewImage = styled.div`
-    /* border: 1px solid gray; */
     position: relative;
-    display: flex;
-    justify-content: center;
-    & > button {
-        /* border: 1px solid gray; */
+    height: 100%;
+    div {
+        height: 100%;
+        position: relative;
+        img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            object-fit: cover;
+        }
+        overflow: hidden;
+    }
+
+    span {
         position: absolute;
-        top: 8px;
-        right: 8px;
-        height: 14px;
+        top: 50px;
+        left: 100px;
+        font-size: 40px;
+    }
+    &.plus {
+        opacity: 0.7;
+    }
+`;
+
+const ImageUpload = styled.div`
+    background-color: rgba(128, 128, 128, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(128, 128, 128, 0.3);
+    }
+`;
+
+const DropBox = styled.div`
+    border: 1px solid rgba(128, 128, 128, 0.3);
+    border-radius: 20px;
+    padding: 10px;
+    height: 266px;
+    position: relative;
+    button {
+        border: 1px solid gray;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        height: 18px;
         background: rgba(255, 255, 255, 0.5);
         border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
         &:hover {
-            background: rgba(255, 255, 255, 0);
+            background: rgba(128, 128, 128, 0.15);
         }
-    }
-    & > img {
-        width: 260px;
-        height: 202px;
     }
 `;
 
@@ -170,8 +236,6 @@ const User = styled.div`
     margin-bottom: 14px;
 `;
 
-const ImagesWrapper = styled.div``;
-
 const WeatherTab = styled.div`
     /* border: 1px solid gray; */
     width: 100%;
@@ -204,6 +268,7 @@ const WeatherTab = styled.div`
 `;
 
 const Form = styled.form`
+    width: 286px;
     background: #ffffff;
     box-shadow: 0px 0px 30px 5px rgba(82, 82, 82, 0.15);
     padding: 10px;
@@ -214,8 +279,6 @@ const Form = styled.form`
     & > textarea {
         padding: 1rem;
         width: 100%;
-        height: 10rem;
-        border: none;
         resize: none;
         &::placeholder {
             font-weight: normal;
@@ -231,6 +294,7 @@ const Form = styled.form`
         height: 33px;
         background: linear-gradient(106.76deg, #d3bafc 3.84%, #b9d8f6 89.38%);
         border-radius: 50px;
+        margin-top: 20px;
     }
 `;
 

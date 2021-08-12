@@ -5,6 +5,8 @@ export const createSampleUser = () => ({
     id: shortid.generate(),
     name: faker.name.findName(),
     avator: faker.image.avatar(),
+    email: faker.internet.email(),
+    bio: faker.lorem.word(),
 });
 
 export const createSamplePosts = (n) => {
@@ -15,12 +17,27 @@ export const createSamplePosts = (n) => {
     return samplePosts;
 };
 
+export const createSampleComments = (n) => {
+    const sampleComments = [];
+    for (let i = 0; i < n; i += 1) {
+        sampleComments.push(createSampleComment());
+    }
+    return sampleComments;
+};
+
+const createSampleComment = () => ({
+    id: shortid.generate(),
+    auth: createSampleUser(),
+    content: faker.random.words(),
+});
+
 const createSamplePost = () => ({
     id: shortid.generate(),
     auth: createSampleUser(),
-    weather: createRandomWeather(),
+    mood: createRandomWeather(),
     content: faker.lorem.text(),
     image: createSampleImages(),
+    commentCnt: createRandomNumber(),
 });
 
 const createRandomWeather = () => {
@@ -37,6 +54,8 @@ const createSampleImages = () => {
     }
     return sampleImages;
 };
+
+const createRandomNumber = () => Math.floor(Math.random() * 10);
 
 export const sampleMe = {
     id: 1,

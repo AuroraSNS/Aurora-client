@@ -1,8 +1,7 @@
 import styled from 'styled-components';
-import { ChangeEvent, useCallback, useEffect, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { FILTER_WEATHER } from '../../../actions/post';
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../Icon';
 
 const FilterBar = () => {
@@ -23,7 +22,6 @@ const FilterBar = () => {
         },
         [selectWeather],
     );
-    console.log(selectWeather);
 
     return (
         <Wrapper>

@@ -7,6 +7,10 @@ import {
     LOAD_MORE_POSTS_REQUEST,
     LOAD_MORE_POSTS_SUCCESS,
     LOAD_MORE_POSTS_FAILURE,
+    ADD_POST_REQUEST,
+    ADD_POST_SUCCESS,
+    ADD_POST_FAILURE,
+    ADD_POST_CLEAR,
 } from '../actions/post';
 
 import { PostAction } from '../interfaces/act/post';
@@ -21,6 +25,9 @@ export const initialState: PostState = {
     loadMorePostsLoading: false,
     loadMorePostsDone: false,
     loadMorePostsError: null,
+    addPostLoading: false,
+    addPostDone: false,
+    addPostError: null,
 };
 
 const reducer = (state = initialState, action: PostAction) =>
@@ -53,6 +60,24 @@ const reducer = (state = initialState, action: PostAction) =>
             case LOAD_MORE_POSTS_FAILURE:
                 draft.loadMorePostsLoading = false;
                 draft.loadMorePostsError = action.error;
+                break;
+            case ADD_POST_REQUEST:
+                draft.addPostLoading = true;
+                draft.addPostDone = false;
+                draft.addPostError = null;
+                break;
+            case ADD_POST_SUCCESS:
+                draft.addPostLoading = false;
+                draft.addPostDone = true;
+                break;
+            case ADD_POST_FAILURE:
+                draft.addPostLoading = false;
+                draft.addPostError = action.error;
+                break;
+            case ADD_POST_CLEAR:
+                draft.addPostLoading = false;
+                draft.addPostDone = false;
+                draft.addPostError = null;
                 break;
             default:
                 break;

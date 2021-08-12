@@ -9,9 +9,7 @@
     "type-check": "tsc"
   },
   "dependencies": {
-    "@ant-design/icons": "^4.6.2",
     "@babel/core": "^7.14.6",
-    "antd": "^4.15.4",
     "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.12.0",
     "faker": "^5.5.3",

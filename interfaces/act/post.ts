@@ -1,4 +1,8 @@
 import {
+    addPostClear,
+    addPostFailure,
+    addPostRequest,
+    addPostSuccess,
     loadFirstPostsFailure,
     loadFirstPostsRequest,
     loadFirstPostsSuccess,
@@ -13,4 +17,8 @@ export type PostAction =
     | ReturnType<typeof loadFirstPostsFailure>
     | ReturnType<typeof loadMorePostsRequest>
     | ReturnType<typeof loadMorePostsSuccess>
-    | ReturnType<typeof loadMorePostsFailure>;
+    | ReturnType<typeof loadMorePostsFailure>
+    | ReturnType<typeof addPostRequest>
+    | ReturnType<typeof addPostSuccess>
+    | ReturnType<typeof addPostFailure>
+    | ReturnType<typeof addPostClear>;
