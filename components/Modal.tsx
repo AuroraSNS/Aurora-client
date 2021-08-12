@@ -48,7 +48,7 @@ const StyledModalOverlay = styled.div`
             opacity: 1;
         }
     }
-    z-index: 1;
+    z-index: 999;
 `;
 
 const StyledModal = styled.div`

@@ -32,9 +32,31 @@ const Global = createGlobalStyle`
     border: none;
     outline: none;
   }
-  button {
+  button,svg[id],a {
     cursor: pointer;
   }
+  ul{
+    padding-inline-start: 0;
+    margin-block-start: 0;
+    margin-block-end: 0;
+  }
+  svg#not-favorite:hover, svg#favorite:hover {
+    will-change: transform;
+    animation: hearthBeat 1s linear infinite;
+  }
+
+  @keyframes hearthBeat {
+    0% {
+        transform: none;
+    }
+    50% {
+        transform: scale(1.5);
+    }
+    100% {
+        transform: none;
+    }
+}
+
   body::-webkit-scrollbar {
         width: 6px; /*스크롤바의 너비*/
     }

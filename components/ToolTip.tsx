@@ -14,7 +14,7 @@ const ToolTip = ({ message, wh, children }: Props) => (
 );
 
 ToolTip.defaultProps = {
-    wh: 98,
+    wh: 75,
 };
 
 const Wrapper = styled.div<{ message: string; wh: number }>`

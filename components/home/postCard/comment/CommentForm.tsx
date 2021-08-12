@@ -25,25 +25,24 @@ const CommentForm = ({ postId }: Props) => {
 };
 
 const Form = styled.form`
-    flex: 1;
+    width: 100%;
     display: flex;
-    justify-content: center;
     align-items: center;
     input {
         flex: 1;
         background-color: #f0f2f5;
         border-radius: 10px;
         height: 25px;
-        margin: 0 20px;
         padding: 0 10px;
+        width: 100%;
     }
     button {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 50px;
+        width: 40px;
         height: 28px;
-        margin-right: 20px;
+        margin-left: 20px;
         background: linear-gradient(106.76deg, #d3bafc 3.84%, #b9d8f6 89.38%);
         border-radius: 50px;
     }

@@ -14,6 +14,7 @@ import CommentBox from './comment/CommentBox';
 import CommentForm from './comment/CommentForm';
 import ToolTip from '../../ToolTip';
 import PostCardModal from './PostCardModal';
+import PostHeader from './PostHeader';
 
 type Props = {
     post: IPost;
@@ -78,17 +79,7 @@ const PostCard = ({ post }: Props) => {
 
     return (
         <Wrapper mood={post.mood}>
-            <Header>
-                <img src={post.auth.avator} alt="avator" />
-                <div>
-                    <span>{post.auth.name}</span>
-                    <span>22 mins ago</span>
-                </div>
-                {post.mood === 'sun' && <IconSun />}
-                {post.mood === 'cloud' && <IconCloud />}
-                {post.mood === 'rain' && <IconRain />}
-                {post.mood === 'moon' && <IconMoon />}
-            </Header>
+            <PostHeader post={post} />
             <Body>
                 <p>{post.content}</p>
                 <ImageContainer
@@ -121,11 +112,12 @@ const PostCard = ({ post }: Props) => {
                         댓글 {post.commentCnt}개
                     </span>
                 </ToolTip>
-
-                <CommentForm postId={post.id} />
+                <div className="form-wrapper">
+                    <CommentForm postId={post.id} />
+                </div>
                 <IconMore />
             </Footer>
-            {commentBox && comments && <CommentBox comments={comments} />}
+            {commentBox && comments && <CommentBox comments={comments} ht="128px" />}
             {modal && <PostCardModal post={post} comments={comments} onClose={closePostCardModal} />}
         </Wrapper>
     );
@@ -143,6 +135,10 @@ const Footer = styled.div`
     .comment-cnt {
         color: #707070;
         cursor: pointer;
+    }
+    .form-wrapper {
+        margin: 0 20px;
+        flex: 1;
     }
     svg {
         cursor: pointer;
@@ -222,36 +218,6 @@ const Wrapper = styled.article<{ mood: string }>`
             if (props.mood === 'rain') return 'rgba(154, 198, 240, 0.5)';
             if (props.mood === 'moon') return 'rgba(172, 141, 224, 0.5)';
         }};
-`;
-
-const Header = styled.div`
-    /* border: 1px solid gray; */
-    width: 100%;
-    display: flex;
-    align-items: center;
-    position: relative;
-    img {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        margin-right: 12px;
-    }
-    div {
-        display: flex;
-        flex-direction: column;
-        & > span:first-child {
-            font-weight: 600;
-            font-size: 14px;
-        }
-        & > span:last-child {
-            font-size: 12px;
-            color: #707070;
-        }
-    }
-    svg {
-        position: absolute;
-        right: 0;
-    }
 `;
 
 const Body = styled.div`

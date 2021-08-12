@@ -5,16 +5,26 @@ import Comment from './Comment';
 
 type Props = {
     comments: IComment[];
+    ht?: string;
+    vertical?: boolean;
 };
 
-const CommentBox = ({ comments }: Props) => (
-    <Wrapper>{comments && comments.map((comment) => <Comment key={comment.id} comment={comment} />)}</Wrapper>
+const CommentBox = ({ comments, ht, vertical }: Props) => (
+    <Wrapper ht={ht as string}>
+        {comments &&
+            comments.map((comment) => <Comment key={comment.id} comment={comment} vertical={vertical as boolean} />)}
+    </Wrapper>
 );
 
-const Wrapper = styled.section`
+CommentBox.defaultProps = {
+    ht: '100%',
+    vertical: false,
+};
+
+const Wrapper = styled.section<{ ht: string }>`
     /* border: 1px solid gray; */
     margin-top: 25px;
-    height: 118px;
+    height: ${(props) => props.ht};
     overflow: auto;
     &::-webkit-scrollbar {
         width: 6px; /*스크롤바의 너비*/

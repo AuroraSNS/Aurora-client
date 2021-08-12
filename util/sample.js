@@ -3,7 +3,7 @@ import faker from 'faker';
 
 export const createSampleUser = () => ({
     id: shortid.generate(),
-    name: faker.name.findName(),
+    name: faker.name.firstName(),
     avator: faker.image.avatar(),
     email: faker.internet.email(),
     bio: faker.lorem.word(),

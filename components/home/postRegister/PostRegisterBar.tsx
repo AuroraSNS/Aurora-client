@@ -9,18 +9,22 @@ const PostBar = () => {
     const [modal, setModal] = useState(false);
 
     const openPostCardModal = () => {
+        console.log('open');
         setModal(true);
     };
     const closePostCardModal = () => {
+        console.log('close');
         setModal(false);
     };
-
+    console.log(modal);
     return (
-        <Wrapper onClick={openPostCardModal}>
-            <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
-            <span>{me?.name}님, 오늘 당신의 날씨는 어떤가요?</span>
+        <>
+            <Wrapper onClick={openPostCardModal}>
+                <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
+                <span>{me?.name}님, 오늘 당신의 날씨는 어떤가요?</span>
+            </Wrapper>
             {modal && <PostRegisterModal onClose={closePostCardModal} />}
-        </Wrapper>
+        </>
     );
 };
 

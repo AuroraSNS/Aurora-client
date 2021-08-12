@@ -8,41 +8,48 @@ import { IconMore } from '../../../Icon';
 
 type Props = {
     comment: IComment;
+    vertical?: boolean;
 };
 
-const Comment = ({ comment }: Props) => {
+const Comment = ({ comment, vertical }: Props) => {
     const { me } = useSelector((state: RootState) => state.user);
     const [editMode, setEditMode] = useState(false);
     const [editText, changeEditText] = useInput(comment.content);
     return (
-        <Wrapper>
-            <img src={comment.auth.avator} alt="avatar" />
-            <span className="writer">{comment.auth.name}</span>
-            <span>{comment.content}</span>
+        <Wrapper vertical={vertical as boolean}>
             <div>
-                <IconMore />
+                <img src={comment.auth.avator} alt="avatar" />
+                <span className="writer">{comment.auth.name}</span>
+            </div>
+            <div>
+                <p>{comment.content}</p>
+                {/* <IconMore /> */}
             </div>
         </Wrapper>
     );
 };
 
-const Wrapper = styled.div`
+Comment.defaultProps = {
+    vertical: false,
+};
+
+const Wrapper = styled.div<{ vertical: boolean }>`
     display: flex;
-    align-items: center;
-    margin: 3px 0;
-    img {
-        width: 36px;
-        height: 36px;
-        border-radius: 50%;
-    }
-    .writer {
-        margin: 0 8px;
-        font-weight: 600;
-    }
+    flex-direction: ${(props) => (props.vertical ? 'column' : 'row')};
+    margin: 5px 0;
+    font-size: 12px;
     div {
-        width: 22px;
-        margin-left: 5px;
-        cursor: pointer;
+        img {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+        }
+        .writer {
+            margin: 0 8px;
+            font-weight: 600;
+        }
+        display: flex;
+        align-items: center;
     }
 `;
 

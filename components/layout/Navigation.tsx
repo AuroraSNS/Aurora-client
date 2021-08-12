@@ -62,7 +62,6 @@ const Navbar = styled.nav`
         z-index: 10;
         background-color: white;
         ul {
-            padding-inline-start: 0;
             flex-direction: row;
             width: 100%;
             justify-content: space-evenly;
@@ -73,6 +72,7 @@ const Navbar = styled.nav`
 
 const Tap = styled.a<{ selected: string; name: string }>`
     /* border: 1px solid gray; */
+    margin: auto;
     width: 110px;
     font-style: normal;
     font-weight: 600;
