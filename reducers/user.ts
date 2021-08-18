@@ -112,7 +112,6 @@ const reducer = (state = initialState, action: UserAction) =>
             case MODIFY_PROFILE_SUCCESS:
                 draft.modifyProfileLoading = false;
                 draft.modifyProfileDone = true;
-                draft.me = { ...(draft.me as IMe), ...action.data };
                 break;
             case MODIFY_PROFILE_FAILURE:
                 draft.modifyProfileLoading = false;

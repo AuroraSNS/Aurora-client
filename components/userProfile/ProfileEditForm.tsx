@@ -1,68 +1,66 @@
 import styled from 'styled-components';
-import { Button } from 'antd';
 import { useCallback, useState, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import useInput from '../../hooks/useInput';
-import { updateUerProfileAction, withdrawal } from '../../actions/user.ts';
 
-const ProfileEditForm = ({ onClose }) => {
+const ProfileEditForm = () => {
     const dispatch = useDispatch();
-    const { updateError, accessToken } = useSelector((state) => state.user);
+    // const { updateError, accessToken } = useSelector((state) => state.user);
 
     const [username, onChangeUsername] = useInput('');
     const [bio, onChangeBio] = useInput('');
     const [image, setImage] = useState('');
 
     const imageInput = useRef();
-    const onClickImageUpload = useCallback(() => {
-        imageInput.current.click();
-    }, [imageInput.current]);
+    // const onClickImageUpload = useCallback(() => {
+    //     imageInput.current.click();
+    // }, [imageInput.current]);
 
-    const onChangeImage = useCallback((e) => {
-        setImage(...e.target.files);
-    }, []);
+    // const onChangeImage = useCallback((e) => {
+    //     setImage(...e.target.files);
+    // }, []);
 
-    const removeImage = useCallback((name) => {
-        setImage('');
-    });
+    // const removeImage = useCallback((name) => {
+    //     setImage('');
+    // });
 
-    const onClickWithdrawal = useCallback(() => {
-        if (confirm('정말 탈퇴하시겠습니까??') === true) {
-            dispatch(withdrawal(accessToken));
-        }
-    });
+    // const onClickWithdrawal = useCallback(() => {
+    //     if (confirm('정말 탈퇴하시겠습니까??') === true) {
+    //         dispatch(withdrawal(accessToken));
+    //     }
+    // });
 
-    const onSubmit = useCallback((e) => {
-        e.preventDefault();
+    // const onSubmit = useCallback((e) => {
+    //     e.preventDefault();
 
-        const bodyFormData = new FormData();
-        bodyFormData.append('username', username);
-        bodyFormData.append('image', image);
-        bodyFormData.append('bio', bio);
+    //     const bodyFormData = new FormData();
+    //     bodyFormData.append('username', username);
+    //     bodyFormData.append('image', image);
+    //     bodyFormData.append('bio', bio);
 
-        dispatch(updateUerProfileAction(bodyFormData, accessToken));
-        onClose();
-    });
+    //     dispatch(updateUerProfileAction(bodyFormData, accessToken));
+    //     onClose();
+    // });
 
     return (
         <>
-            {updateError ? <p>{updateError}</p> : ''}
-            <EditForm onSubmit={onSubmit} encType="multipart/form-data">
+            {/* {updateError ? <p>{updateError}</p> : ''} */}
+            <EditForm encType="multipart/form-data">
                 <Input value={username} onChange={onChangeUsername} placeholder="새 유저네임" />
                 <Input value={bio} onChange={onChangeBio} placeholder="새 소개글" />
                 <UploadImage>
                     <Text>프로필 이미지 업로드</Text>
-                    <input type="file" accept="image/*" hidden ref={imageInput} onChange={onChangeImage} />
-                    <ChooseButton onClick={onClickImageUpload}>파일 선택</ChooseButton>
+                    {/* <input type="file" accept="image/*" hidden ref={imageInput} onChange={onChangeImage} />
+                    <ChooseButton onClick={onClickImageUpload}>파일 선택</ChooseButton> */}
                     <div>
                         {' '}
                         {image ? (
                             <ImageWrapper>
                                 <Image src={URL.createObjectURL(image)} />
-                                <CloseButton type="button" onClick={() => removeImage(image)}>
+                                {/* <CloseButton type="button" onClick={() => removeImage(image)}>
                                     지우기
-                                </CloseButton>
+                                </CloseButton> */}
                             </ImageWrapper>
                         ) : (
                             ''
@@ -72,9 +70,9 @@ const ProfileEditForm = ({ onClose }) => {
                 <EditButton disabled={!username && !bio && !image} type="submit">
                     수정
                 </EditButton>
-                <WithdrawlButton type="button" onClick={onClickWithdrawal}>
+                {/* <WithdrawlButton type="button" onClick={onClickWithdrawal}>
                     회원탈퇴
-                </WithdrawlButton>
+                </WithdrawlButton> */}
             </EditForm>
         </>
     );
@@ -105,7 +103,7 @@ const ImageWrapper = styled.div`
     display: flex;
     align-items: flex-end;
 `;
-const ChooseButton = styled(Button)`
+const ChooseButton = styled('button')`
     margin-left: 1rem;
     width: 9rem;
 `;

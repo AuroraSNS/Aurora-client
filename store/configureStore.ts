@@ -4,14 +4,14 @@ import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from '../reducers';
-import { UserState } from '../interfaces/data/user';
-import { PostState } from '../interfaces/data/post';
+import { IUserState } from '../interfaces/data/user';
+import { IPostState } from '../interfaces/data/post';
 import rootSaga from '../sagas';
 
 export interface CombinedState {
     index: string;
-    user: UserState;
-    post: PostState;
+    user: IUserState;
+    post: IPostState;
 }
 
 const configureStore: MakeStore<CombinedState> = () => {

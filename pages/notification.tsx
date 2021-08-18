@@ -25,7 +25,7 @@ const Notification = () => {
                     <Head>
                         <title>알림 | Aurora</title>
                     </Head>
-                    <AppLayout>
+                    <AppLayout title="Notification">
                         <NotificationMsg>알림이 없습니다 :(</NotificationMsg>
                     </AppLayout>
                 </>

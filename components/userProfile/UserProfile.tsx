@@ -3,9 +3,10 @@ import { useSelector } from 'react-redux';
 import { useState } from 'react';
 
 import ProfileEditModal from './ProfileEditModal';
+import { RootState } from '../../reducers';
 
 const UserProfile = () => {
-    const { me } = useSelector((state) => state.user);
+    const { me } = useSelector((state: RootState) => state.user);
 
     const [showModal, setShowModal] = useState(false);
 
@@ -35,7 +36,7 @@ const UserProfile = () => {
                 </ProfileInfo>
                 <>{me.bio ? <Bio>{me.bio}</Bio> : <Bio>만나서 반가워요!</Bio>}</>
             </Wrapper>
-            {showModal && <ProfileEditModal onClose={() => setShowModal(false)} User={me} />}
+            {showModal && <ProfileEditModal />}
         </>
     );
 };

@@ -1,17 +1,17 @@
 import styled from 'styled-components';
 import ProfileEditForm from './ProfileEditForm';
 
-const ProfileEditModal = ({ User, onClose }) => (
+const ProfileEditModal = () => (
     <StyledModalOverlay>
         <StyledModal>
             <StyledModalHeader>
                 <div>Profile Update</div>
-                <span onClick={onClose}>
+                <span>
                     <i className="fas fa-times" />
                 </span>
             </StyledModalHeader>
             <StyledModalBody>
-                <ProfileEditForm onClose={onClose} />
+                <ProfileEditForm />
             </StyledModalBody>
         </StyledModal>
     </StyledModalOverlay>

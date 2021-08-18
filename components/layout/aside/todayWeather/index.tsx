@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable radix */
 import React, { useEffect, useState } from 'react';
 import { ITodayWeather } from '../../../../interfaces/data';
@@ -32,7 +33,7 @@ const TodayWeather = () => {
         }
     };
 
-    const handleGeoSucces = (position) => {
+    const handleGeoSucces = (position: any) => {
         const { latitude, longitude } = position.coords;
         const coordsObj = {
             latitude,

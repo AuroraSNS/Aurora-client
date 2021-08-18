@@ -1,45 +1,39 @@
 import Head from 'next/head';
 import styled from 'styled-components';
-import { useEffect, useCallback, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
-
-import AppLayout from '../components/layout/AppLayout';
-import Loading from '../components/common/Loading';
-import PostCard from '../components/home/postCardList/postCard/PostCard';
-import UserProfile from '../components/userProfile/UserProfile';
-import { firstLoadPost, moreLoadPost, loadStatistics } from '../actions/post';
+import { useSelector } from 'react-redux';
+import { RootState } from '../reducers';
 
 const Profile = () => {
     const router = useRouter();
 
-    const dispatch = useDispatch();
-    const { isLoggedIn, accessToken } = useSelector((state) => state.user);
-    const { Posts, firstLoadPostDone, filterWeather, totalPosts } = useSelector((state) => state.post);
+    // const dispatch = useDispatch();
+    const { isLoggedIn, accessToken } = useSelector((state: RootState) => state.user);
+    // const { Posts, firstLoadPostDone, filterWeather, totalPosts } = useSelector((state) => state.post);
 
-    const [page, setPage] = useState(2);
+    // const [page, setPage] = useState(2);
 
-    let filterPosts = [];
-    if (filterWeather.length > 0) {
-        filterPosts = Posts.filter((ele) => filterWeather.includes(ele.mood));
-    }
+    // let filterPosts = [];
+    // if (filterWeather.length > 0) {
+    //     filterPosts = Posts.filter((ele) => filterWeather.includes(ele.mood));
+    // }
 
-    useEffect(() => {
-        if (isLoggedIn) {
-            dispatch(firstLoadPost(accessToken));
-        } else {
-            router.push('/user/signin');
-        }
-    }, [isLoggedIn]);
+    // useEffect(() => {
+    //     if (isLoggedIn) {
+    //         dispatch(firstLoadPost(accessToken));
+    //     } else {
+    //         router.push('/user/signin');
+    //     }
+    // }, [isLoggedIn]);
 
-    useEffect(() => {
-        dispatch(loadStatistics(accessToken));
-    }, []);
+    // useEffect(() => {
+    //     dispatch(loadStatistics(accessToken));
+    // }, []);
 
-    const onClickMore = useCallback(() => {
-        dispatch(moreLoadPost(page, accessToken));
-        setPage((prev) => prev + 1);
-    }, [page]);
+    // const onClickMore = useCallback(() => {
+    //     dispatch(moreLoadPost(page, accessToken));
+    //     setPage((prev) => prev + 1);
+    // }, [page]);
 
     return (
         <>
@@ -48,7 +42,7 @@ const Profile = () => {
                     <Head>
                         <title>프로필 | Aurora</title>
                     </Head>
-                    <AppLayout filter isMain={false}>
+                    {/* <AppLayout filter isMain={false}>
                         <UserProfile />
                         <Text>나의 포스트</Text>
                         {totalPosts !== 0 ? (
@@ -71,7 +65,7 @@ const Profile = () => {
                         ) : (
                             <div>첫 게시물을 작성해보세요!</div>
                         )}
-                    </AppLayout>
+                    </AppLayout> */}
                 </>
             )}
         </>
