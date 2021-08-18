@@ -20,7 +20,7 @@ import {
     MODIFY_PROFILE_SUCCESS,
 } from '../actions/user';
 import { UserAction } from '../interfaces/act/user';
-import { IMe, IUserState } from '../interfaces/data/user';
+import { IUserState } from '../interfaces/data/user';
 
 // initial state
 export const initialState: IUserState = {
