@@ -41,12 +41,10 @@ const UserProfile = () => {
 };
 
 const Wrapper = styled.div`
-    display: flex;
+    ${({ theme }) => theme.flexCenter}
     flex-direction: column;
     width: 80%;
     height: 18rem;
-    align-items: center;
-    justify-content: center;
     box-shadow: 0px 4px 2px rgba(119, 119, 119, 0.25);
 `;
 

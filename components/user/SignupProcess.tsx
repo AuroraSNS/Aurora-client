@@ -159,9 +159,7 @@ const PasswordconfirmMessage = styled.div`
 `;
 const ErrorMessage = styled.div`
     margin: 1rem 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    ${({ theme }) => theme.flexCenter}
     background-color: #eb8686;
     border-radius: 0.1rem;
     height: 2rem;

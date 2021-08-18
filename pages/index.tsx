@@ -2,13 +2,16 @@ import styled from 'styled-components';
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
+import { END } from 'redux-saga';
 import AppLayout from '../components/layout/AppLayout';
 
-import PostRegisterBar from '../components/home/postRegister/PostRegisterBar';
+import PostRegisterBar from '../components/home/postRegister/postRegisterBar';
 import { loadFirstPostsRequest, loadMorePostsRequest } from '../actions/post';
 import { RootState } from '../reducers';
-import PostCard from '../components/home/postCard/PostCardt';
+import PostCard from '../components/home/postCardList/postCard';
 import { loadProfileRequest } from '../actions/user';
+import wrapper from '../store/configureStore';
+import { IPost } from '../interfaces/data/post';
 
 const Home = () => {
     // const router = useRouter();
@@ -57,13 +60,20 @@ const Home = () => {
         <AppLayout title="Home" filter isMain>
             <PostRegisterBar />
             <PostCardList>
-                {Posts?.map((post) => (
+                {Posts?.map((post: IPost) => (
                     <PostCard key={post.id} post={post} />
                 ))}
             </PostCardList>
         </AppLayout>
     );
 };
+
+// export const getServerSideProps = wrapper.getServerSideProps(async (context) => {
+//     context.store.dispatch(loadProfileRequest('ddd'));
+//     context.store.dispatch(loadFirstPostsRequest());
+//     context.store.dispatch(END);
+//     await context.store.sagaTask?.toPromise();
+// });
 
 const PostCardList = styled.section`
     /* border: 1px solid gray; */

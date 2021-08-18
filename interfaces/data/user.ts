@@ -13,13 +13,12 @@ export interface IUserInfo extends IAuth {
     bio: string;
 }
 
-export interface Me extends IUserInfo {
+export interface IMe extends IUserInfo {
     email: string;
-    bio: string;
 }
 
-export interface UserState {
-    me: null | Me;
+export interface IUserState {
+    me: null | IMe;
     logInLoading: boolean;
     logInDone: boolean;
     logInError: null | string;

@@ -14,10 +14,10 @@ import {
 } from '../actions/post';
 
 import { PostAction } from '../interfaces/act/post';
-import { IPost, PostState } from '../interfaces/data/post';
+import { IPost, IPostState } from '../interfaces/data/post';
 
 // 초기 데이터 구조
-export const initialState: PostState = {
+export const initialState: IPostState = {
     Posts: [],
     loadFirstPostsLoading: false,
     loadFirstPostsDone: false,
@@ -31,7 +31,7 @@ export const initialState: PostState = {
 };
 
 const reducer = (state = initialState, action: PostAction) =>
-    produce(state, (draft: PostState) => {
+    produce(state, (draft: IPostState) => {
         switch (action.type) {
             case LOAD_FIRST_POSTS_REQUEST:
                 draft.loadFirstPostsLoading = true;

@@ -66,10 +66,9 @@ const Logo = styled.img`
 `;
 
 const MainComponent = styled.div`
-    display: flex;
+    ${({ theme }) => theme.flexCenter}
     flex-direction: column;
     justify-content: space-evenly;
-    align-items: center;
 `;
 
 export default AppLayout;

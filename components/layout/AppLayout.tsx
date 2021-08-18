@@ -1,10 +1,9 @@
 import styled from 'styled-components';
 import React, { ReactChild } from 'react';
 import Head from 'next/head';
-import Header from './header/Header';
-import RightSideBar from './aside/RightSideBar';
-import Global from '../../styles/Global';
-import Navigation from './Navigation';
+import Header from './header';
+import RightSideBar from './aside';
+import Navigation from './navigation';
 
 type Props = {
     children: ReactChild | ReactChild[];
@@ -15,7 +14,6 @@ type Props = {
 
 const AppLayout = ({ children, title, filter, isMain }: Props) => (
     <>
-        <Global />
         <Head>
             <title>{title}</title>
             <meta charSet="utf-8" />
@@ -26,7 +24,7 @@ const AppLayout = ({ children, title, filter, isMain }: Props) => (
             <Navigation page={title} />
             <main>
                 <MainComponent>{children}</MainComponent>
-                <RightSideBar isMain={isMain} />
+                <RightSideBar isMain={isMain as boolean} />
             </main>
         </Container>
     </>

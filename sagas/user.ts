@@ -85,7 +85,7 @@ function loadProfileAPI(token: string) {
 
 function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     try {
-        // const result: AxiosResponse<Me> = yield call(loadProfileAPI, action.token);
+        // const result: AxiosResponse<IMe> = yield call(loadProfileAPI, action.token);
         yield delay(1000);
         yield put(loadProfileSuccess(sampleMe));
     } catch (err) {

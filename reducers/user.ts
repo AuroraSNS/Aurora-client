@@ -20,10 +20,10 @@ import {
     MODIFY_PROFILE_SUCCESS,
 } from '../actions/user';
 import { UserAction } from '../interfaces/act/user';
-import { Me, UserState } from '../interfaces/data/user';
+import { IMe, IUserState } from '../interfaces/data/user';
 
 // initial state
-export const initialState: UserState = {
+export const initialState: IUserState = {
     me: null,
     logInLoading: false,
     logInDone: false,
@@ -43,7 +43,7 @@ export const initialState: UserState = {
 };
 
 const reducer = (state = initialState, action: UserAction) =>
-    produce(state, (draft: UserState) => {
+    produce(state, (draft: IUserState) => {
         switch (action.type) {
             case LOG_IN_REQUEST:
                 draft.logInLoading = true;
@@ -112,7 +112,7 @@ const reducer = (state = initialState, action: UserAction) =>
             case MODIFY_PROFILE_SUCCESS:
                 draft.modifyProfileLoading = false;
                 draft.modifyProfileDone = true;
-                draft.me = { ...(draft.me as Me), ...action.data };
+                draft.me = { ...(draft.me as IMe), ...action.data };
                 break;
             case MODIFY_PROFILE_FAILURE:
                 draft.modifyProfileLoading = false;

@@ -5,8 +5,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useRouter } from 'next/router';
 
 import AppLayout from '../components/layout/AppLayout';
-import Loading from '../components/Loading';
-import PostCard from '../components/home/postCard/PostCard';
+import Loading from '../components/common/Loading';
+import PostCard from '../components/home/postCardList/postCard/PostCard';
 import UserProfile from '../components/userProfile/UserProfile';
 import { firstLoadPost, moreLoadPost, loadStatistics } from '../actions/post';
 

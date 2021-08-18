@@ -35,9 +35,7 @@ const Notification = () => {
 };
 
 const NotificationMsg = styled.div`
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    ${({ theme }) => theme.flexCenter}
     width: 28rem;
     height: 4rem;
     border: 1px solid #f0f0f0;

@@ -61,7 +61,8 @@ export const sampleMe = {
     id: 1,
     email: 'test@test.com',
     name: '라이언',
-    avator: 'images/profile-thumbnail.jpg',
+    avator: 'https://placeimg.com/300/300/any',
+    bio: '',
 };
 
 export const samplePost = {

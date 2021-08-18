@@ -9,7 +9,7 @@ export interface IPost {
     commentCnt: number;
 }
 
-export interface PostState {
+export interface IPostState {
     Posts: null | IPost[];
     loadFirstPostsLoading: boolean;
     loadFirstPostsDone: boolean;

@@ -1,7 +1,6 @@
 /* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios, { AxiosResponse } from 'axios';
-import { setCookie } from 'nookies';
 import { all, fork, put, takeLatest, throttle, call, delay } from 'redux-saga/effects';
 import {
     addPostFailure,

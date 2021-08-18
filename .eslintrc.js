@@ -46,6 +46,7 @@ module.exports = {
         '@typescript-eslint/explicit-function-return-type': 'off',
         'no-underscore-dangle': 'off',
         'consistent-return': 'off',
+        'import/prefer-default-export': 'off',
     },
     settings: {
         'import/resolver': {

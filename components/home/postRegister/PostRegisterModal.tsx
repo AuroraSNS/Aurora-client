@@ -1,7 +1,7 @@
 import React from 'react';
 
-import PostRegisterForm from './PostRegisterForm';
-import Modal from '../../Modal';
+import PostRegisterForm from './postRegisterForm';
+import Modal from '../../common/Modal';
 
 type Props = {
     onClose: () => void;
