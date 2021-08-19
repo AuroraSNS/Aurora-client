@@ -83,25 +83,25 @@ const PostCard = ({ post }: Props) => {
             <Body>
                 <p>{post.content}</p>
                 <ImageContainer
-                    className={post.image.length > 2 ? 'more' : post.image.length > 1 ? 'double' : ''}
+                    className={post.images.length > 2 ? 'more' : post.images.length > 1 ? 'double' : ''}
                     onClick={openPostCardModal}
                 >
-                    {post.image[0] && (
+                    {post.images[0] && (
                         <div>
                             {/* <Image width={640} height={640} src={post.image[0]} alt="postimage" /> */}
-                            <img src={post.image[0]} alt="postimage" />
+                            <img src={post.images[0]} alt="postimage" />
                         </div>
                     )}
-                    {post.image[1] && (
+                    {post.images[1] && (
                         <div>
                             {/* <Image width={640} height={640} src={post.image[0]} alt="postimage" /> */}
-                            <img src={post.image[1]} alt="postimage" />
+                            <img src={post.images[1]} alt="postimage" />
                         </div>
                     )}
-                    {post.image[2] && (
+                    {post.images[2] && (
                         <div>
                             {/* <Image width={640} height={640} src={post.image[0]} alt="postimage" /> */}
-                            <img src={post.image[2]} alt="postimage" />
+                            <img src={post.images[2]} alt="postimage" />
                             <span>+</span>
                         </div>
                     )}

@@ -4,7 +4,7 @@ import axios from 'axios';
 import userSaga from './user';
 import postSaga from './post';
 
-axios.defaults.baseURL = 'https://api.hanium-ezfarm.com/';
+axios.defaults.baseURL = 'https://api.aurora.center/';
 axios.defaults.withCredentials = true;
 
 export const getToken = () => (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')) as string;

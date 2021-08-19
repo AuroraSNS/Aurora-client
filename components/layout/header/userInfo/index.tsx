@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import { useSelector } from 'react-redux';
 
@@ -9,14 +10,22 @@ const UserInfo = () => {
 
     return (
         <Wrapper>
-            <img src={me?.avator} alt="avatar" />
-            <span>{me && me.name}</span>
-            {/* <Dropdown overlay={menu} onVisibleChange={handleVisibleChange} visible={visible}>
+            {me ? (
+                <>
+                    <img src={me?.avator} alt="avatar" />
+                    <span>{me && me.name}</span>
+                    {/* <Dropdown overlay={menu} onVisibleChange={handleVisibleChange} visible={visible}>
                 <a className="ant-dropdown-link" onClick={(e) => e.preventDefault()}>
                     {me.name}
                     <DownOutlined />
                 </a>
             </Dropdown> */}
+                </>
+            ) : (
+                <Link href="./login">
+                    <a>로그인하러 가기</a>
+                </Link>
+            )}
         </Wrapper>
     );
 };

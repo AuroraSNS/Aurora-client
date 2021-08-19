@@ -6,7 +6,7 @@ import { END } from 'redux-saga';
 import AppLayout from '../components/layout/AppLayout';
 
 import PostRegisterBar from '../components/home/postRegister/postRegisterBar';
-import { loadFirstPostsRequest, loadMorePostsRequest } from '../actions/post';
+import { loadAllPostsRequest } from '../actions/post';
 import { RootState } from '../reducers';
 import PostCard from '../components/home/postCardList/postCard';
 import { loadProfileRequest } from '../actions/user';
@@ -18,8 +18,10 @@ const Home = () => {
 
     const dispatch = useDispatch();
     const { me } = useSelector((state: RootState) => state.user);
-    const { Posts, loadMorePostsLoading } = useSelector((state: RootState) => state.post);
-    const [init, setInit] = useState(false);
+    const { Posts, hasMorePosts, loadAllPostsLoading, loadAllPostsDone } = useSelector(
+        (state: RootState) => state.post,
+    );
+    const [page, setPage] = useState(0);
 
     // let filterPosts = [];
     // if (filterWeather.length > 0) {
@@ -36,9 +38,15 @@ const Home = () => {
     // }, [isLoggedIn]);
 
     useEffect(() => {
-        dispatch(loadProfileRequest('token'));
-        dispatch(loadFirstPostsRequest());
-    }, [dispatch]);
+        if (loadAllPostsDone) {
+            setPage(Math.ceil(Posts.length / 10));
+        }
+    }, [loadAllPostsDone, Posts.length]);
+
+    useEffect(() => {
+        // dispatch(loadProfileRequest('token'));
+        dispatch(loadAllPostsRequest(page));
+    }, [dispatch, page]);
 
     useEffect(() => {
         function onScroll() {
@@ -46,15 +54,15 @@ const Home = () => {
                 window.pageYOffset + document.documentElement.clientHeight >
                 document.documentElement.scrollHeight - 300
             ) {
-                if (loadMorePostsLoading) return;
-                dispatch(loadMorePostsRequest(1));
+                if (loadAllPostsLoading || !hasMorePosts) return;
+                dispatch(loadAllPostsRequest(page));
             }
         }
         window.addEventListener('scroll', onScroll);
         return () => {
             window.removeEventListener('scroll', onScroll);
         };
-    }, [dispatch, loadMorePostsLoading]);
+    }, [dispatch, loadAllPostsLoading, hasMorePosts, page]);
 
     return (
         <AppLayout title="Home" filter isMain>

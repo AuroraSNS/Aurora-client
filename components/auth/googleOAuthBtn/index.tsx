@@ -27,6 +27,15 @@ const GoogleOAuthBtn = () => {
         console.log(res);
     }, []);
 
+    // const googleOAuthLogin = useCallback(() => {
+    //     const res = axios({
+    //         method: 'GET',
+    //         url: 'https://api.aurora.center/user/me',
+    //         withCredentials: true,
+    //     });
+    //     console.log(res);
+    // }, []);
+
     return (
         <Wrapper>
             <button type="button" onClick={googleOAuthLogin}>

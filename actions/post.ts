@@ -1,13 +1,13 @@
 import { IPost } from '../interfaces/data/post';
 
 // 액션 상수
-export const LOAD_FIRST_POSTS_REQUEST = 'LOAD_FIRST_POSTS_REQUEST' as const;
-export const LOAD_FIRST_POSTS_SUCCESS = 'LOAD_FIRST_POSTS_SUCCESS' as const;
-export const LOAD_FIRST_POSTS_FAILURE = 'LOAD_FIRST_POSTS_FAILURE' as const;
+export const LOAD_ALL_POSTS_REQUEST = 'LOAD_ALL_POSTS_REQUEST' as const;
+export const LOAD_ALL_POSTS_SUCCESS = 'LOAD_ALL_POSTS_SUCCESS' as const;
+export const LOAD_ALL_POSTS_FAILURE = 'LOAD_ALL_POSTS_FAILURE' as const;
 
-export const LOAD_MORE_POSTS_REQUEST = 'LOAD_MORE_POSTS_REQUEST' as const;
-export const LOAD_MORE_POSTS_SUCCESS = 'LOAD_MORE_POSTS_SUCCESS' as const;
-export const LOAD_MORE_POSTS_FAILURE = 'LOAD_MORE_POSTS_FAILURE' as const;
+export const LOAD_USER_POSTS_REQUEST = 'LOAD_USER_POSTS_REQUEST' as const;
+export const LOAD_USER_POSTS_SUCCESS = 'LOAD_USER_POSTS_SUCCESS' as const;
+export const LOAD_USER_POSTS_FAILURE = 'LOAD_USER_POSTS_FAILURE' as const;
 
 export const ADD_POST_REQUEST = 'ADD_POST_REQUEST' as const;
 export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS' as const;
@@ -54,32 +54,36 @@ export const ADD_POST_CLEAR = 'ADD_POST_CLEAR' as const;
 // export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
 
 // 액션 크리에이터
-export const loadFirstPostsRequest = () => ({
-    type: LOAD_FIRST_POSTS_REQUEST,
+export const loadAllPostsRequest = (page: number) => ({
+    type: LOAD_ALL_POSTS_REQUEST,
+    page,
 });
 
-export const loadFirstPostsSuccess = (data: IPost[]) => ({
-    type: LOAD_FIRST_POSTS_SUCCESS,
+export const loadAllPostsSuccess = (data: IPost[], page: number) => ({
+    type: LOAD_ALL_POSTS_SUCCESS,
     data,
+    page,
 });
 
-export const loadFirstPostsFailure = (error: string) => ({
-    type: LOAD_FIRST_POSTS_FAILURE,
+export const loadAllPostsFailure = (error: string) => ({
+    type: LOAD_ALL_POSTS_FAILURE,
     error,
 });
 
-export const loadMorePostsRequest = (lastPostId: number) => ({
-    type: LOAD_MORE_POSTS_REQUEST,
-    lastPostId,
+export const loadUserPostsRequest = (userId: number, page: number) => ({
+    type: LOAD_USER_POSTS_REQUEST,
+    userId,
+    page,
 });
 
-export const loadMorePostsSuccess = (data: IPost[]) => ({
-    type: LOAD_MORE_POSTS_SUCCESS,
+export const loadUserPostsSuccess = (data: IPost[], page: number) => ({
+    type: LOAD_USER_POSTS_SUCCESS,
     data,
+    page,
 });
 
-export const loadMorePostsFailure = (error: string) => ({
-    type: LOAD_MORE_POSTS_FAILURE,
+export const loadUserPostsFailure = (error: string) => ({
+    type: LOAD_USER_POSTS_FAILURE,
     error,
 });
 

@@ -19,7 +19,7 @@ type Props = {
 const PostCardModal = ({ post, comments, onClose }: Props) => (
     <Modal onClose={onClose}>
         <Wrapper>
-            <ImageSlider images={post.image} />
+            <ImageSlider images={post.images} />
             <Container>
                 <PostHeader post={post} />
                 <div className="content">

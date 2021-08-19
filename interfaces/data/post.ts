@@ -5,18 +5,19 @@ export interface IPost {
     auth: IAuth;
     mood: string;
     content: string;
-    image: string[];
+    images: string[];
     commentCnt: number;
 }
 
 export interface IPostState {
     Posts: null | IPost[];
-    loadFirstPostsLoading: boolean;
-    loadFirstPostsDone: boolean;
-    loadFirstPostsError: null | string;
-    loadMorePostsLoading: boolean;
-    loadMorePostsDone: boolean;
-    loadMorePostsError: null | string;
+    hasMorePosts: boolean;
+    loadAllPostsLoading: boolean;
+    loadAllPostsDone: boolean;
+    loadAllPostsError: null | string;
+    loadUserPostsLoading: boolean;
+    loadUserPostsDone: boolean;
+    loadUserPostsError: null | string;
     addPostLoading: boolean;
     addPostDone: boolean;
     addPostError: null | string;
