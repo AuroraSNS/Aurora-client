@@ -36,7 +36,7 @@ const createSamplePost = () => ({
     auth: createSampleUser(),
     mood: createRandomWeather(),
     content: faker.lorem.text(),
-    image: createSampleImages(),
+    images: createSampleImages(),
     commentCnt: createRandomNumber(),
 });
 

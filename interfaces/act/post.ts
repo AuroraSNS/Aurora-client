@@ -3,21 +3,21 @@ import {
     addPostFailure,
     addPostRequest,
     addPostSuccess,
-    loadFirstPostsFailure,
-    loadFirstPostsRequest,
-    loadFirstPostsSuccess,
-    loadMorePostsFailure,
-    loadMorePostsRequest,
-    loadMorePostsSuccess,
+    loadAllPostsFailure,
+    loadAllPostsRequest,
+    loadAllPostsSuccess,
+    loadUserPostsFailure,
+    loadUserPostsRequest,
+    loadUserPostsSuccess,
 } from '../../actions/post';
 
 export type PostAction =
-    | ReturnType<typeof loadFirstPostsRequest>
-    | ReturnType<typeof loadFirstPostsSuccess>
-    | ReturnType<typeof loadFirstPostsFailure>
-    | ReturnType<typeof loadMorePostsRequest>
-    | ReturnType<typeof loadMorePostsSuccess>
-    | ReturnType<typeof loadMorePostsFailure>
+    | ReturnType<typeof loadAllPostsRequest>
+    | ReturnType<typeof loadAllPostsSuccess>
+    | ReturnType<typeof loadAllPostsFailure>
+    | ReturnType<typeof loadUserPostsRequest>
+    | ReturnType<typeof loadUserPostsSuccess>
+    | ReturnType<typeof loadUserPostsFailure>
     | ReturnType<typeof addPostRequest>
     | ReturnType<typeof addPostSuccess>
     | ReturnType<typeof addPostFailure>
