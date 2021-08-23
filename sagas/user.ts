@@ -25,7 +25,7 @@ import {
 } from '../actions/user';
 import { ILogInForm, IMe } from '../interfaces/data/user';
 import { getToken } from '.';
-import { sampleMe } from '../util/sample';
+import { createSampleUser, sampleMe } from '../util/sample';
 
 function logInAPI(data: ILogInForm) {
     return axios({
@@ -78,7 +78,7 @@ function* signUp(action: ReturnType<typeof signUpRequest>) {
 function loadProfileAPI(token: string) {
     return axios({
         method: 'GET',
-        url: `/api/user`,
+        url: '/user/me',
         headers: { Authorization: `Bearer ${token}` },
     });
 }
@@ -87,6 +87,7 @@ function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     try {
         const result: AxiosResponse<IMe> = yield call(loadProfileAPI, action.token);
         yield put(loadProfileSuccess(result.data));
+        // yield put(loadProfileSuccess(createSampleUser()));
     } catch (err) {
         yield put(loadProfileFailure(err.message));
     }

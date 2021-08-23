@@ -1,16 +1,17 @@
 import React from 'react';
-import { ISetState } from '../../../../interfaces/data';
+import { IOnSubmit, ISetState } from '../../../../interfaces/data';
 import { IconCheck } from '../../../common/Icon';
 import { Form } from './style';
 
 type Props = {
-    comment: string;
-    onChangeComment: ISetState;
+    content: string;
+    onChangeContent: ISetState;
+    onSubmit: IOnSubmit;
 };
 
-const CommentFormPresenter = ({ comment, onChangeComment }: Props) => (
-    <Form>
-        <input type="text" placeholder="댓글을 입력하세요..." value={comment} onChange={onChangeComment} />
+const CommentFormPresenter = ({ content, onChangeContent, onSubmit }: Props) => (
+    <Form onSubmit={onSubmit}>
+        <input type="text" placeholder="댓글을 입력하세요..." value={content} onChange={onChangeContent} />
         <button type="submit">
             <IconCheck />
         </button>

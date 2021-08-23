@@ -41,6 +41,8 @@ function* loadAllPosts(action: ReturnType<typeof loadAllPostsRequest>) {
     try {
         const result: AxiosResponse<IPost[] | []> = yield call(loadAllPostsAPI, action.page);
         yield put(loadAllPostsSuccess(result.data, action.page));
+        // delay(1000);
+        // yield put(loadAllPostsSuccess(createSamplePosts(10), action.page));
     } catch (err) {
         yield put(loadAllPostsFailure(err.message));
     }
@@ -84,10 +86,10 @@ function* addPost(action: ReturnType<typeof addPostRequest>) {
     }
 }
 
-function modifyPostAPI(data: FormData) {
+function modifyPostAPI(postId: number, data: FormData) {
     return axios({
         method: 'PATCH',
-        url: `/posts`,
+        url: `/posts/${postId}`,
         headers: { Authorization: `Bearer ${getToken()}` },
         data,
     });
@@ -95,7 +97,7 @@ function modifyPostAPI(data: FormData) {
 
 function* modifyPost(action: ReturnType<typeof modifyPostRequest>) {
     try {
-        yield call(modifyPostAPI, action.data);
+        yield call(modifyPostAPI, action.postId, action.data);
         yield put(modifyPostSuccess());
     } catch (err) {
         yield put(modifyPostFailure(err.message));

@@ -19,6 +19,7 @@ export const Footer = styled.div`
         margin: 0 20px;
         flex: 1;
     }
+
     .more-options {
         display: flex;
         flex-direction: column;
@@ -36,6 +37,7 @@ export const Footer = styled.div`
         div:first-child {
             margin-bottom: 8px;
         }
+        z-index: 9;
     }
     @media screen and (max-width: 768px) {
         .comment-cnt {

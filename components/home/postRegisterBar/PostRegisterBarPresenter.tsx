@@ -1,6 +1,8 @@
 import React from 'react';
 import { IMe } from '../../../interfaces/data/user';
-import { Avatar, Wrapper } from './style';
+import Avatar from '../../common/Avatar';
+import PostFormModalContainer from '../../common/postFormModal/PostFormModalContainer';
+import { Wrapper } from './style';
 
 type Props = {
     openPostCardModal: () => void;
@@ -10,10 +12,12 @@ type Props = {
 };
 
 const PostRegisterBarPresenter = ({ openPostCardModal, closePostCardModal, me, modal }: Props) => (
-    <Wrapper onClick={openPostCardModal}>
-        <Avatar src={me?.avator || '/images/defaultProfile.png'} alt="avatar" />
-        {me ? <span>{me.name}님, 오늘 당신의 날씨는 어떤가요?</span> : <span>로그인하고 글을 올려보세요</span>}
-        {modal && <PostRegisterModal onClose={closePostCardModal} />}
-    </Wrapper>
+    <>
+        <Wrapper onClick={openPostCardModal}>
+            <Avatar url={me?.avator} size={44} />
+            <span>오늘 당신의 날씨는 어떤가요?</span>
+        </Wrapper>
+        {modal && <PostFormModalContainer isFirst onClose={closePostCardModal} />}
+    </>
 );
 export default PostRegisterBarPresenter;

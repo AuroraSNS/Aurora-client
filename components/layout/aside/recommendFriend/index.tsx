@@ -1,4 +1,5 @@
 import React from 'react';
+import Avatar from '../../../common/Avatar';
 import { Container, FriendCard, Wrapper } from './style';
 
 const Sample = [
@@ -22,9 +23,7 @@ const RecommendFriend = () => (
         <Container>
             {Sample.map((ele) => (
                 <FriendCard key={ele.id}>
-                    <div>
-                        <img src="/images/defaultProfile.png" alt="friendAvatar" />
-                    </div>
+                    <Avatar url="" size={58} />
                     <span>{ele.name}</span>
                     <button type="button">친구 추가</button>
                 </FriendCard>

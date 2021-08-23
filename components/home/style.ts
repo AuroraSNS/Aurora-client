@@ -36,6 +36,7 @@ export const PostCardList = styled.section`
         display: flex;
         justify-content: center;
         align-items: center;
+        z-index: 9;
         svg {
             transform: rotate(90deg);
             * {

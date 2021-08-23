@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import userSaga from './user';
 import postSaga from './post';
+import commentSaga from './comment';
 
 axios.defaults.baseURL = 'https://api.aurora.center/';
 axios.defaults.withCredentials = true;
@@ -10,5 +11,5 @@ axios.defaults.withCredentials = true;
 export const getToken = () => (localStorage.getItem('accessToken') || sessionStorage.getItem('accessToken')) as string;
 
 export default function* rootSaga() {
-    yield all([fork(userSaga), fork(postSaga)]);
+    yield all([fork(userSaga), fork(postSaga), fork(commentSaga)]);
 }

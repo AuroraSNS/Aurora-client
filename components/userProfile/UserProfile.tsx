@@ -1,29 +1,19 @@
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import ProfileEditModal from './ProfileEditModal';
 import { RootState } from '../../reducers';
+import Avatar from '../common/Avatar';
 
 const UserProfile = () => {
     const { me } = useSelector((state: RootState) => state.user);
 
     const [showModal, setShowModal] = useState(false);
-
     return (
         <>
             <Wrapper>
-                <>
-                    {/* 맨 처음 가입 & 로그인 했을 때 디폴트 프로필 사진 설정 */}
-                    {me.avatar[0] ? (
-                        <Avatar
-                            src={`data:image/png;base64,${Buffer.from(me.avatar[0].data.data).toString('base64')}`}
-                            alt="avatar"
-                        />
-                    ) : (
-                        <Avatar src="/images/defaultProfile.png" alt="avatar" />
-                    )}
-                </>
+                <Avatar url={me?.avator} size={130} />
                 <ProfileInfo>
                     <Username>{me.username}</Username>
                     <ProfileEditButton
@@ -47,14 +37,6 @@ const Wrapper = styled.div`
     width: 80%;
     height: 18rem;
     box-shadow: 0px 4px 2px rgba(119, 119, 119, 0.25);
-`;
-
-const Avatar = styled.img`
-    height: 6rem;
-    width: 6rem;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 1px solid #d2d2d2;
 `;
 
 const ProfileInfo = styled.div`

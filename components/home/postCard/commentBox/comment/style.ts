@@ -16,8 +16,25 @@ export const Wrapper = styled.div<{ vertical: boolean }>`
         }
         p {
             ${({ theme }) => theme.textStyles.P12}
+            margin-right: 10px;
         }
         display: flex;
         align-items: center;
+    }
+    .more-options {
+        display: flex;
+        ${({ theme }) => theme.textStyles.P12}
+        span {
+            cursor: pointer;
+        }
+        z-index: 9;
+    }
+`;
+
+export const EditForm = styled.form`
+    input {
+        background: rgba(128, 128, 128, 0.1);
+        background-color: #f0f2f5;
+        border-radius: 10px;
     }
 `;

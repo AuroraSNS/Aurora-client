@@ -59,7 +59,7 @@ export const DropBox = styled.div`
         position: absolute;
         top: 15px;
         right: 15px;
-        height: 18px;
+        padding: 5px;
         background: rgba(255, 255, 255, 0.5);
         border-radius: 50%;
         ${({ theme }) => theme.flexCenter}
@@ -71,7 +71,7 @@ export const DropBox = styled.div`
 
 export const AttachBtnWrapper = styled.div`
     display: flex;
-    padding: 0 15px;
+    padding-left: 15px;
     & > button {
         width: 29px;
         height: 29px;
@@ -82,29 +82,9 @@ export const AttachBtnWrapper = styled.div`
     margin: 12px 0;
 `;
 
-export const User = styled.div`
-    /* border: 1px solid gray; */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    & > img {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        margin-bottom: 5px;
-    }
-    & > span {
-        ${({ theme }) => theme.textStyles.P12}
-    }
-    margin-top: 10px;
-    margin-bottom: 14px;
-`;
-
 export const WeatherTab = styled.div`
     /* border: 1px solid gray; */
-    width: 100%;
     display: flex;
-    justify-content: space-evenly;
     svg {
         cursor: pointer;
     }
@@ -116,17 +96,34 @@ export const WeatherTab = styled.div`
         height: 40px;
         display: flex;
         justify-content: center;
+        position: relative;
+        &::after {
+            content: '';
+            width: 0%;
+            height: 1px;
+            position: absolute;
+            /* background: #888; */
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            transition: width 0.5s;
+        }
     }
-    & > input#register-sun:checked + label {
+
+    & > input#register-sun:checked + label:after {
         border-bottom: 2px solid ${({ theme }) => theme.colors.sun};
+        width: 100%;
     }
-    & > input#register-cloud:checked + label {
+    & > input#register-cloud:checked + label:after {
+        width: 100%;
         border-bottom: 2px solid ${({ theme }) => theme.colors.cloud};
     }
-    & > input#register-rain:checked + label {
+    & > input#register-rain:checked + label:after {
+        width: 100%;
         border-bottom: 2px solid ${({ theme }) => theme.colors.rain};
     }
-    & > input#register-moon:checked + label {
+    & > input#register-moon:checked + label:after {
+        width: 100%;
         border-bottom: 2px solid ${({ theme }) => theme.colors.moon};
     }
 `;
@@ -139,21 +136,44 @@ export const Form = styled.form`
     border-radius: 20px;
     display: flex;
     flex-direction: column;
-    & > textarea {
+
+    .userInfo {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        span {
+            ${({ theme }) => theme.textStyles.P12}
+            margin-top: 5px;
+        }
+    }
+
+    textarea {
         padding: 1rem;
-        width: 100%;
+        min-height: 150px;
         resize: none;
         &::placeholder {
             ${({ theme }) => theme.textStyles.P16}
         }
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-thumb {
+            background-color: #f0f2f5;
+            border-radius: 20px;
+        }
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
     }
-    & > button {
+    button[type='submit'] {
         ${({ theme }) => theme.textStyles.Sm}
         color: #ffffff;
         width: 268px;
         height: 33px;
         background: ${({ theme }) => theme.colors.gradient};
         border-radius: 50px;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 `;

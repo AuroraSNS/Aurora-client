@@ -4,7 +4,7 @@ import CommentContainer from './comment/CommentContainer';
 import { Wrapper } from './style';
 
 type Props = {
-    comments: IComment[];
+    comments: IComment[] | null;
     ht: string;
     vertical: boolean;
 };

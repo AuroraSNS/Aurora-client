@@ -15,13 +15,13 @@ export const Wrapper = styled.div`
     span {
         ${({ theme }) => theme.textStyles.P14}
         display: flex;
-        align-items: center;
         width: 100%;
         max-width: 575px;
         height: 38px;
         background: #f0f2f5;
         border-radius: 30px;
-        padding-left: 24px;
+        padding: 10px 0 10px 24px;
+        margin-left: 16px;
     }
     &:hover {
         background-color: rgba(128, 128, 128, 0.2);
@@ -33,12 +33,4 @@ export const Wrapper = styled.div`
         border-radius: 0;
         z-index: 10;
     }
-`;
-
-export const Avatar = styled.img`
-    height: 44px;
-    width: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin-right: 16px;
 `;

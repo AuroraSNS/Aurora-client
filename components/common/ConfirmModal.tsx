@@ -30,6 +30,8 @@ const Wrapper = styled.div`
     padding: 30px;
     background: #fff;
     border-radius: 30px;
+    display: flex;
+    flex-direction: column;
 `;
 
 const ButtonWrapper = styled.div`

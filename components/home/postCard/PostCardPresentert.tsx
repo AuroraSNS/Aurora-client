@@ -3,55 +3,49 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { IComment } from '../../../interfaces/data/comment';
 import { IPost } from '../../../interfaces/data/post';
+import { IMe } from '../../../interfaces/data/user';
 import ConfirmModal from '../../common/ConfirmModal';
 import { IconFavorite, IconMore } from '../../common/Icon';
+import PostFormModalContainer from '../../common/postFormModal/PostFormModalContainer';
 import ToolTip from '../../common/ToolTip';
 import CommentBoxContainer from './commentBox/CommentBoxContainer';
 import CommentFormContainer from './commentForm/CommentFormContainer';
 import PostCardModalContainer from './postCardModal/PostCardModalContainer';
 import PostHeaderContainer from './postHeader/PostHeaderContainer';
-import PostModifyModalContainer from './postModifyModal/PostModifyModalContainer';
 
 import { Body, Footer, ImageContainer, Wrapper } from './style';
 
 type Props = {
+    isMe: boolean;
     post: IPost;
     commentBox: boolean;
     onChangeCommentBox: () => void;
-    comments: IComment[];
-    modal: boolean;
-    openPostCardModal: () => void;
-    closePostCardModal: () => void;
-    moreOptions: boolean;
-    moreOptionsToggle: () => void;
-    modifyModal: boolean;
-    openModifyModal: () => void;
-    closeModifyModal: () => void;
-    removeConfirm: boolean;
-    openRemoveConfirm: () => void;
+    showModal: boolean;
+    showModalToggle: () => void;
+    showMoreOptions: boolean;
+    showMoreOptionsToggle: () => void;
+    showModifyModal: boolean;
+    showModifyModalToggle: () => void;
+    showRemoveModal: boolean;
+    showRemoveModalToggle: () => void;
     removeOk: (id: number) => void;
-    removeCancel: () => void;
 };
 
 const PostCardPresentert = ({
+    isMe,
     post,
     commentBox,
     onChangeCommentBox,
-    comments,
-    modal,
-    openPostCardModal,
-    closePostCardModal,
-    moreOptions,
-    moreOptionsToggle,
-    modifyModal,
-    openModifyModal,
-    closeModifyModal,
-    removeConfirm,
-    openRemoveConfirm,
+    showModal,
+    showModalToggle,
+    showMoreOptions,
+    showMoreOptionsToggle,
+    showModifyModal,
+    showModifyModalToggle,
+    showRemoveModal,
+    showRemoveModalToggle,
     removeOk,
-    removeCancel,
 }: Props) => (
     <Wrapper mood={post.mood}>
         <PostHeaderContainer post={post} />
@@ -59,7 +53,7 @@ const PostCardPresentert = ({
             <p>{post.content}</p>
             <ImageContainer
                 className={post.images.length > 2 ? 'more' : post.images.length > 1 ? 'double' : ''}
-                onClick={openPostCardModal}
+                onClick={showModalToggle}
             >
                 {post.images[0] && (
                     <div>
@@ -87,34 +81,39 @@ const PostCardPresentert = ({
             <span className="like-cnt">12</span>
             <ToolTip message="댓글 열기/닫기">
                 <span className="comment-cnt" onClick={onChangeCommentBox}>
-                    댓글 {post.commentCnt}개
+                    댓글 {post.commentCnt || 0}개
                 </span>
             </ToolTip>
             <div className="form-wrapper">
                 <CommentFormContainer postId={post.id} />
             </div>
-            <button type="button" onClick={moreOptionsToggle}>
-                <IconMore />
-            </button>
-            {moreOptions && (
-                <div className="more-options">
-                    <div onClick={openModifyModal}>게시물 수정</div>
-                    <div onClick={openRemoveConfirm}>게시물 삭제</div>
-                </div>
+            {isMe && (
+                <button type="button" onClick={showMoreOptionsToggle}>
+                    <IconMore />
+                </button>
             )}
-            {removeConfirm && (
+            {showMoreOptions && (
+                <>
+                    <div className="overlay" onClick={showMoreOptionsToggle} />
+                    <div className="more-options">
+                        <div onClick={showModifyModalToggle}>게시물 수정</div>
+                        <div onClick={showRemoveModalToggle}>게시물 삭제</div>
+                    </div>
+                </>
+            )}
+            {showRemoveModal && (
                 <ConfirmModal
                     text="정말로 삭제하시겠습니까?"
                     onOk={() => {
                         removeOk(post.id);
                     }}
-                    onCancel={removeCancel}
+                    onCancel={showRemoveModalToggle}
                 />
             )}
         </Footer>
-        {commentBox && comments && <CommentBoxContainer comments={comments} ht="128px" />}
-        {modal && <PostCardModalContainer post={post} comments={comments} onClose={closePostCardModal} />}
-        {modifyModal && <PostModifyModalContainer post={post} onClose={closeModifyModal} />}
+        {commentBox && <CommentBoxContainer postId={post.id} ht="128px" />}
+        {showModal && <PostCardModalContainer post={post} onClose={showModalToggle} />}
+        {showModifyModal && <PostFormModalContainer post={post} onClose={showModifyModalToggle} />}
     </Wrapper>
 );
 export default PostCardPresentert;

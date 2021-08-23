@@ -22,18 +22,6 @@ export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST' as const;
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS' as const;
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE' as const;
 
-// export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST' as const;
-// export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS' as const;
-// export const ADD_COMMENT_FAILURE = 'ADD_COMMENT_FAILURE' as const;
-
-// export const UPDATE_COMMENT_REQUEST = 'UPDATE_COMMENT_REQUEST' as const;
-// export const UPDATE_COMMENT_SUCCESS = 'UPDATE_COMMENT_SUCCESS' as const;
-// export const UPDATE_COMMENT_FAILURE = 'UPDATE_COMMENT_FAILURE' as const;
-
-// export const REMOVE_COMMENT_REQUEST = 'REMOVE_COMMENT_REQUEST' as const;
-// export const REMOVE_COMMENT_SUCCESS = 'REMOVE_COMMENT_SUCCESS' as const;
-// export const REMOVE_COMMENT_FAILURE = 'REMOVE_COMMENT_FAILURE' as const;
-
 // export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
 // export const CHANGE_TIME = 'CHANGE_TIME' as const;
 
@@ -118,8 +106,9 @@ export const removePostFailure = (error: string) => ({
     type: REMOVE_POST_FAILURE,
     error,
 });
-export const modifyPostRequest = (data: FormData) => ({
+export const modifyPostRequest = (postId: number, data: FormData) => ({
     type: MODIFY_POST_REQUEST,
+    postId,
     data,
 });
 

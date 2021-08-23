@@ -1,39 +1,36 @@
+import { useRouter } from 'next/router';
+import { destroyCookie, setCookie } from 'nookies';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadAllPostsRequest } from '../../actions/post';
-import { loadProfileRequest } from '../../actions/user';
 import { RootState } from '../../reducers';
-import { getToken } from '../../sagas';
 import { getUrlParameter } from '../../util/util';
 import HomePresenter from './HomePresenter';
 
 const HomeContainer = () => {
     const dispatch = useDispatch();
-    const { Posts, hasMorePosts, loadAllPostsLoading, loadAllPostsDone, addPostDone } = useSelector(
-        (state: RootState) => state.post,
-    );
-    const [page, setPage] = useState(0);
+    const router = useRouter();
+    const { Posts, hasMorePosts, loadAllPostsLoading, loadAllPostsDone, addPostDone, removePostDone, modifyPostDone } =
+        useSelector((state: RootState) => state.post);
+    const [page, setPage] = useState(Math.ceil(Posts.length / 10));
 
     useEffect(() => {
-        if (sessionStorage.getItem('accessToken')) {
-            const token = getToken();
-            dispatch(loadProfileRequest(token));
-        } else {
-            const token = getUrlParameter('token');
-            if (token) {
-                sessionStorage.setItem('accessToken', token);
-                dispatch(loadProfileRequest(token));
-            }
+        const token = getUrlParameter('token');
+        if (token) {
+            destroyCookie(null, 'accessToken');
+            setCookie(null, 'accessToken', token, { path: '/' });
+            sessionStorage.removeItem('accessToken');
+            sessionStorage.setItem('accessToken', token);
+            router.push('/');
         }
-        dispatch(loadAllPostsRequest(page));
     }, []);
 
     useEffect(() => {
-        if (addPostDone) {
-            dispatch(loadAllPostsRequest(page));
+        if (addPostDone || removePostDone || modifyPostDone) {
+            dispatch(loadAllPostsRequest(0));
             setPage(1);
         }
-    }, [addPostDone, dispatch, page]);
+    }, [addPostDone, removePostDone, modifyPostDone, dispatch, page]);
 
     useEffect(() => {
         if (loadAllPostsDone) {

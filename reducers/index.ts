@@ -3,6 +3,7 @@ import { combineReducers, Reducer, AnyAction } from 'redux';
 
 import user from './user';
 import post from './post';
+import comment from './comment';
 
 const rootReducer: Reducer<any, AnyAction> = (state, action) => {
     switch (action.type) {
@@ -13,6 +14,7 @@ const rootReducer: Reducer<any, AnyAction> = (state, action) => {
             const combinedReducer = combineReducers({
                 user,
                 post,
+                comment,
             });
             return combinedReducer(state, action);
         }

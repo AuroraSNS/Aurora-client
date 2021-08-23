@@ -1,11 +1,10 @@
 /* eslint-disable no-param-reassign */
-import { useState, useEffect, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useCallback } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { removePostRequest } from '../../../actions/post';
 import useToggle from '../../../hooks/useToggle';
-import { IComment } from '../../../interfaces/data/comment';
 import { IPost } from '../../../interfaces/data/post';
-import { createSampleComments } from '../../../util/sample';
+import { RootState } from '../../../reducers';
 import PostCardPresentert from './PostCardPresentert';
 
 type Props = {
@@ -14,92 +13,39 @@ type Props = {
 
 const PostCardContainer = ({ post }: Props) => {
     const dispatch = useDispatch();
+
+    const { me } = useSelector((state: RootState) => state.user);
+    const { modifyPostDone } = useSelector((state: RootState) => state.post);
+
     const [commentBox, onChangeCommentBox] = useToggle(false);
-    const [comments, setComments] = useState<IComment[] | null>(null);
-    const [modal, setModal] = useState(false);
-    const [moreOptions, setMoreOptions] = useState(false);
-    const [removeConfirm, setRemoveConfirm] = useState(false);
-    const [modifyModal, setModifyModal] = useState(false);
-    // const { me, accessToken } = useSelector((state) => state.user);
-
-    // const [editMode, setEditMode] = useState(false);
-
-    // // 포스트 수정
-    // const onClickUpdate = useCallback(() => {
-    //     setEditMode(true);
-    // }, []);
-    // const onCancelUpdate = useCallback(() => {
-    //     setEditMode(false);
-    // }, []);
-    // const onChangePost = useCallback(
-    //     (editText) => () => {
-    //         const data = new FormData();
-    //         data.append('content', editText);
-    //         dispatch(updatePost(post._id, data, accessToken));
-    //     },
-    //     [post],
-    // );
-
-    // // 좋아요 기능
-    // const onLike = useCallback(() => {
-    //     dispatch(likePost(post._id, accessToken));
-    // }, []);
-    // const onUnlike = useCallback(() => {
-    //     dispatch(unlikePost(post._id, accessToken));
-    // }, []);
-
-    // // 댓글 기능
-    // const [commentFormOpened, setCommentFormOpened] = useState(false);
-    // const onToggleComment = useCallback(() => {
-    //     setCommentFormOpened((prev) => !prev);
-    // }, []);
-
-    useEffect(() => {
-        setComments(createSampleComments(post.commentCnt));
-    }, [post.commentCnt]);
-
-    const openPostCardModal = useCallback(() => {
-        setModal(true);
-    }, []);
-    const closePostCardModal = useCallback(() => {
-        setModal(false);
-    }, []);
-    const openModifyModal = useCallback(() => {
-        setModifyModal(true);
-    }, []);
-    const closeModifyModal = useCallback(() => {
-        setModifyModal(false);
-    }, []);
-
-    const moreOptionsToggle = useCallback(() => {
-        setMoreOptions((prev) => !prev);
-    }, []);
-
-    const openRemoveConfirm = useCallback(() => {
-        setRemoveConfirm(true);
-    }, []);
+    const [showModal, showModalToggle] = useToggle(false);
+    const [showMoreOptions, showMoreOptionsToggle] = useToggle(false);
+    const [showModifyModal, showModifyModalToggle, setShowModifyModal] = useToggle(false);
+    const [showRemoveModal, showRemoveModalToggle] = useToggle(false);
 
     const removeOk = useCallback(
         (id: number) => {
             dispatch(removePostRequest(id));
-            setRemoveConfirm(false);
-            setMoreOptions(false);
+            showRemoveModalToggle();
+            showMoreOptionsToggle();
         },
         [dispatch],
     );
 
-    const removeCancel = useCallback(() => {
-        setRemoveConfirm(false);
-    }, []);
+    useEffect(() => {
+        if (modifyPostDone) {
+            setShowModifyModal(false);
+        }
+    }, [modifyPostDone]);
 
     useEffect(() => {
-        function scrollTo(element, to, duration) {
+        function scrollTo(element: HTMLElement, to: number, duration: number) {
             let start = element.scrollTop;
             let change = to - start;
             let currentTime = 0;
             let increment = 20;
 
-            let animateScroll = function () {
+            const animateScroll = () => {
                 currentTime += increment;
                 let val = easeInOutQuad(currentTime, start, change, duration);
                 element.scrollTop = val;
@@ -114,7 +60,7 @@ const PostCardContainer = ({ post }: Props) => {
         // b = start value
         // c = change in value
         // d = duration
-        function easeInOutQuad(t, b, c, d) {
+        function easeInOutQuad(t: number, b: number, c: number, d: number) {
             t /= d / 2;
             if (t < 1) return (c / 2) * t * t + b;
             t -= 1;
@@ -129,22 +75,19 @@ const PostCardContainer = ({ post }: Props) => {
 
     return (
         <PostCardPresentert
+            isMe={me?.id === post.auth.id}
             post={post}
             commentBox={commentBox}
             onChangeCommentBox={onChangeCommentBox}
-            comments={comments as IComment[]}
-            modal={modal}
-            openPostCardModal={openPostCardModal}
-            closePostCardModal={closePostCardModal}
-            moreOptions={moreOptions}
-            moreOptionsToggle={moreOptionsToggle}
-            modifyModal={modifyModal}
-            openModifyModal={openModifyModal}
-            closeModifyModal={closeModifyModal}
-            removeConfirm={removeConfirm}
-            openRemoveConfirm={openRemoveConfirm}
+            showModal={showModal}
+            showModalToggle={showModalToggle}
+            showMoreOptions={showMoreOptions}
+            showMoreOptionsToggle={showMoreOptionsToggle}
+            showModifyModal={showModifyModal}
+            showModifyModalToggle={showModifyModalToggle}
+            showRemoveModal={showRemoveModal}
+            showRemoveModalToggle={showRemoveModalToggle}
             removeOk={removeOk}
-            removeCancel={removeCancel}
         />
     );
 };

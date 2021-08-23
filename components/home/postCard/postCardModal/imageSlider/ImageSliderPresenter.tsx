@@ -25,8 +25,8 @@ const ImageSliderPresenter = ({ idx, prev, next, images }: Props) => (
         )}
         <Container idx={idx} cnt={images.length}>
             <ul className="slides">
-                {images.map((image, i) => (
-                    <li key={i}>
+                {images.map((image) => (
+                    <li key={image}>
                         <img src={image} alt="" />
                     </li>
                 ))}

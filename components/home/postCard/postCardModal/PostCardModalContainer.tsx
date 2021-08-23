@@ -1,14 +1,11 @@
-import { IComment } from '../../../../interfaces/data/comment';
+import React from 'react';
 import { IPost } from '../../../../interfaces/data/post';
 import PostCardModalPresenter from './PostCardModalPresenter';
 
 type Props = {
     post: IPost;
-    comments: IComment[];
     onClose: () => void;
 };
 
-const PostCardModalContainer = ({ post, comments, onClose }: Props) => (
-    <PostCardModalPresenter onClose={onClose} post={post} comments={comments} />
-);
+const PostCardModalContainer = ({ post, onClose }: Props) => <PostCardModalPresenter onClose={onClose} post={post} />;
 export default PostCardModalContainer;

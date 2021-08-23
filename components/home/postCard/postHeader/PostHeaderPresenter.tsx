@@ -9,7 +9,7 @@ type Props = {
 
 const PostHeaderPresenter = ({ post }: Props) => (
     <Wrapper>
-        <img src={post.auth.avator} alt="avator" />
+        <img src={post.auth.avator || '/images/defaultProfile.png'} alt="avator" />
         <div>
             <span>{post.auth.name}</span>
             <span>22 mins ago</span>
