@@ -1,7 +1,7 @@
 import { IAuth } from './user';
 
 export interface IPost {
-    id: string;
+    id: number;
     auth: IAuth;
     mood: string;
     content: string;
@@ -21,4 +21,10 @@ export interface IPostState {
     addPostLoading: boolean;
     addPostDone: boolean;
     addPostError: null | string;
+    modifyPostLoading: boolean;
+    modifyPostDone: boolean;
+    modifyPostError: null | string;
+    removePostLoading: boolean;
+    removePostDone: boolean;
+    removePostError: null | string;
 }

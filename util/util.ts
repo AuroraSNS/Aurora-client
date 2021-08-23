@@ -1,6 +1,6 @@
+/* eslint-disable no-useless-escape */
 import { keyframes } from 'styled-components';
 
-/* eslint-disable import/prefer-default-export */
 export const convertWeatherIcon = (icon: string): number => {
     const iconNumber = Number(icon.substring(0, 2));
     if (iconNumber === 1) return 0;
@@ -19,3 +19,11 @@ export const upWeatherStick = (h: number) => keyframes`
         height: ${h}%;
     }
 `;
+
+export const getUrlParameter = (key: string) => {
+    let name = key.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    let regex = new RegExp(`[\\?&]${name}=([^&#]*)`);
+
+    let results = regex.exec(window.location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};

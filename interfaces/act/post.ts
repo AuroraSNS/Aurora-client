@@ -9,6 +9,12 @@ import {
     loadUserPostsFailure,
     loadUserPostsRequest,
     loadUserPostsSuccess,
+    modifyPostFailure,
+    modifyPostRequest,
+    modifyPostSuccess,
+    removePostFailure,
+    removePostRequest,
+    removePostSuccess,
 } from '../../actions/post';
 
 export type PostAction =
@@ -21,4 +27,10 @@ export type PostAction =
     | ReturnType<typeof addPostRequest>
     | ReturnType<typeof addPostSuccess>
     | ReturnType<typeof addPostFailure>
-    | ReturnType<typeof addPostClear>;
+    | ReturnType<typeof addPostClear>
+    | ReturnType<typeof removePostRequest>
+    | ReturnType<typeof removePostSuccess>
+    | ReturnType<typeof removePostFailure>
+    | ReturnType<typeof modifyPostRequest>
+    | ReturnType<typeof modifyPostSuccess>
+    | ReturnType<typeof modifyPostFailure>;

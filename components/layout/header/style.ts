@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.header`
+    background: #ffffff;
     box-shadow: 0px 4px 2px rgba(119, 119, 119, 0.25);
-    height: 80px;
-    ${({ theme }) => theme.flexCenter}
-    justify-content: space-between;
+
     width: 100%;
     position: fixed;
-    z-index: 100;
+    z-index: 9;
     top: 0;
-    left: 0;
-    right: 0;
-    background: #ffffff;
+    .inner {
+        ${({ theme }) => theme.flexCenter}
+        justify-content: space-between;
+        height: 80px;
+    }
 `;
 
 export const Logo = styled.div`

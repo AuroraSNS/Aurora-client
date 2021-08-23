@@ -47,6 +47,7 @@ module.exports = {
         'no-underscore-dangle': 'off',
         'consistent-return': 'off',
         'import/prefer-default-export': 'off',
+        'react-hooks/exhaustive-deps': 'off',
     },
     settings: {
         'import/resolver': {

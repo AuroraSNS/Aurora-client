@@ -22,7 +22,7 @@ const UserInfo = () => {
             </Dropdown> */}
                 </>
             ) : (
-                <Link href="./login">
+                <Link href="/login">
                     <a>로그인하러 가기</a>
                 </Link>
             )}

@@ -23,7 +23,7 @@ const RecommendFriend = () => (
             {Sample.map((ele) => (
                 <FriendCard key={ele.id}>
                     <div>
-                        <img src="/images/profile-thumbnail.jpg" alt="friendAvatar" />
+                        <img src="/images/defaultProfile.png" alt="friendAvatar" />
                     </div>
                     <span>{ele.name}</span>
                     <button type="button">친구 추가</button>

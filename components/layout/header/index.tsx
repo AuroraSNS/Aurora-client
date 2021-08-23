@@ -11,16 +11,17 @@ type Props = {
 
 const Header = ({ filter }: Props) => (
     <Wrapper>
-        <Logo>
-            <Link href="/">
-                <a>
-                    <img src="/images/logo.png" alt="logo" />
-                </a>
-            </Link>
-        </Logo>
-
-        {filter && <FilterBar />}
-        <UserInfo />
+        <div className="inner">
+            <Logo>
+                <Link href="/">
+                    <a>
+                        <img src="/images/logo.png" alt="logo" />
+                    </a>
+                </Link>
+            </Logo>
+            {filter && <FilterBar />}
+            <UserInfo />
+        </div>
     </Wrapper>
 );
 

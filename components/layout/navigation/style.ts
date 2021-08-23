@@ -34,11 +34,9 @@ export const Tap = styled.a<{ selected: string; name: string }>`
 
 export const Navbar = styled.nav`
     /* border: 1px solid black; */
-    flex: none;
     width: 200px;
-    align-items: center;
     position: fixed;
-    margin-top: 50px;
+    top: 130px;
     ul {
         display: flex;
         flex-direction: column;
@@ -47,17 +45,21 @@ export const Navbar = styled.nav`
         }
     }
     @media screen and (max-width: 768px) {
-        bottom: 0;
         width: 100%;
+        height: 70px;
+        top: unset;
+        bottom: 0;
         z-index: 10;
-        background-color: white;
+        background: #fff;
+        padding: 20px 50px;
         ul {
             ${({ theme }) => theme.flexCenter}
-            width: 100%;
-            justify-content: space-evenly;
+            flex-direction: row;
+            width: inherit;
+            justify-content: space-between;
             ${Tap} {
                 margin-bottom: 0px !important;
-                height: 70px;
+                height: inherit;
                 width: 40px;
                 span {
                     display: none;

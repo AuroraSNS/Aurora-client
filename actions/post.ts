@@ -14,13 +14,13 @@ export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS' as const;
 export const ADD_POST_FAILURE = 'ADD_POST_FAILURE' as const;
 export const ADD_POST_CLEAR = 'ADD_POST_CLEAR' as const;
 
-// export const UPDATE_POST_REQUEST = 'UPDATE_POST_REQUEST' as const;
-// export const UPDATE_POST_SUCCESS = 'UPDATE_POST_SUCCESS' as const;
-// export const UPDATE_POST_FAILURE = 'UPDATE_POST_FAILURE' as const;
+export const MODIFY_POST_REQUEST = 'MODIFY_POST_REQUEST' as const;
+export const MODIFY_POST_SUCCESS = 'MODIFY_POST_SUCCESS' as const;
+export const MODIFY_POST_FAILURE = 'MODIFY_POST_FAILURE' as const;
 
-// export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST' as const;
-// export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS' as const;
-// export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE' as const;
+export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST' as const;
+export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS' as const;
+export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE' as const;
 
 // export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST' as const;
 // export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS' as const;
@@ -103,4 +103,31 @@ export const addPostFailure = (error: string) => ({
 
 export const addPostClear = () => ({
     type: ADD_POST_CLEAR,
+});
+
+export const removePostRequest = (postId: number) => ({
+    type: REMOVE_POST_REQUEST,
+    postId,
+});
+
+export const removePostSuccess = () => ({
+    type: REMOVE_POST_SUCCESS,
+});
+
+export const removePostFailure = (error: string) => ({
+    type: REMOVE_POST_FAILURE,
+    error,
+});
+export const modifyPostRequest = (data: FormData) => ({
+    type: MODIFY_POST_REQUEST,
+    data,
+});
+
+export const modifyPostSuccess = () => ({
+    type: MODIFY_POST_SUCCESS,
+});
+
+export const modifyPostFailure = (error: string) => ({
+    type: MODIFY_POST_FAILURE,
+    error,
 });

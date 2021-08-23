@@ -6,8 +6,8 @@ export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: fixed;
-    right: 0;
+    position: sticky;
+    top: 50px;
     @media screen and (max-width: 1240px) {
         display: none;
     }

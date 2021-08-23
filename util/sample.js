@@ -70,7 +70,7 @@ export const samplePost = {
     auto: {
         id: 1,
         name: '라이언',
-        avator: 'images/profile-thumbnail.jpg',
+        avator: '/images/defaultProfile.png',
     },
     weather: 'sun',
     content: '오늘부터 2박 3일 러시아 다녀옵니다~',

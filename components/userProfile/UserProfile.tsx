@@ -21,7 +21,7 @@ const UserProfile = () => {
                             alt="avatar"
                         />
                     ) : (
-                        <Avatar src="/images/profile-thumbnail.jpg" alt="avatar" />
+                        <Avatar src="/images/defaultProfile.png" alt="avatar" />
                     )}
                 </>
                 <ProfileInfo>

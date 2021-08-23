@@ -23,7 +23,7 @@ import {
     signUpSuccess,
     SIGN_UP_REQUEST,
 } from '../actions/user';
-import { ILogInForm } from '../interfaces/data/user';
+import { ILogInForm, IMe } from '../interfaces/data/user';
 import { getToken } from '.';
 import { sampleMe } from '../util/sample';
 
@@ -38,8 +38,8 @@ function logInAPI(data: ILogInForm) {
 function* logIn(action: ReturnType<typeof logInRequest>) {
     try {
         // const result: AxiosResponse<{ accessToken: string; tokenType: string }> = yield call(logInAPI, action.data);
-        setCookie(null, 'accessToken', 'accessToken', { path: '/' });
-        localStorage.setItem('accessToken', 'accessToken');
+        // setCookie(null, 'accessToken', result.data.accessToken, { path: '/' });
+        // sessionStorage.setItem('accessToken', result.data.accessToken);
         yield delay(1000);
         yield put(logInSuccess());
     } catch (err) {
@@ -50,7 +50,7 @@ function* logIn(action: ReturnType<typeof logInRequest>) {
 function* logOut() {
     try {
         // destroyCookie(null, 'accessToken');
-        // localStorage.removeItem('accessToken');
+        // sessionStorage.removeItem('accessToken');
         yield delay(1000);
         yield put(logOutSuccess());
     } catch (err) {
@@ -85,9 +85,8 @@ function loadProfileAPI(token: string) {
 
 function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     try {
-        // const result: AxiosResponse<IMe> = yield call(loadProfileAPI, action.token);
-        yield delay(1000);
-        yield put(loadProfileSuccess(sampleMe));
+        const result: AxiosResponse<IMe> = yield call(loadProfileAPI, action.token);
+        yield put(loadProfileSuccess(result.data));
     } catch (err) {
         yield put(loadProfileFailure(err.message));
     }

@@ -6,7 +6,7 @@ import RightSideBar from './aside';
 import Navigation from './navigation';
 
 type Props = {
-    children: ReactChild | ReactChild[];
+    children: React.ReactNode;
     title: string;
     filter?: boolean;
     isMain?: boolean;
@@ -21,11 +21,11 @@ const AppLayout = ({ children, title, filter, isMain }: Props) => (
         </Head>
         <Header filter={filter} />
         <Container>
-            <Navigation page={title} />
-            <main>
+            <div className="inner">
+                <Navigation page={title} />
                 <MainComponent>{children}</MainComponent>
                 <RightSideBar isMain={isMain as boolean} />
-            </main>
+            </div>
         </Container>
     </>
 );
@@ -37,24 +37,12 @@ AppLayout.defaultProps = {
 
 const Container = styled.div`
     display: flex;
-    height: 100%;
+    justify-content: center;
     padding-top: 80px;
-    main {
-        flex: 1;
+    .inner {
+        width: 100%;
         display: flex;
-        padding-left: 200px;
-        padding-right: 305px;
-        justify-content: center;
-    }
-    @media screen and (max-width: 1240px) {
-        main {
-            padding-right: 0;
-        }
-    }
-    @media screen and (max-width: 768px) {
-        main {
-            padding-left: 0;
-        }
+        justify-content: space-between;
     }
 `;
 
@@ -65,7 +53,11 @@ const MainComponent = styled.div`
     align-items: center;
     width: 100%;
     flex: 1;
-    padding: 0 30px;
+    margin-left: 200px;
+    padding: 0 20px;
+    @media screen and (max-width: 768px) {
+        margin-left: 0;
+    }
 `;
 
 export default AppLayout;

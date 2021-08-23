@@ -70,6 +70,11 @@ const Global = createGlobalStyle`
         transform: none;
     }
   }
+  .inner {
+  max-width: 1440px;
+  margin: 0 auto;
+  position: relative;
+}
 `;
 
 export default Global;
