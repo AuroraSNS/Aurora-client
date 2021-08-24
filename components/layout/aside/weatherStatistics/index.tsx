@@ -9,20 +9,19 @@ import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
 type Props = {
     isMain?: boolean;
 };
-const SampleStatistics = { sun: 67, cloud: 23, rain: 53, moon: 46 };
 const WeatherStatistics = ({ isMain }: Props) => {
-    const { Statistics } = useSelector((state: RootState) => state.post);
+    const { allStatistics } = useSelector((state: RootState) => state.post);
 
     return (
         <Wrapper>
             <div className="title">My Firends Weather</div>
             <Container
-                sun={SampleStatistics.sun}
-                cloud={SampleStatistics.cloud}
-                rain={SampleStatistics.rain}
-                moon={SampleStatistics.moon}
+                sun={allStatistics.sun}
+                cloud={allStatistics.cloud}
+                rain={allStatistics.rain}
+                moon={allStatistics.moon}
             >
-                <ToolTip message={`${SampleStatistics.sun}%`} wh={25}>
+                <ToolTip message={`${allStatistics.sun}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-sun" />
@@ -30,7 +29,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <IconSun />
                     </div>
                 </ToolTip>
-                <ToolTip message={`${SampleStatistics.cloud}%`} wh={25}>
+                <ToolTip message={`${allStatistics.cloud}%`} wh={25}>
                     <div>
                         <div className="stick">
                             <span className="stick-cloud" />
@@ -38,7 +37,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <IconCloud />
                     </div>
                 </ToolTip>
-                <ToolTip message={`${SampleStatistics.rain}%`} wh={25}>
+                <ToolTip message={`${allStatistics.rain}%`} wh={25}>
                     <div>
                         <div className="stick">
                             <span className="stick-rain" />
@@ -46,7 +45,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <IconRain />
                     </div>
                 </ToolTip>
-                <ToolTip message={`${SampleStatistics.moon}%`} wh={25}>
+                <ToolTip message={`${allStatistics.moon}%`} wh={25}>
                     <div>
                         <div className="stick">
                             <span className="stick-moon" />

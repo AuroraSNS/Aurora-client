@@ -31,6 +31,12 @@ export const ImageWrapper = styled.div`
         ${({ theme }) => theme.smbtn}
     }
     margin-bottom: 30px;
+    .user-image {
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        object-fit: cover;
+    }
 `;
 
 export const InputWrapper = styled.div`

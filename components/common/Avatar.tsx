@@ -11,7 +11,7 @@ const Avatar = ({ url, size }: Props) => (
         <Image
             width={size}
             height={size}
-            src="https://aurora-image-bucket.s3.ap-northeast-2.amazonaws.com/aurora/defaultProfile.png"
+            src={url || 'https://aurora-image-bucket.s3.ap-northeast-2.amazonaws.com/aurora/defaultProfile.png'}
             alt="avatar"
         />
     </Wrapper>

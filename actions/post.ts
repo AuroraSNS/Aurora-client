@@ -1,4 +1,4 @@
-import { IPost } from '../interfaces/data/post';
+import { IPost, IWeatherStatistics } from '../interfaces/data/post';
 
 // 액션 상수
 export const LOAD_ALL_POSTS_REQUEST = 'LOAD_ALL_POSTS_REQUEST' as const;
@@ -22,12 +22,12 @@ export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST' as const;
 export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS' as const;
 export const REMOVE_POST_FAILURE = 'REMOVE_POST_FAILURE' as const;
 
+export const LOAD_ALL_STATISTICS_REQUEST = 'LOAD_ALL_STATISTICS_REQUEST' as const;
+export const LOAD_ALL_STATISTICS_SUCCESS = 'LOAD_ALL_STATISTICS_SUCCESS' as const;
+export const LOAD_ALL_STATISTICS_FAILURE = 'LOAD_ALL_STATISTICS_FAILURE' as const;
+
 // export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
 // export const CHANGE_TIME = 'CHANGE_TIME' as const;
-
-// export const LOAD_ALL_STATISTICS_REQUEST = 'LOAD_ALL_STATISTICS_REQUEST' as const;
-// export const LOAD_ALL_STATISTICS_SUCCESS = 'LOAD_ALL_STATISTICS_SUCCESS' as const;
-// export const LOAD_ALL_STATISTICS_FAILURE = 'LOAD_ALL_STATISTICS_FAILURE' as const;
 
 // export const LOAD_STATISTICS_REQUEST = 'LOAD_STATISTICS_REQUEST' as const;
 // export const LOAD_STATISTICS_SUCCESS = 'LOAD_STATISTICS_SUCCESS' as const;
@@ -118,5 +118,19 @@ export const modifyPostSuccess = () => ({
 
 export const modifyPostFailure = (error: string) => ({
     type: MODIFY_POST_FAILURE,
+    error,
+});
+
+export const loadAllStatisticsRequest = () => ({
+    type: LOAD_ALL_STATISTICS_REQUEST,
+});
+
+export const loadAllStatisticsSuccess = (data: IWeatherStatistics) => ({
+    type: LOAD_ALL_STATISTICS_SUCCESS,
+    data,
+});
+
+export const loadAllStatisticsFailure = (error: string) => ({
+    type: LOAD_ALL_STATISTICS_FAILURE,
     error,
 });

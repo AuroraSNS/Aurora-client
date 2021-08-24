@@ -17,6 +17,9 @@ import {
     MODIFY_POST_REQUEST,
     MODIFY_POST_SUCCESS,
     MODIFY_POST_FAILURE,
+    LOAD_ALL_STATISTICS_REQUEST,
+    LOAD_ALL_STATISTICS_SUCCESS,
+    LOAD_ALL_STATISTICS_FAILURE,
 } from '../actions/post';
 
 import { PostAction } from '../interfaces/act/post';
@@ -25,6 +28,7 @@ import { IPost, IPostState } from '../interfaces/data/post';
 // 초기 데이터 구조
 export const initialState: IPostState = {
     Posts: [],
+    allStatistics: null,
     hasMorePosts: true,
     loadAllPostsLoading: false,
     loadAllPostsDone: false,
@@ -41,6 +45,9 @@ export const initialState: IPostState = {
     removePostLoading: false,
     removePostDone: false,
     removePostError: null,
+    loadAllStatisticsLoading: false,
+    loadAllStatisticsDone: false,
+    loadAllStatisticsError: null,
 };
 
 const reducer = (state = initialState, action: PostAction) =>
@@ -119,6 +126,20 @@ const reducer = (state = initialState, action: PostAction) =>
             case REMOVE_POST_FAILURE:
                 draft.removePostLoading = false;
                 draft.removePostError = action.error;
+                break;
+            case LOAD_ALL_STATISTICS_REQUEST:
+                draft.loadAllStatisticsLoading = true;
+                draft.loadAllStatisticsDone = false;
+                draft.loadAllStatisticsError = null;
+                break;
+            case LOAD_ALL_STATISTICS_SUCCESS:
+                draft.loadAllStatisticsLoading = false;
+                draft.loadAllStatisticsDone = true;
+                draft.allStatistics = action.data;
+                break;
+            case LOAD_ALL_STATISTICS_FAILURE:
+                draft.loadAllStatisticsLoading = false;
+                draft.loadAllStatisticsError = action.error;
                 break;
             default:
                 break;

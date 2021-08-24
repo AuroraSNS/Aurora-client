@@ -13,7 +13,7 @@ const HomeContainer = () => {
     const { Posts, hasMorePosts, loadAllPostsLoading, loadAllPostsDone, addPostDone, removePostDone, modifyPostDone } =
         useSelector((state: RootState) => state.post);
     const [page, setPage] = useState(Math.ceil(Posts.length / 10));
-    // console.log(process.env.NEXT_PUBLIC_imageURL);
+
     useEffect(() => {
         const token = getUrlParameter('token');
         if (token) {

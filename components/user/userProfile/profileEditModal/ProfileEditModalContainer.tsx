@@ -18,9 +18,8 @@ const ProfileEditModalContainer = ({ onClose }: Props) => {
     const [image, setImage] = useState<File | null>(null);
     const [name, onChangeName] = useInput(me.name);
     const [bio, onChangeBio] = useInput(me.bio);
-    const [isDefaultImage, setIsDefaultImage] = useState('N');
+    const [isImageChanged, setIsDefaultImage] = useState(false);
     const [isChange, setIsChange] = useState(false);
-
     const imageInput = useRef<HTMLInputElement>(null);
     const imageUpload = useCallback(() => {
         if (!imageInput.current) return;
@@ -29,7 +28,7 @@ const ProfileEditModalContainer = ({ onClose }: Props) => {
     const onChangeImages = useCallback((e: ChangeEvent<HTMLInputElement>) => {
         if (!e.target.files) return;
         setImage(e.target.files[0]);
-        setIsDefaultImage('N');
+        setIsDefaultImage(true);
         setIsChange(true);
     }, []);
     const removeImage = useCallback(() => {
@@ -38,7 +37,7 @@ const ProfileEditModalContainer = ({ onClose }: Props) => {
         } else {
             setImage(null);
         }
-        setIsDefaultImage('Y');
+        setIsDefaultImage(true);
     }, [currentImage]);
 
     const onSubmit = useCallback(
@@ -49,11 +48,11 @@ const ProfileEditModalContainer = ({ onClose }: Props) => {
                 if (image) data.append('image', image);
                 if (name) data.append('name', name);
                 if (bio) data.append('bio', bio);
-                data.append('isDefaultImage', isDefaultImage);
+                data.append('isImageChanged', String(isImageChanged));
                 dispatch(modifyProfileRequest(data));
             }
         },
-        [dispatch, image, name, bio, isDefaultImage, isChange],
+        [dispatch, image, name, bio, isImageChanged, isChange],
     );
 
     useEffect(() => {

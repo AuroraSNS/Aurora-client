@@ -45,7 +45,12 @@ const ProfileEditModalPresenter = ({
     <Modal onClose={onClose}>
         <Form onSubmit={onSubmit}>
             <ImageWrapper>
-                <Avatar size={160} url={(image && URL.createObjectURL(image)) || currentImage} />
+                {image ? (
+                    <img className="user-image" src={URL.createObjectURL(image as File)} alt="" />
+                ) : (
+                    <Avatar size={160} url={currentImage} />
+                )}
+
                 <input type="file" accept="image/*" multiple hidden ref={imageInput} onChange={onChangeImages} />
                 {image ? (
                     <button type="button" onClick={removeImage}>

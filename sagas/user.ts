@@ -82,13 +82,14 @@ function* signUp(action: ReturnType<typeof signUpRequest>) {
 function loadProfileAPI(token: string) {
     return axios({
         method: 'GET',
-        url: '/user/me',
+        url: '/user',
         headers: { Authorization: `Bearer ${token}` },
     });
 }
 
 function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     try {
+        console.log('aaa');
         const result: AxiosResponse<IMe> = yield call(loadProfileAPI, action.token);
         yield put(loadProfileSuccess(result.data));
         // yield put(loadProfileSuccess(createSampleUser()));
@@ -97,18 +98,18 @@ function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     }
 }
 
-function loadUserProfileAPI(userId: string) {
+function loadUserProfileAPI(userId: number) {
     return axios({
         method: 'GET',
-        url: '/user/me',
+        url: `/user/${userId}`,
     });
 }
 
 function* loadUserProfile(action: ReturnType<typeof loadUserProfileRequest>) {
     try {
-        // const result: AxiosResponse<IUserProfile> = yield call(loadUserProfileAPI, action.userId);
-        // yield put(loadUserProfileSuccess(result.data));
-        yield put(loadUserProfileSuccess(createSampleUser()));
+        const result: AxiosResponse<IUserProfile> = yield call(loadUserProfileAPI, action.userId);
+        yield put(loadUserProfileSuccess(result.data));
+        // yield put(loadUserProfileSuccess(createSampleUser()));
     } catch (err) {
         yield put(loadUserProfileFailure(err.message));
     }
@@ -117,19 +118,19 @@ function* loadUserProfile(action: ReturnType<typeof loadUserProfileRequest>) {
 function modifyProfileAPI(data: FormData) {
     return axios({
         method: 'PATCH',
-        url: '/api/user',
+        url: '/user',
         headers: { Authorization: `Bearer ${getToken()}` },
         data,
     });
 }
 
 function* modifyProfile(action: ReturnType<typeof modifyProfileRequest>) {
-    // try {
-    //     const result: AxiosResponse<ProfileModifyFormData> = yield call(modifyProfileAPI, action.data);
-    //     yield put(modifyProfileSuccess(result.data));
-    // } catch (err) {
-    //     yield put(modifyProfileFailure(err.message));
-    // }
+    try {
+        yield call(modifyProfileAPI, action.data);
+        yield put(modifyProfileSuccess());
+    } catch (err) {
+        yield put(modifyProfileFailure(err.message));
+    }
 }
 
 function* watchLogIn() {

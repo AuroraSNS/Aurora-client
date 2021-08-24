@@ -10,6 +10,7 @@ export const Wrapper = styled.section`
     .title {
         ${({ theme }) => theme.textStyles.H6}
         text-align: center;
+        margin-bottom: 30px;
     }
 `;
 

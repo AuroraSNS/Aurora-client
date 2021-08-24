@@ -25,16 +25,15 @@ export const FriendCard = styled.div`
     ${({ theme }) => theme.flexCenter}
     flex-direction: column;
     justify-content: space-between;
-    div {
+    &>div {
         width: 58px;
         height: 58px;
         background: #f0f2f5;
         border-radius: 10px;
-        padding: 10px;
-        img {
-            width: 100%;
-            height: 100%;
-            border-radius: 50%;
+        padding: 7px;
+            img {
+                border-radius: 50%;
+            }
         }
     }
     span {

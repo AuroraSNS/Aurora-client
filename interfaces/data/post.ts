@@ -1,5 +1,12 @@
 import { IAuth } from './user';
 
+export interface IWeatherStatistics {
+    sun: number;
+    cloud: number;
+    rain: number;
+    moon: number;
+}
+
 export interface IPost {
     id: number;
     auth: IAuth;
@@ -11,6 +18,7 @@ export interface IPost {
 
 export interface IPostState {
     Posts: null | IPost[];
+    allStatistics: IWeatherStatistics | null;
     hasMorePosts: boolean;
     loadAllPostsLoading: boolean;
     loadAllPostsDone: boolean;
@@ -27,4 +35,7 @@ export interface IPostState {
     removePostLoading: boolean;
     removePostDone: boolean;
     removePostError: null | string;
+    loadAllStatisticsLoading: boolean;
+    loadAllStatisticsDone: boolean;
+    loadAllStatisticsError: null | string;
 }

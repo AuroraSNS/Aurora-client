@@ -6,6 +6,9 @@ import {
     loadAllPostsFailure,
     loadAllPostsRequest,
     loadAllPostsSuccess,
+    loadAllStatisticsFailure,
+    loadAllStatisticsRequest,
+    loadAllStatisticsSuccess,
     loadUserPostsFailure,
     loadUserPostsRequest,
     loadUserPostsSuccess,
@@ -33,4 +36,7 @@ export type PostAction =
     | ReturnType<typeof removePostFailure>
     | ReturnType<typeof modifyPostRequest>
     | ReturnType<typeof modifyPostSuccess>
-    | ReturnType<typeof modifyPostFailure>;
+    | ReturnType<typeof modifyPostFailure>
+    | ReturnType<typeof loadAllStatisticsRequest>
+    | ReturnType<typeof loadAllStatisticsSuccess>
+    | ReturnType<typeof loadAllStatisticsFailure>;

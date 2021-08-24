@@ -44,11 +44,13 @@ const CommentContainer = ({ comment, vertical }: Props) => {
         [dispatch],
     );
 
-    const onSubmit = useCallback((e: FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        console.log('editText :', editText);
-        dispatch(modifyCommentRequest(comment.id, editText));
-    }, []);
+    const onSubmit = useCallback(
+        (e: FormEvent<HTMLFormElement>) => {
+            e.preventDefault();
+            dispatch(modifyCommentRequest(comment.id, editText));
+        },
+        [editText],
+    );
 
     return (
         <CommentPresenter

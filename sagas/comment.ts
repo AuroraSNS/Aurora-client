@@ -40,7 +40,6 @@ function* loadComment(action: ReturnType<typeof loadCommentRequest>) {
 }
 
 function addCommentAPI(postId: number, content: string) {
-    console.log(content);
     return axios({
         method: 'POST',
         url: `/comments/${postId}`,

@@ -2,14 +2,16 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserPostsRequest } from '../../actions/post';
+import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
 import { RootState } from '../../reducers';
+import { getToken } from '../../sagas';
 import UserPresenter from './UserPresenter';
 
 const UserContainer = () => {
     const router = useRouter();
     const result = router.query;
     const dispatch = useDispatch();
-    const { user } = useSelector((state: RootState) => state.user);
+    const { me, user, modifyProfileDone } = useSelector((state: RootState) => state.user);
     const {
         Posts,
         hasMorePosts,
@@ -32,6 +34,14 @@ const UserContainer = () => {
             setPage(Math.ceil(Posts.length / 10));
         }
     }, [loadUserPostsDone, Posts.length]);
+
+    useEffect(() => {
+        if (modifyProfileDone) {
+            dispatch(loadProfileRequest(getToken()));
+            dispatch(loadUserProfileRequest(me.id));
+            dispatch(loadUserPostsRequest(me.id, 0));
+        }
+    }, [modifyProfileDone]);
 
     useEffect(() => {
         function onScroll() {

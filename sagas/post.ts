@@ -24,8 +24,11 @@ import {
     modifyPostSuccess,
     modifyPostFailure,
     modifyPostRequest,
+    loadAllStatisticsFailure,
+    loadAllStatisticsSuccess,
+    LOAD_ALL_STATISTICS_REQUEST,
 } from '../actions/post';
-import { IPost } from '../interfaces/data/post';
+import { IPost, IWeatherStatistics } from '../interfaces/data/post';
 
 function loadAllPostsAPI(page: number) {
     return axios({
@@ -51,7 +54,7 @@ function* loadAllPosts(action: ReturnType<typeof loadAllPostsRequest>) {
 function loadUserPostsAPI(userId: number, page: number) {
     return axios({
         method: 'GET',
-        url: `/posts/all/${userId}`,
+        url: `/posts/${userId}`,
         params: {
             page,
         },
@@ -121,6 +124,22 @@ function* removePost(action: ReturnType<typeof removePostRequest>) {
     }
 }
 
+function loadAllStatisticsAPI() {
+    return axios({
+        method: 'GET',
+        url: `/mood/all`,
+    });
+}
+
+function* loadAllStatistics() {
+    try {
+        const result: AxiosResponse<IWeatherStatistics> = yield call(loadAllStatisticsAPI);
+        yield put(loadAllStatisticsSuccess(result.data));
+    } catch (err) {
+        yield put(loadAllStatisticsFailure(err.message));
+    }
+}
+
 function* watchLoadAllPosts() {
     yield throttle(5000, LOAD_ALL_POSTS_REQUEST, loadAllPosts);
 }
@@ -140,6 +159,9 @@ function* watchModifyPost() {
 function* watchRemovePost() {
     yield takeLatest(REMOVE_POST_REQUEST, removePost);
 }
+function* watchLoadAllStatistics() {
+    yield takeLatest(LOAD_ALL_STATISTICS_REQUEST, loadAllStatistics);
+}
 
 export default function* postSaga() {
     yield all([
@@ -148,5 +170,6 @@ export default function* postSaga() {
         fork(watchAddPost),
         fork(watchModifyPost),
         fork(watchRemovePost),
+        fork(watchLoadAllStatistics),
     ]);
 }

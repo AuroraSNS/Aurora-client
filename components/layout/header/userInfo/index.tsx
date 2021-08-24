@@ -11,7 +11,7 @@ const UserInfo = () => {
 
     return (
         <Wrapper>
-            <Link href={`/user/${me.id}`}>
+            <Link href={`/user/${me?.id}`}>
                 <a>
                     <Avatar url={me?.avatar} size={54} />
                 </a>

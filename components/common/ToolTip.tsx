@@ -40,7 +40,8 @@ const Wrapper = styled.div<{ message: string; wh: number }>`
         color: #ffffff;
         font-size: 12px;
         margin-bottom: 10px;
-        padding: 7px 12px;
+        padding: 7px;
+        text-align: center;
         position: absolute;
         width: ${(props) => `${props.wh}px`};
         word-wrap: break-word;

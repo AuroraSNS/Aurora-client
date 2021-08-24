@@ -23,7 +23,9 @@ const RecommendFriend = () => (
         <Container>
             {Sample.map((ele) => (
                 <FriendCard key={ele.id}>
-                    <Avatar url="" size={58} />
+                    <div>
+                        <Avatar url="" size={44} />
+                    </div>
                     <span>{ele.name}</span>
                     <button type="button">친구 추가</button>
                 </FriendCard>
