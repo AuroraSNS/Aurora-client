@@ -10,18 +10,13 @@ type Props = {
     isMain?: boolean;
 };
 const WeatherStatistics = ({ isMain }: Props) => {
-    const { allStatistics } = useSelector((state: RootState) => state.post);
+    const { statistics } = useSelector((state: RootState) => state.post);
 
     return (
         <Wrapper>
             <div className="title">My Firends Weather</div>
-            <Container
-                sun={allStatistics.sun}
-                cloud={allStatistics.cloud}
-                rain={allStatistics.rain}
-                moon={allStatistics.moon}
-            >
-                <ToolTip message={`${allStatistics.sun}%`} wh={31}>
+            <Container sun={statistics.sun} cloud={statistics.cloud} rain={statistics.rain} moon={statistics.moon}>
+                <ToolTip message={`${statistics.sun}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-sun" />
@@ -29,7 +24,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <IconSun />
                     </div>
                 </ToolTip>
-                <ToolTip message={`${allStatistics.cloud}%`} wh={25}>
+                <ToolTip message={`${statistics.cloud}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-cloud" />
@@ -37,7 +32,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <IconCloud />
                     </div>
                 </ToolTip>
-                <ToolTip message={`${allStatistics.rain}%`} wh={25}>
+                <ToolTip message={`${statistics.rain}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-rain" />
@@ -45,7 +40,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <IconRain />
                     </div>
                 </ToolTip>
-                <ToolTip message={`${allStatistics.moon}%`} wh={25}>
+                <ToolTip message={`${statistics.moon}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-moon" />

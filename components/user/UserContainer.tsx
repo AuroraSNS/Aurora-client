@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUserPostsRequest } from '../../actions/post';
+import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../actions/post';
 import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
 import { RootState } from '../../reducers';
 import { getToken } from '../../sagas';
@@ -12,6 +12,8 @@ const UserContainer = () => {
     const result = router.query;
     const dispatch = useDispatch();
     const { me, user, modifyProfileDone } = useSelector((state: RootState) => state.user);
+    const { filterList } = useSelector((state: RootState) => state.post);
+
     const {
         Posts,
         hasMorePosts,
@@ -22,9 +24,15 @@ const UserContainer = () => {
         modifyPostDone,
     } = useSelector((state: RootState) => state.post);
     const [page, setPage] = useState(Math.ceil(Posts.length / 10));
+
+    useEffect(() => {
+        dispatch(loadUserPostsRequest(user.id, 0, filterList));
+    }, [filterList]);
+
     useEffect(() => {
         if (addPostDone || removePostDone || modifyPostDone) {
-            dispatch(loadUserPostsRequest(Number(result.id), 0));
+            dispatch(loadUserPostsRequest(me.id, 0, filterList));
+            dispatch(loadUserStatisticsRequest(String(me.id)));
             setPage(1);
         }
     }, [addPostDone, removePostDone, modifyPostDone, dispatch, page]);
@@ -39,7 +47,7 @@ const UserContainer = () => {
         if (modifyProfileDone) {
             dispatch(loadProfileRequest(getToken()));
             dispatch(loadUserProfileRequest(me.id));
-            dispatch(loadUserPostsRequest(me.id, 0));
+            dispatch(loadUserPostsRequest(me.id, 0, filterList));
         }
     }, [modifyProfileDone]);
 
@@ -50,7 +58,7 @@ const UserContainer = () => {
                 document.documentElement.scrollHeight - 300
             ) {
                 if (loadUserPostsLoading || !hasMorePosts) return;
-                dispatch(loadUserPostsRequest(Number(result.id), page));
+                dispatch(loadUserPostsRequest(user.id, page, filterList));
             }
         }
         window.addEventListener('scroll', onScroll);
@@ -59,7 +67,7 @@ const UserContainer = () => {
         };
     }, [dispatch, loadUserPostsLoading, hasMorePosts, page]);
 
-    return <UserPresenter Posts={Posts} user={user} />;
+    return <UserPresenter Posts={Posts} />;
 };
 
 export default UserContainer;

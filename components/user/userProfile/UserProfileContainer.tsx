@@ -5,12 +5,8 @@ import { IUserProfile } from '../../../interfaces/data/user';
 import { RootState } from '../../../reducers';
 import UserProfilePresenter from './UserProfilePresenter';
 
-type Props = {
-    user: IUserProfile;
-};
-
-const UserProfileContainer = ({ user }: Props) => {
-    const { me, modifyProfileDone } = useSelector((state: RootState) => state.user);
+const UserProfileContainer = () => {
+    const { me, user, modifyProfileDone } = useSelector((state: RootState) => state.user);
 
     const [showProfileModal, showProfileModalToggle, setShowProfileModal] = useToggle(false);
 
@@ -23,7 +19,7 @@ const UserProfileContainer = ({ user }: Props) => {
     return (
         <UserProfilePresenter
             user={user}
-            isMe={me?.id === user.id}
+            isMe={me?.id === user?.id}
             showProfileModal={showProfileModal}
             showProfileModalToggle={showProfileModalToggle}
         />

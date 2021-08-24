@@ -8,7 +8,7 @@ type Props = {
 };
 
 const NotificationPresenter = ({ noti }: Props) => (
-    <AppLayout title="Notification">
+    <AppLayout title="Notification" filter={false}>
         <NotificationBox notis={noti as INotification[]} newNoti />
         <NotificationBox notis={noti as INotification[]} />
     </AppLayout>

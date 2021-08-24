@@ -20,6 +20,10 @@ import {
     LOAD_ALL_STATISTICS_REQUEST,
     LOAD_ALL_STATISTICS_SUCCESS,
     LOAD_ALL_STATISTICS_FAILURE,
+    LOAD_USER_STATISTICS_REQUEST,
+    LOAD_USER_STATISTICS_SUCCESS,
+    LOAD_USER_STATISTICS_FAILURE,
+    FILTER_WEATHER,
 } from '../actions/post';
 
 import { PostAction } from '../interfaces/act/post';
@@ -28,7 +32,8 @@ import { IPost, IPostState } from '../interfaces/data/post';
 // 초기 데이터 구조
 export const initialState: IPostState = {
     Posts: [],
-    allStatistics: null,
+    statistics: null,
+    filterList: [],
     hasMorePosts: true,
     loadAllPostsLoading: false,
     loadAllPostsDone: false,
@@ -48,6 +53,9 @@ export const initialState: IPostState = {
     loadAllStatisticsLoading: false,
     loadAllStatisticsDone: false,
     loadAllStatisticsError: null,
+    loadUserStatisticsLoading: false,
+    loadUserStatisticsDone: false,
+    loadUserStatisticsError: null,
 };
 
 const reducer = (state = initialState, action: PostAction) =>
@@ -135,11 +143,28 @@ const reducer = (state = initialState, action: PostAction) =>
             case LOAD_ALL_STATISTICS_SUCCESS:
                 draft.loadAllStatisticsLoading = false;
                 draft.loadAllStatisticsDone = true;
-                draft.allStatistics = action.data;
+                draft.statistics = action.data;
                 break;
             case LOAD_ALL_STATISTICS_FAILURE:
                 draft.loadAllStatisticsLoading = false;
                 draft.loadAllStatisticsError = action.error;
+                break;
+            case LOAD_USER_STATISTICS_REQUEST:
+                draft.loadUserStatisticsLoading = true;
+                draft.loadUserStatisticsDone = false;
+                draft.loadUserStatisticsError = null;
+                break;
+            case LOAD_USER_STATISTICS_SUCCESS:
+                draft.loadUserStatisticsLoading = false;
+                draft.loadUserStatisticsDone = true;
+                draft.statistics = action.data;
+                break;
+            case LOAD_USER_STATISTICS_FAILURE:
+                draft.loadUserStatisticsLoading = false;
+                draft.loadUserStatisticsError = action.error;
+                break;
+            case FILTER_WEATHER:
+                draft.filterList = action.data;
                 break;
             default:
                 break;

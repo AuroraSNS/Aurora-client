@@ -26,12 +26,12 @@ export const LOAD_ALL_STATISTICS_REQUEST = 'LOAD_ALL_STATISTICS_REQUEST' as cons
 export const LOAD_ALL_STATISTICS_SUCCESS = 'LOAD_ALL_STATISTICS_SUCCESS' as const;
 export const LOAD_ALL_STATISTICS_FAILURE = 'LOAD_ALL_STATISTICS_FAILURE' as const;
 
-// export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
-// export const CHANGE_TIME = 'CHANGE_TIME' as const;
+export const LOAD_USER_STATISTICS_REQUEST = 'LOAD_USER_STATISTICS_REQUEST' as const;
+export const LOAD_USER_STATISTICS_SUCCESS = 'LOAD_USER_STATISTICS_SUCCESS' as const;
+export const LOAD_USER_STATISTICS_FAILURE = 'LOAD_USER_STATISTICS_FAILURE' as const;
 
-// export const LOAD_STATISTICS_REQUEST = 'LOAD_STATISTICS_REQUEST' as const;
-// export const LOAD_STATISTICS_SUCCESS = 'LOAD_STATISTICS_SUCCESS' as const;
-// export const LOAD_STATISTICS_FAILURE = 'LOAD_STATISTICS_FAILURE' as const;
+export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
+// export const CHANGE_TIME = 'CHANGE_TIME' as const;
 
 // export const LOAD_LIKE_POST_REQUEST = 'LOAD_LIKE_POST_REQUEST' as const;
 // export const LOAD_LIKE_POST_SUCCESS = 'LOAD_LIKE_POST_SUCCESS' as const;
@@ -42,9 +42,10 @@ export const LOAD_ALL_STATISTICS_FAILURE = 'LOAD_ALL_STATISTICS_FAILURE' as cons
 // export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
 
 // 액션 크리에이터
-export const loadAllPostsRequest = (page: number) => ({
+export const loadAllPostsRequest = (page: number, filter: string[]) => ({
     type: LOAD_ALL_POSTS_REQUEST,
     page,
+    filter,
 });
 
 export const loadAllPostsSuccess = (data: IPost[], page: number) => ({
@@ -58,10 +59,11 @@ export const loadAllPostsFailure = (error: string) => ({
     error,
 });
 
-export const loadUserPostsRequest = (userId: number, page: number) => ({
+export const loadUserPostsRequest = (userId: number, page: number, filter: string[]) => ({
     type: LOAD_USER_POSTS_REQUEST,
     userId,
     page,
+    filter,
 });
 
 export const loadUserPostsSuccess = (data: IPost[], page: number) => ({
@@ -133,4 +135,24 @@ export const loadAllStatisticsSuccess = (data: IWeatherStatistics) => ({
 export const loadAllStatisticsFailure = (error: string) => ({
     type: LOAD_ALL_STATISTICS_FAILURE,
     error,
+});
+
+export const loadUserStatisticsRequest = (userId: string) => ({
+    type: LOAD_USER_STATISTICS_REQUEST,
+    userId,
+});
+
+export const loadUserStatisticsSuccess = (data: IWeatherStatistics) => ({
+    type: LOAD_USER_STATISTICS_SUCCESS,
+    data,
+});
+
+export const loadUserStatisticsFailure = (error: string) => ({
+    type: LOAD_USER_STATISTICS_FAILURE,
+    error,
+});
+
+export const filterWeather = (data: string[]) => ({
+    type: FILTER_WEATHER,
+    data,
 });

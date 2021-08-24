@@ -3,6 +3,7 @@ import {
     addPostFailure,
     addPostRequest,
     addPostSuccess,
+    filterWeather,
     loadAllPostsFailure,
     loadAllPostsRequest,
     loadAllPostsSuccess,
@@ -12,6 +13,9 @@ import {
     loadUserPostsFailure,
     loadUserPostsRequest,
     loadUserPostsSuccess,
+    loadUserStatisticsFailure,
+    loadUserStatisticsRequest,
+    loadUserStatisticsSuccess,
     modifyPostFailure,
     modifyPostRequest,
     modifyPostSuccess,
@@ -39,4 +43,8 @@ export type PostAction =
     | ReturnType<typeof modifyPostFailure>
     | ReturnType<typeof loadAllStatisticsRequest>
     | ReturnType<typeof loadAllStatisticsSuccess>
-    | ReturnType<typeof loadAllStatisticsFailure>;
+    | ReturnType<typeof loadAllStatisticsFailure>
+    | ReturnType<typeof loadUserStatisticsRequest>
+    | ReturnType<typeof loadUserStatisticsSuccess>
+    | ReturnType<typeof loadUserStatisticsFailure>
+    | ReturnType<typeof filterWeather>;

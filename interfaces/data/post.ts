@@ -18,7 +18,8 @@ export interface IPost {
 
 export interface IPostState {
     Posts: null | IPost[];
-    allStatistics: IWeatherStatistics | null;
+    statistics: IWeatherStatistics | null;
+    filterList: string[];
     hasMorePosts: boolean;
     loadAllPostsLoading: boolean;
     loadAllPostsDone: boolean;
@@ -38,4 +39,7 @@ export interface IPostState {
     loadAllStatisticsLoading: boolean;
     loadAllStatisticsDone: boolean;
     loadAllStatisticsError: null | string;
+    loadUserStatisticsLoading: boolean;
+    loadUserStatisticsDone: boolean;
+    loadUserStatisticsError: null | string;
 }

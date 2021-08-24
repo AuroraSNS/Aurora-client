@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, { ReactChild } from 'react';
+import React from 'react';
 import Head from 'next/head';
 import Header from './header';
 import RightSideBar from './aside';
@@ -7,7 +7,7 @@ import Navigation from './navigation';
 
 type Props = {
     children: React.ReactNode;
-    title: string;
+    title?: string;
     filter?: boolean;
     isMain?: boolean;
 };
@@ -22,7 +22,7 @@ const AppLayout = ({ children, title, filter, isMain }: Props) => (
         <Header filter={filter} />
         <Container>
             <div className="inner">
-                <Navigation page={title} />
+                <Navigation page={title as string} />
                 <MainComponent>{children}</MainComponent>
                 <RightSideBar isMain={isMain as boolean} />
             </div>
@@ -31,6 +31,7 @@ const AppLayout = ({ children, title, filter, isMain }: Props) => (
 );
 
 AppLayout.defaultProps = {
+    title: 'Aurora',
     filter: true,
     isMain: false,
 };

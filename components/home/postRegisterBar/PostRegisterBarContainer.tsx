@@ -11,11 +11,11 @@ const PostRegisterBarContainer = () => {
     const [modal, setModal] = useState(false);
 
     const openPostCardModal = useCallback(() => {
-        // if (me) {
-        setModal(true);
-        // } else {
-        //     router.push('/login');
-        // }
+        if (me) {
+            setModal(true);
+        } else {
+            router.push('/login');
+        }
     }, []);
 
     const closePostCardModal = useCallback(() => {

@@ -1,7 +1,10 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 import axios, { AxiosResponse } from 'axios';
-import { all, fork, put, takeLatest, throttle, call, delay } from 'redux-saga/effects';
+import { all, fork, put, takeLatest, throttle, call } from 'redux-saga/effects';
 import { getToken } from '.';
 import {
     loadAllPostsFailure,
@@ -27,10 +30,27 @@ import {
     loadAllStatisticsFailure,
     loadAllStatisticsSuccess,
     LOAD_ALL_STATISTICS_REQUEST,
+    loadUserStatisticsRequest,
+    loadUserStatisticsSuccess,
+    loadUserStatisticsFailure,
+    LOAD_USER_STATISTICS_REQUEST,
 } from '../actions/post';
 import { IPost, IWeatherStatistics } from '../interfaces/data/post';
 
-function loadAllPostsAPI(page: number) {
+let qs = require('qs');
+
+function loadAllPostsAPI(page: number, filter: string[]) {
+    if (filter.length > 0) {
+        return axios({
+            method: 'GET',
+            url: '/posts/all/filter',
+            params: {
+                page,
+                mood: filter,
+            },
+            paramsSerializer: (p) => qs.stringify(p, { arrayFormat: 'repeat' }),
+        });
+    }
     return axios({
         method: 'GET',
         url: '/posts/all',
@@ -42,16 +62,25 @@ function loadAllPostsAPI(page: number) {
 
 function* loadAllPosts(action: ReturnType<typeof loadAllPostsRequest>) {
     try {
-        const result: AxiosResponse<IPost[] | []> = yield call(loadAllPostsAPI, action.page);
+        const result: AxiosResponse<IPost[] | []> = yield call(loadAllPostsAPI, action.page, action.filter);
         yield put(loadAllPostsSuccess(result.data, action.page));
-        // delay(1000);
-        // yield put(loadAllPostsSuccess(createSamplePosts(10), action.page));
     } catch (err) {
         yield put(loadAllPostsFailure(err.message));
     }
 }
 
-function loadUserPostsAPI(userId: number, page: number) {
+function loadUserPostsAPI(userId: number, page: number, filter: string[]) {
+    if (filter.length > 0) {
+        return axios({
+            method: 'GET',
+            url: `/posts/${userId}/filter`,
+            params: {
+                page,
+                mood: filter,
+            },
+            paramsSerializer: (p) => qs.stringify(p, { arrayFormat: 'repeat' }),
+        });
+    }
     return axios({
         method: 'GET',
         url: `/posts/${userId}`,
@@ -63,9 +92,13 @@ function loadUserPostsAPI(userId: number, page: number) {
 
 function* loadUserPosts(action: ReturnType<typeof loadUserPostsRequest>) {
     try {
-        const result: AxiosResponse<IPost[] | []> = yield call(loadUserPostsAPI, action.userId, action.page);
+        const result: AxiosResponse<IPost[] | []> = yield call(
+            loadUserPostsAPI,
+            action.userId,
+            action.page,
+            action.filter,
+        );
         yield put(loadUserPostsSuccess(result.data, action.page));
-        // yield put(loadUserPostsSuccess(createSamplePosts(5), action.page));
     } catch (err) {
         yield put(loadUserPostsFailure(err.message));
     }
@@ -140,6 +173,22 @@ function* loadAllStatistics() {
     }
 }
 
+function loadUserStatisticsAPI(userId: string) {
+    return axios({
+        method: 'GET',
+        url: `/mood/${userId}`,
+    });
+}
+
+function* loadUserStatistics(action: ReturnType<typeof loadUserStatisticsRequest>) {
+    try {
+        const result: AxiosResponse<IWeatherStatistics> = yield call(loadUserStatisticsAPI, action.userId);
+        yield put(loadUserStatisticsSuccess(result.data));
+    } catch (err) {
+        yield put(loadUserStatisticsFailure(err.message));
+    }
+}
+
 function* watchLoadAllPosts() {
     yield throttle(5000, LOAD_ALL_POSTS_REQUEST, loadAllPosts);
 }
@@ -159,8 +208,13 @@ function* watchModifyPost() {
 function* watchRemovePost() {
     yield takeLatest(REMOVE_POST_REQUEST, removePost);
 }
+
 function* watchLoadAllStatistics() {
     yield takeLatest(LOAD_ALL_STATISTICS_REQUEST, loadAllStatistics);
+}
+
+function* watchLoadUserStatistics() {
+    yield takeLatest(LOAD_USER_STATISTICS_REQUEST, loadUserStatistics);
 }
 
 export default function* postSaga() {
@@ -171,5 +225,6 @@ export default function* postSaga() {
         fork(watchModifyPost),
         fork(watchRemovePost),
         fork(watchLoadAllStatistics),
+        fork(watchLoadUserStatistics),
     ]);
 }

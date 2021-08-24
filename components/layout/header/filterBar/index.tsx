@@ -1,26 +1,27 @@
-import React, { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { filterWeather, loadAllPostsRequest } from '../../../../actions/post';
+import { RootState } from '../../../../reducers';
 
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
 import { WeatherContainer, Wrapper } from './style';
 
 const FilterBar = () => {
     const dispatch = useDispatch();
-
-    const [selectWeather, setSelectWeather] = useState<Array<string>>([]);
+    const { filterList } = useSelector((state: RootState) => state.post);
 
     const onClick = useCallback(
         (e: any) => {
             if (e.target.name === 'weather') {
-                if (selectWeather.includes(e.target.value)) {
-                    const newSelectWeather = selectWeather.filter((v) => v !== e.target.value);
-                    setSelectWeather(newSelectWeather);
+                if (filterList.includes(e.target.value)) {
+                    const newSelectWeather = filterList.filter((v) => v !== e.target.value);
+                    dispatch(filterWeather(newSelectWeather));
                 } else {
-                    setSelectWeather((prev) => [...prev, e.target.value]);
+                    dispatch(filterWeather([...filterList, e.target.value]));
                 }
             }
         },
-        [selectWeather],
+        [filterList],
     );
 
     return (

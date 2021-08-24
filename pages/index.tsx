@@ -13,7 +13,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
     }
     context.store.dispatch(loadAllStatisticsRequest());
-    context.store.dispatch(loadAllPostsRequest(0));
+    context.store.dispatch(loadAllPostsRequest(0, []));
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();
 });

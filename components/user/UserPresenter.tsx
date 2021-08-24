@@ -9,12 +9,11 @@ import UserProfileContainer from './userProfile/UserProfileContainer';
 
 type Props = {
     Posts: IPost[];
-    user: IUserProfile;
 };
 
-const UserPresenter = ({ Posts, user }: Props) => (
-    <AppLayout title="Home" filter isMain>
-        <UserProfileContainer user={user} />
+const UserPresenter = ({ Posts }: Props) => (
+    <AppLayout filter isMain>
+        <UserProfileContainer />
         <PostCardList>
             {Posts?.map((post: IPost) => (
                 <PostCardContainer key={post.id} post={post} />

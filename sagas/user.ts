@@ -29,7 +29,6 @@ import {
 } from '../actions/user';
 import { ILogInForm, IMe, IUserProfile } from '../interfaces/data/user';
 import { getToken } from '.';
-import { createSampleUser, sampleMe } from '../util/sample';
 
 function logInAPI(data: ILogInForm) {
     return axios({
@@ -89,10 +88,8 @@ function loadProfileAPI(token: string) {
 
 function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     try {
-        console.log('aaa');
         const result: AxiosResponse<IMe> = yield call(loadProfileAPI, action.token);
         yield put(loadProfileSuccess(result.data));
-        // yield put(loadProfileSuccess(createSampleUser()));
     } catch (err) {
         yield put(loadProfileFailure(err.message));
     }
