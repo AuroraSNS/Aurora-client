@@ -1,5 +1,6 @@
 import shortid from 'shortid';
 import faker from 'faker';
+import { now } from 'moment';
 
 export const createSampleUser = () => ({
     id: shortid.generate(),
@@ -24,6 +25,21 @@ export const createSampleComments = (n) => {
     }
     return sampleComments;
 };
+
+export const createSampleNotifications = (n) => {
+    const sampleNotifications = [];
+    for (let i = 0; i < n; i += 1) {
+        sampleNotifications.push(createSampleNotification());
+    }
+    return sampleNotifications;
+};
+
+const createSampleNotification = () => ({
+    id: shortid.generate(),
+    auth: createSampleUser(),
+    content: faker.random.words(),
+    time: new Date().toLocaleTimeString(),
+});
 
 const createSampleComment = () => ({
     id: shortid.generate(),

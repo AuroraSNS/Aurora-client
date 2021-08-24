@@ -28,7 +28,7 @@ const Navigation = ({ page }: Props) => (
                 </Link>
             </li>
             <li>
-                <Link href="#">
+                <Link href="/notification">
                     <Tap name="Notification" selected={page}>
                         <IconNotification />
                         <span>알림</span>
