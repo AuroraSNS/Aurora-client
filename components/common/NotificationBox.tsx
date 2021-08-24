@@ -57,12 +57,7 @@ const Wrapper = styled.section<{
     height: ${({ newNoti }) => (newNoti ? '305px' : '420px')};
     margin-top: ${({ newNoti }) => (newNoti ? '55px' : '30px')};
     .bg {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(324.54deg, #d3bafc 0%, #b9d8f6 34.9%, #f8cbcb 68.23%, #fee6e6 100%);
-        filter: blur(30px);
-        z-index: -1;
+        ${({ theme }) => theme.bgFilter}
     }
     .content {
         /* filter: none; */

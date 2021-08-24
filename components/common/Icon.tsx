@@ -493,3 +493,30 @@ export const Logo = () => (
         </defs>
     </svg>
 );
+export const IconMsg = () => (
+    <svg width="27" height="20" viewBox="0 0 27 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M4 0C1.79086 0 0 1.79086 0 4V16C0 18.2091 1.79086 20 4 20H22.1429C24.352 20 26.1429 18.2091 26.1429 16V4C26.1429 1.79086 24.352 0 22.1429 0H4ZM2 4C2 2.89543 2.89543 2 4 2H22.1429C23.2474 2 24.1429 2.89543 24.1429 4V16C24.1429 17.1046 23.2474 18 22.1429 18H4C2.89543 18 2 17.1046 2 16V4ZM5.6 4.2C5.15817 3.86863 4.53137 3.95817 4.2 4.4C3.86863 4.84183 3.95817 5.46863 4.4 5.8L12.4 11.8C12.7556 12.0667 13.2444 12.0667 13.6 11.8L21.6 5.8C22.0418 5.46863 22.1314 4.84183 21.8 4.4C21.4686 3.95817 20.8418 3.86863 20.4 4.2L13 9.75L5.6 4.2Z"
+            fill="#EFEFEF"
+        />
+        <path
+            d="M14.6667 5L10 10.8667L12.625 11.9667V16L17 9.4L14.6667 8.3V5Z"
+            fill="#ED9A9A"
+            stroke="#ED9A9A"
+            strokeLinejoin="round"
+        />
+    </svg>
+);
+export const IconSend = () => (
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+            d="M11.625 7.95214L7.5625 11.4545L1.875 7.95214L16.9062 1.63635L14.4688 16.3636L10 13.5"
+            stroke="white"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+        />
+    </svg>
+);

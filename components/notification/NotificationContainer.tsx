@@ -5,13 +5,13 @@ import { createSampleNotifications } from '../../util/sample';
 import NotificationPresenter from './NotificationPresenter';
 
 const NotificationContainer = () => {
-    const router = useRouter();
-
     const [noti, setNoti] = useState<INotification[] | null>(null);
+
     useEffect(() => {
         let res: INotification[] = createSampleNotifications(10);
         setNoti(res);
     }, []);
+
     return <NotificationPresenter noti={noti} />;
 };
 

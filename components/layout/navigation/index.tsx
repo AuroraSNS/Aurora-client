@@ -20,8 +20,8 @@ const Navigation = ({ page }: Props) => (
                 </Link>
             </li>
             <li>
-                <Link href="#">
-                    <Tap name="Message" selected={page}>
+                <Link href="/chat">
+                    <Tap name="Chat" selected={page}>
                         <IconMessage />
                         <span>메시지</span>
                     </Tap>

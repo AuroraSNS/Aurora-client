@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterWeather, loadAllPostsRequest } from '../../../../actions/post';
+import { loadAllPostsRequest } from '../../../../actions/post';
 import { RootState } from '../../../../reducers';
 
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
