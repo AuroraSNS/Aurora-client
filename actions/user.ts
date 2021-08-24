@@ -1,4 +1,4 @@
-import { ILogInForm, IMe } from '../interfaces/data/user';
+import { ILogInForm, IMe, IUserProfile } from '../interfaces/data/user';
 
 // 액션 상수
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;
@@ -22,6 +22,10 @@ export const MODIFY_PROFILE_REQUEST = 'MODIFY_PROFILE_REQUEST' as const;
 export const MODIFY_PROFILE_SUCCESS = 'MODIFY_PROFILE_SUCCESS' as const;
 export const MODIFY_PROFILE_FAILURE = 'MODIFY_PROFILE_FAILURE' as const;
 export const MODIFY_PROFILE_CLEAR = 'MODIFY_PROFILE_CLEAR' as const;
+
+export const LOAD_USER_PROFILE_REQUEST = 'LOAD_USER_PROFILE_REQUEST' as const;
+export const LOAD_USER_PROFILE_SUCCESS = 'LOAD_USER_PROFILE_SUCCESS' as const;
+export const LOAD_USER_PROFILE_FAILURE = 'LOAD_USER_PROFILE_FAILURE' as const;
 
 // 액션 크리에이터
 export const logInRequest = (data: ILogInForm) => ({
@@ -84,7 +88,22 @@ export const loadProfileFailure = (error: string) => ({
     error,
 });
 
-export const modifyProfileRequest = (data: IMe) => ({
+export const loadUserProfileRequest = (userId: number) => ({
+    type: LOAD_USER_PROFILE_REQUEST,
+    userId,
+});
+
+export const loadUserProfileSuccess = (data: IUserProfile) => ({
+    type: LOAD_USER_PROFILE_SUCCESS,
+    data,
+});
+
+export const loadUserProfileFailure = (error: string) => ({
+    type: LOAD_USER_PROFILE_FAILURE,
+    error,
+});
+
+export const modifyProfileRequest = (data: FormData) => ({
     type: MODIFY_PROFILE_REQUEST,
     data,
 });

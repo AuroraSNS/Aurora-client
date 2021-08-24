@@ -51,45 +51,24 @@ export const ImageContainer = styled.div`
     display: flex;
     justify-content: center;
     cursor: pointer;
-    div {
+    div.imgBox {
         position: relative;
         width: 100%;
-        &:before {
-            content: '';
-            display: block;
-            padding-top: 100%;
-        }
+        max-height: 625px;
         img {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            object-fit: cover;
+            object-fit: contain;
         }
     }
-    div &.double {
-        img {
-            padding: 0 5px;
-        }
+    & > div:not(:last-child) {
+        margin-right: 9px;
     }
-    &.more {
-        div:first-child {
-            margin-right: 9px;
-        }
-        div:nth-child(2) {
-            margin-right: 9px;
-        }
-        div:nth-child(3) {
+    .double div {
+        width: 45%;
+    }
+    .more {
+        & > div:nth-child(3) {
             width: 20%;
             overflow: hidden;
-            img {
-                position: absolute;
-                object-fit: cover;
-                opacity: 0.3;
-            }
-
             & > span {
                 top: 35%;
                 left: 30%;

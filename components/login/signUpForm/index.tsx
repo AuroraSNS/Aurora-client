@@ -1,7 +1,5 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import FacebookOAuthBtn from '../facebookOAuthBtn';
-import GoogleOAuthBtn from '../loginForm/googleOAuth';
 import { Form } from './style';
 
 const SignUpForm = () => {
@@ -16,8 +14,6 @@ const SignUpForm = () => {
             {/* {loginErrorMsg ? <ErrorMessage>{loginErrorMsg}</ErrorMessage> : ''} */}
             <button type="submit">로그인</button>
             <span>계정이 없으신가요?</span>
-            <GoogleOAuthBtn />
-            <FacebookOAuthBtn />
         </Form>
     );
 };

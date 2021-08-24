@@ -41,6 +41,7 @@ const colors = {
     rain: '#b9d8f6',
     moon: '#d3bafc',
     gradient: 'linear-gradient(106.76deg, #d3bafc 3.84%, #b9d8f6 89.38%)',
+    gradient2: 'linear-gradient(106.83deg, #d3bafc 0%, #f8cbcb 100%)',
 };
 
 const size = {
@@ -102,6 +103,14 @@ const scroll = css`
     &::-webkit-scrollbar-track {
         background-color: transparent;
     }
+`;
+
+const smbtn = css`
+    width: 29px;
+    height: 29px;
+    background: #f0f2f5;
+    border-radius: 10px;
+    ${({ theme }) => theme.flexCenter}
 `;
 
 const textStyles = {
@@ -176,5 +185,6 @@ export default {
     flexCenter,
     colors,
     scroll,
+    smbtn,
     textStyles,
 };

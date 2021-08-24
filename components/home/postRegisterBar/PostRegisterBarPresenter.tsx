@@ -14,7 +14,7 @@ type Props = {
 const PostRegisterBarPresenter = ({ openPostCardModal, closePostCardModal, me, modal }: Props) => (
     <>
         <Wrapper onClick={openPostCardModal}>
-            <Avatar url={me?.avator} size={44} />
+            <Avatar url={me?.avatar} size={44} />
             <span>오늘 당신의 날씨는 어떤가요?</span>
         </Wrapper>
         {modal && <PostFormModalContainer isFirst onClose={closePostCardModal} />}

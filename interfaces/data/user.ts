@@ -2,23 +2,23 @@ export interface ILogInForm {
     email: string;
     password: string;
 }
-
 export interface IAuth {
     id: number;
     name: string;
-    avator: string;
+    avatar: string;
 }
 
-export interface IUserInfo extends IAuth {
+export interface IUserProfile extends IAuth {
     bio: string;
 }
 
-export interface IMe extends IUserInfo {
+export interface IMe extends IUserProfile {
     email: string;
 }
 
 export interface IUserState {
     me: null | IMe;
+    user: IUserProfile | null;
     logInLoading: boolean;
     logInDone: boolean;
     logInError: null | string;
@@ -31,6 +31,9 @@ export interface IUserState {
     loadProfileLoading: boolean;
     loadProfileDone: boolean;
     loadProfileError: null | string;
+    loadUserProfileLoading: boolean;
+    loadUserProfileDone: boolean;
+    loadUserProfileError: null | string;
     modifyProfileLoading: boolean;
     modifyProfileDone: boolean;
     modifyProfileError: null | string;

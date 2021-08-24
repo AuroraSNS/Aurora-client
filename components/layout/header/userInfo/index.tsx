@@ -13,7 +13,7 @@ const UserInfo = () => {
         <Wrapper>
             <Link href={`/user/${me.id}`}>
                 <a>
-                    <Avatar url={me?.avator} size={54} />
+                    <Avatar url={me?.avatar} size={54} />
                 </a>
             </Link>
             <span>{me && me.name}</span>

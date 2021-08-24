@@ -22,7 +22,6 @@ const PostCardContainer = ({ post }: Props) => {
     const [showMoreOptions, showMoreOptionsToggle] = useToggle(false);
     const [showModifyModal, showModifyModalToggle, setShowModifyModal] = useToggle(false);
     const [showRemoveModal, showRemoveModalToggle] = useToggle(false);
-
     const removeOk = useCallback(
         (id: number) => {
             dispatch(removePostRequest(id));

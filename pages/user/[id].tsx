@@ -3,8 +3,8 @@ import nookies from 'nookies';
 import React from 'react';
 import UserContainer from '../../components/user/UserContainer';
 import wrapper from '../../store/configureStore';
-import { loadProfileRequest } from '../../actions/user';
-import { loadUserPostsRequest } from '../../actions/post';
+import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
+import { loadAllPostsRequest, loadUserPostsRequest } from '../../actions/post';
 
 const User = () => <UserContainer />;
 
@@ -15,6 +15,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     }
     if (context.params) {
         context.store.dispatch(loadUserPostsRequest(Number(context.params.id), 0));
+        // context.store.dispatch(loadAllPostsRequest(0));
+        context.store.dispatch(loadUserProfileRequest(Number(context.params.id) || 1));
     }
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();

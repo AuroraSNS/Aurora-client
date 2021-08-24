@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import Image from 'next/image';
 
 type Props = {
     url: string;
@@ -7,7 +8,12 @@ type Props = {
 
 const Avatar = ({ url, size }: Props) => (
     <Wrapper size={size}>
-        <img src={url || '/images/defaultProfile.png'} alt="avatar" />
+        <Image
+            width={size}
+            height={size}
+            src="https://aurora-image-bucket.s3.ap-northeast-2.amazonaws.com/aurora/defaultProfile.png"
+            alt="avatar"
+        />
     </Wrapper>
 );
 
@@ -15,8 +21,8 @@ const Wrapper = styled.div<{ size: number }>`
     width: ${({ size }) => `${size}px`};
     height: ${({ size }) => `${size}px`};
     img {
-        width: 100%;
         border-radius: 50%;
+        object-fit: cover;
     }
 `;
 

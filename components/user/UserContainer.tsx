@@ -9,6 +9,7 @@ const UserContainer = () => {
     const router = useRouter();
     const result = router.query;
     const dispatch = useDispatch();
+    const { user } = useSelector((state: RootState) => state.user);
     const {
         Posts,
         hasMorePosts,
@@ -48,7 +49,7 @@ const UserContainer = () => {
         };
     }, [dispatch, loadUserPostsLoading, hasMorePosts, page]);
 
-    return <UserPresenter Posts={Posts} />;
+    return <UserPresenter Posts={Posts} user={user} />;
 };
 
 export default UserContainer;

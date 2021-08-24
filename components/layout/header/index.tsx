@@ -2,6 +2,7 @@ import Link from 'next/link';
 
 import React from 'react';
 import { useSelector } from 'react-redux';
+import Image from 'next/image';
 import { RootState } from '../../../reducers';
 import FilterBar from './filterBar';
 import { Wrapper, Logo } from './style';
@@ -19,7 +20,7 @@ const Header = ({ filter }: Props) => {
                 <Logo>
                     <Link href="/">
                         <a>
-                            <img src="/images/logo.png" alt="logo" />
+                            <Image width={150} height={55} src="/images/logo.png" alt="logo" />
                         </a>
                     </Link>
                 </Logo>

@@ -42,7 +42,7 @@ const CommentPresenter = ({
 }: Props) => (
     <Wrapper vertical={vertical as boolean}>
         <div>
-            <Avatar url={comment.auth.avator} size={36} />
+            <Avatar url={comment.auth.avatar} size={36} />
             <span>{comment.auth.name}</span>
         </div>
         <div>

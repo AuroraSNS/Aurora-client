@@ -38,7 +38,6 @@ const Global = createGlobalStyle`
   a,button{
     cursor: pointer;
   }
-
   ul{
     list-style: none;
   }

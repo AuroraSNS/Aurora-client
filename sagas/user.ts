@@ -6,7 +6,11 @@ import {
     loadProfileFailure,
     loadProfileRequest,
     loadProfileSuccess,
+    loadUserProfileFailure,
+    loadUserProfileRequest,
+    loadUserProfileSuccess,
     LOAD_PROFILE_REQUEST,
+    LOAD_USER_PROFILE_REQUEST,
     logInFailure,
     logInRequest,
     logInSuccess,
@@ -23,7 +27,7 @@ import {
     signUpSuccess,
     SIGN_UP_REQUEST,
 } from '../actions/user';
-import { ILogInForm, IMe } from '../interfaces/data/user';
+import { ILogInForm, IMe, IUserProfile } from '../interfaces/data/user';
 import { getToken } from '.';
 import { createSampleUser, sampleMe } from '../util/sample';
 
@@ -93,6 +97,23 @@ function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     }
 }
 
+function loadUserProfileAPI(userId: string) {
+    return axios({
+        method: 'GET',
+        url: '/user/me',
+    });
+}
+
+function* loadUserProfile(action: ReturnType<typeof loadUserProfileRequest>) {
+    try {
+        // const result: AxiosResponse<IUserProfile> = yield call(loadUserProfileAPI, action.userId);
+        // yield put(loadUserProfileSuccess(result.data));
+        yield put(loadUserProfileSuccess(createSampleUser()));
+    } catch (err) {
+        yield put(loadUserProfileFailure(err.message));
+    }
+}
+
 function modifyProfileAPI(data: FormData) {
     return axios({
         method: 'PATCH',
@@ -127,6 +148,10 @@ function* watchLoadProfile() {
     yield takeLatest(LOAD_PROFILE_REQUEST, loadProfile);
 }
 
+function* watchLoadUserProfile() {
+    yield takeLatest(LOAD_USER_PROFILE_REQUEST, loadUserProfile);
+}
+
 function* watchModifyProfile() {
     yield takeLatest(MODIFY_PROFILE_REQUEST, modifyProfile);
 }
@@ -138,5 +163,6 @@ export default function* userSaga() {
         fork(watchSignUp),
         fork(watchModifyProfile),
         fork(watchLoadProfile),
+        fork(watchLoadUserProfile),
     ]);
 }

@@ -47,7 +47,7 @@ const PostFormModalPresenter = ({
     <Modal onClose={onClose}>
         <Form onSubmit={onSubmit} encType="multipart/form-data">
             <div className="userInfo">
-                <Avatar url={me?.avator} size={44} />
+                <Avatar url={me?.avatar} size={44} />
                 <span>{me?.name}</span>
             </div>
             <WeatherTab onClick={onClickWeather}>

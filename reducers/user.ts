@@ -18,13 +18,17 @@ import {
     MODIFY_PROFILE_FAILURE,
     MODIFY_PROFILE_REQUEST,
     MODIFY_PROFILE_SUCCESS,
+    LOAD_USER_PROFILE_FAILURE,
+    LOAD_USER_PROFILE_SUCCESS,
+    LOAD_USER_PROFILE_REQUEST,
 } from '../actions/user';
 import { UserAction } from '../interfaces/act/user';
-import { IUserState } from '../interfaces/data/user';
+import { IMe, IUserState } from '../interfaces/data/user';
 
 // initial state
 export const initialState: IUserState = {
     me: null,
+    user: null,
     logInLoading: false,
     logInDone: false,
     logInError: null,
@@ -37,6 +41,9 @@ export const initialState: IUserState = {
     loadProfileLoading: false,
     loadProfileDone: false,
     loadProfileError: null,
+    loadUserProfileLoading: false,
+    loadUserProfileDone: false,
+    loadUserProfileError: null,
     modifyProfileLoading: false,
     modifyProfileDone: false,
     modifyProfileError: null,
@@ -98,11 +105,25 @@ const reducer = (state = initialState, action: UserAction) =>
             case LOAD_PROFILE_SUCCESS:
                 draft.loadProfileLoading = false;
                 draft.loadProfileDone = true;
-                draft.me = action.data;
+                draft.me = action.data as IMe;
                 break;
             case LOAD_PROFILE_FAILURE:
                 draft.loadProfileLoading = false;
                 draft.loadProfileError = action.error;
+                break;
+            case LOAD_USER_PROFILE_REQUEST:
+                draft.loadUserProfileLoading = true;
+                draft.loadUserProfileDone = false;
+                draft.loadUserProfileError = null;
+                break;
+            case LOAD_USER_PROFILE_SUCCESS:
+                draft.loadUserProfileLoading = false;
+                draft.loadUserProfileDone = true;
+                draft.user = action.data;
+                break;
+            case LOAD_USER_PROFILE_FAILURE:
+                draft.loadUserProfileLoading = false;
+                draft.loadUserProfileError = action.error;
                 break;
             case MODIFY_PROFILE_REQUEST:
                 draft.modifyProfileLoading = true;

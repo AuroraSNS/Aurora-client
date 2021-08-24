@@ -16,6 +16,9 @@ import {
     modifyProfileFailure,
     modifyProfileRequest,
     modifyProfileSuccess,
+    loadUserProfileFailure,
+    loadUserProfileRequest,
+    loadUserProfileSuccess,
 } from '../../actions/user';
 
 export type UserAction =
@@ -32,6 +35,9 @@ export type UserAction =
     | ReturnType<typeof loadProfileRequest>
     | ReturnType<typeof loadProfileSuccess>
     | ReturnType<typeof loadProfileFailure>
+    | ReturnType<typeof loadUserProfileRequest>
+    | ReturnType<typeof loadUserProfileSuccess>
+    | ReturnType<typeof loadUserProfileFailure>
     | ReturnType<typeof modifyProfileRequest>
     | ReturnType<typeof modifyProfileSuccess>
     | ReturnType<typeof modifyProfileFailure>

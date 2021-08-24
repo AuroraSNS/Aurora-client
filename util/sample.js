@@ -4,7 +4,7 @@ import faker from 'faker';
 export const createSampleUser = () => ({
     id: shortid.generate(),
     name: faker.name.firstName(),
-    avator: faker.image.avatar(),
+    avatar: faker.image.avatar(),
     email: faker.internet.email(),
     bio: faker.lorem.word(),
 });
@@ -61,7 +61,7 @@ export const sampleMe = {
     id: 1,
     email: 'test@test.com',
     name: '라이언',
-    avator: 'https://placeimg.com/300/300/any',
+    avatar: 'https://placeimg.com/300/300/any',
     bio: '',
 };
 
@@ -70,7 +70,7 @@ export const samplePost = {
     auto: {
         id: 1,
         name: '라이언',
-        avator: '/images/defaultProfile.png',
+        avatar: '/images/defaultProfile.png',
     },
     weather: 'sun',
     content: '오늘부터 2박 3일 러시아 다녀옵니다~',

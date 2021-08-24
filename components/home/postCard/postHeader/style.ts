@@ -6,13 +6,8 @@ export const Wrapper = styled.section`
     display: flex;
     align-items: center;
     position: relative;
-    img {
-        width: 44px;
-        height: 44px;
-        border-radius: 50%;
-        margin-right: 12px;
-    }
-    div {
+    div.info {
+        margin-left: 15px;
         display: flex;
         flex-direction: column;
         & > span:first-child {

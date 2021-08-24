@@ -2,9 +2,9 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
+import Image from 'next/image';
 import React from 'react';
 import { IPost } from '../../../interfaces/data/post';
-import { IMe } from '../../../interfaces/data/user';
 import ConfirmModal from '../../common/ConfirmModal';
 import { IconFavorite, IconMore } from '../../common/Icon';
 import PostFormModalContainer from '../../common/postFormModal/PostFormModalContainer';
@@ -56,21 +56,21 @@ const PostCardPresentert = ({
                 onClick={showModalToggle}
             >
                 {post.images[0] && (
-                    <div>
-                        {/* <Image width={640} height={640} src={post.image[0]} alt="postimage" /> */}
-                        <img src={post.images[0]} alt="postimage" />
+                    <div className="imgBox">
+                        <Image width={625} height={625} src={post.images[0]} alt="postimage" />
+                        {/* <img src={post.images[0]} alt="postimage" /> */}
                     </div>
                 )}
                 {post.images[1] && (
-                    <div>
-                        {/* <Image width={640} height={640} src={post.image[0]} alt="postimage" /> */}
-                        <img src={post.images[1]} alt="postimage" />
+                    <div className="imgBox">
+                        <Image width={625} height={625} src={post.images[1]} alt="postimage" />
+                        {/* <img src={post.images[1]} alt="postimage" /> */}
                     </div>
                 )}
                 {post.images[2] && (
-                    <div>
-                        {/* <Image width={640} height={640} src={post.image[0]} alt="postimage" /> */}
-                        <img src={post.images[2]} alt="postimage" />
+                    <div className="imgBox">
+                        <Image width={625} height={625} src={post.images[2]} alt="postimage" />
+                        {/* <img src={post.images[2]} alt="postimage" /> */}
                         <span>+</span>
                     </div>
                 )}
