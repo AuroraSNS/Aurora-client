@@ -1,9 +1,8 @@
 /* eslint-disable import/no-unresolved */
-import axios from 'axios';
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
+import SockJS from 'sockjs-client';
 import useInput from '../../hooks/useInput';
 import { IMessage } from '../../interfaces/data';
 import { RootState } from '../../reducers';
@@ -39,7 +38,7 @@ stompClient.debug = (str: string) => {
 };
 
 const headers = {
-    Authorization: getToken(),
+    Authorization: getToken() as string,
 };
 
 const ChatContainer = () => {
@@ -55,12 +54,18 @@ const ChatContainer = () => {
         [msgTheme],
     );
 
+    const [roomId, setRoomId] = useState(0);
     const [contents, setContents] = useState<IMessage[]>([]);
     const [message, onChangeMessage, setMessage] = useInput('');
     const onReceive = (frame: Stomp.Frame) => {
         // called when the client receives a STOMP message from the server
         let recv = JSON.parse(frame.body);
-        const newMessage = { sender: recv.sender, message: recv.message };
+        const newMessage = {
+            roomId: recv.roomId,
+            sender: recv.sender,
+            message: recv.message,
+            timeStamp: recv.timeStamp,
+        };
         setContents((prev) => [...prev, newMessage]);
     };
 
@@ -84,17 +89,15 @@ const ChatContainer = () => {
 
     useEffect(() => {
         // 유저
-
         // axios 요청
         // 첫 진입시 - 룸id []
         // 방선택시 - 룸id, 참여자 {id, 이름, 아바타} IMessage[]
-
         // stomp 메시지 송수신
         // 메시지 보낼때
-        const roomId = localStorage.getItem('wschat.roomId');
-        axios.get(`/chat/room/${roomId}`).then((res) => {
-            stompClient.connect(headers, onConnect, onError);
-        });
+        // const roomId = localStorage.getItem('wschat.roomId');
+        // axios.get(`/chat/room/${roomId}`).then((res) => {
+        //     stompClient.connect(headers, onConnect, onError);
+        // });
     }, []);
 
     useEffect(() => {
@@ -109,7 +112,7 @@ const ChatContainer = () => {
     const onSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const newMessage: IMessage = { username: me.name as string, message };
+            const newMessage: IMessage = { roomId, sender: me.id, message, timeStamp: new Date().toLocaleString() };
             stompClient.send('/hello', {}, JSON.stringify(newMessage));
             setMessage('');
         },

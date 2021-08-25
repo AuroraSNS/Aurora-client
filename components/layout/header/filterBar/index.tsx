@@ -14,7 +14,9 @@ const FilterBar = () => {
         (e: React.MouseEvent<HTMLDivElement>) => {
             if ((e.target as HTMLInputElement).name === 'weather') {
                 if (filterList.includes((e.target as HTMLInputElement).value)) {
-                    const newSelectWeather = filterList.filter((v) => v !== (e.target as HTMLInputElement).value);
+                    const newSelectWeather = filterList.filter(
+                        (weather: string) => weather !== (e.target as HTMLInputElement).value,
+                    );
                     dispatch(filterWeather(newSelectWeather));
                 } else {
                     dispatch(filterWeather([...filterList, (e.target as HTMLInputElement).value]));

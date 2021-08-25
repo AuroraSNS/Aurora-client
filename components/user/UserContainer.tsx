@@ -46,7 +46,7 @@ const UserContainer = () => {
 
     useEffect(() => {
         if (modifyProfileDone) {
-            dispatch(loadProfileRequest(getToken()));
+            dispatch(loadProfileRequest(getToken() as string));
             dispatch(loadUserProfileRequest(me.id));
             dispatch(loadUserPostsRequest(me.id, 0, filterList));
         }

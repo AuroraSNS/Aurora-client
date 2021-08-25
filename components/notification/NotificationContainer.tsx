@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { INotification } from '../../interfaces/data/notification';
 import { createSampleNotifications } from '../../util/sample';

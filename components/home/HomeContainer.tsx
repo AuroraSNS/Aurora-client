@@ -31,8 +31,8 @@ const HomeContainer = () => {
         if (token) {
             destroyCookie(null, 'accessToken');
             setCookie(null, 'accessToken', token, { path: '/' });
-            sessionStorage.removeItem('accessToken');
-            sessionStorage.setItem('accessToken', token);
+            window?.sessionStorage.removeItem('accessToken');
+            window?.sessionStorage.setItem('accessToken', token);
             router.push('/');
         }
     }, []);
