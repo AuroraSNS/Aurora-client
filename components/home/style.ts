@@ -24,24 +24,4 @@ export const PostCardList = styled.section`
         transition: top 0.5s;
         /* bottom: 0;s */
     }
-    #to-top {
-        cursor: pointer;
-        width: 42px;
-        height: 42px;
-        background: #333;
-        border-radius: 10px;
-        position: fixed;
-        right: 3vw;
-        top: 20vh;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 9;
-        svg {
-            transform: rotate(90deg);
-            * {
-                fill: #fff;
-            }
-        }
-    }
 `;

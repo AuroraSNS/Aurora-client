@@ -38,40 +38,6 @@ const PostCardContainer = ({ post }: Props) => {
         }
     }, [modifyPostDone]);
 
-    useEffect(() => {
-        function scrollTo(element: HTMLElement, to: number, duration: number) {
-            let start = element.scrollTop;
-            let change = to - start;
-            let currentTime = 0;
-            let increment = 20;
-
-            const animateScroll = () => {
-                currentTime += increment;
-                let val = easeInOutQuad(currentTime, start, change, duration);
-                element.scrollTop = val;
-                if (currentTime < duration) {
-                    setTimeout(animateScroll, increment);
-                }
-            };
-            animateScroll();
-        }
-
-        // t = current time
-        // b = start value
-        // c = change in value
-        // d = duration
-        function easeInOutQuad(t: number, b: number, c: number, d: number) {
-            t /= d / 2;
-            if (t < 1) return (c / 2) * t * t + b;
-            t -= 1;
-            return (-c / 2) * (t * (t - 2) - 1) + b;
-        }
-
-        const toTopEl = document.querySelector('#to-top');
-        toTopEl?.addEventListener('click', () => {
-            scrollTo(document.documentElement, 0, 1250);
-        });
-    }, []);
     const onClickLike = useCallback(() => {
         if (me) {
             // dispatch(likePostRequest(post.id, me.likeList.includes(post.id)));

@@ -1,7 +1,6 @@
 import React from 'react';
 import { IPost } from '../../interfaces/data/post';
-import { IUserProfile } from '../../interfaces/data/user';
-import { IconLeft } from '../common/Icon';
+import ScrollToTop from '../common/ScrollToTop';
 import PostCardContainer from '../home/postCard/PostCardContainer';
 import { PostCardList } from '../home/style';
 import AppLayout from '../layout/AppLayout';
@@ -18,9 +17,7 @@ const UserPresenter = ({ Posts }: Props) => (
             {Posts?.map((post: IPost) => (
                 <PostCardContainer key={post.id} post={post} />
             ))}
-            <div id="to-top">
-                <IconLeft />
-            </div>
+            <ScrollToTop />
         </PostCardList>
     </AppLayout>
 );

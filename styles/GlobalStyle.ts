@@ -76,6 +76,11 @@ const Global = createGlobalStyle`
         transform: none;
     }
   }
+  @keyframes fade-in{
+    100%{
+      opacity: 1;
+    }
+  }
   .inner {
   max-width: 1440px;
   margin: 0 auto;
