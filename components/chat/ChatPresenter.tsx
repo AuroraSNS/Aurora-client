@@ -1,24 +1,36 @@
 import React from 'react';
-import { IMessage, IOnSubmit, ISetState } from '../../interfaces/data';
+import { IOnSubmit, ISetState } from '../../interfaces/data';
+import { IContent, IRoom } from '../../interfaces/data/chat';
 import { IMe } from '../../interfaces/data/user';
 import Avatar from '../common/Avatar';
 import { IconMsg, IconSend } from '../common/Icon';
 import AppLayout from '../layout/AppLayout';
-import ChatRoomContainer from './chatroom/ChatRoomContainer';
 import MainChatContainer from './mainChat/MainChatContainer';
-import { ChatList, MainChat, ThemeBox, Wrapper } from './style';
+import { ChatList, ChatRoom, MainChat, ThemeBox, Wrapper } from './style';
 
 type Props = {
     me: IMe;
     onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
     msgTheme: string;
-    contents: IMessage[];
+    rooms: IRoom[];
+    onChangeRoom: (v: IRoom) => void;
+    contents: IContent[];
     message: string;
     onChangeMessage: ISetState;
-    onSubmit: IOnSubmit;
+    sendMessage: IOnSubmit;
 };
 
-const ChatPresenter = ({ me, onClick, msgTheme, contents, message, onChangeMessage, onSubmit }: Props) => (
+const ChatPresenter = ({
+    me,
+    onClick,
+    msgTheme,
+    rooms,
+    onChangeRoom,
+    contents,
+    message,
+    onChangeMessage,
+    sendMessage,
+}: Props) => (
     <AppLayout title="Chat" filter={false}>
         <Wrapper>
             <MainChat>
@@ -27,7 +39,7 @@ const ChatPresenter = ({ me, onClick, msgTheme, contents, message, onChangeMessa
                     <span>{me.name}</span>
                 </div>
                 <ThemeBox onClick={onClick}>
-                    {['sun', 'rain', 'cloud', 'gradient3'].map((themename: string) => (
+                    {['sun', 'rain', 'cloud', 'moon', 'gradient3'].map((themename: string) => (
                         <>
                             <input type="radio" name="theme" id={`theme-${themename}`} value={themename} />
                             <label htmlFor={`theme-${themename}`} />
@@ -35,7 +47,7 @@ const ChatPresenter = ({ me, onClick, msgTheme, contents, message, onChangeMessa
                     ))}
                 </ThemeBox>
                 <MainChatContainer msgTheme={msgTheme} contents={contents} />
-                <form onSubmit={onSubmit}>
+                <form onSubmit={sendMessage}>
                     <input type="text" value={message} onChange={onChangeMessage} />
                     <button type="submit">
                         <IconSend />
@@ -49,10 +61,28 @@ const ChatPresenter = ({ me, onClick, msgTheme, contents, message, onChangeMessa
                     <IconMsg />
                 </div>
                 <div className="chat-list">
-                    <ChatRoomContainer />
-                    <ChatRoomContainer />
-                    <ChatRoomContainer />
-                    <ChatRoomContainer />
+                    {rooms &&
+                        rooms.map((room) => (
+                            <ChatRoom
+                                key={room.id}
+                                onClick={() => {
+                                    onChangeRoom(room);
+                                }}
+                            >
+                                <Avatar url={room.user.avatar} size={36} />
+                                <div className="room-info">
+                                    <span>{room.user.name}</span>
+                                    <div>
+                                        <span>
+                                            {room.lastMessage.length > 12
+                                                ? `${room.lastMessage.slice(0, 12)}...`
+                                                : room.lastMessage.length}
+                                        </span>
+                                        <span>{room.lastTimeStamp}</span>
+                                    </div>
+                                </div>
+                            </ChatRoom>
+                        ))}
                 </div>
             </ChatList>
         </Wrapper>

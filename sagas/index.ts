@@ -4,6 +4,7 @@ import axios from 'axios';
 import userSaga from './user';
 import postSaga from './post';
 import commentSaga from './comment';
+import chatSaga from './chat';
 
 axios.defaults.baseURL = 'https://api.aurora.center/';
 axios.defaults.withCredentials = true;
@@ -15,5 +16,5 @@ export const getToken = () => {
 };
 
 export default function* rootSaga() {
-    yield all([fork(userSaga), fork(postSaga), fork(commentSaga)]);
+    yield all([fork(userSaga), fork(postSaga), fork(commentSaga), fork(chatSaga)]);
 }

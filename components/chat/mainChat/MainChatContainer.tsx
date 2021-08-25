@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { IMessage } from '../../../interfaces/data';
+import { IContent } from '../../../interfaces/data/chat';
 import { RootState } from '../../../reducers';
 import MainChatPresenter from './MainChatPresenter';
 
 type Props = {
-    contents: IMessage[];
+    contents: IContent[];
     msgTheme: string;
 };
 

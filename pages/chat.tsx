@@ -4,6 +4,7 @@ import ChatContainer from '../components/chat/ChatContainer';
 import wrapper from '../store/configureStore';
 import { loadProfileRequest } from '../actions/user';
 import { loadAllStatisticsRequest } from '../actions/post';
+import { loadRoomsRequest } from '../actions/chat';
 
 const Chat = () => <ChatContainer />;
 
@@ -12,6 +13,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     if (cookies.accessToken) {
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
     }
+    context.store.dispatch(loadRoomsRequest(''));
     context.store.dispatch(loadAllStatisticsRequest());
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();

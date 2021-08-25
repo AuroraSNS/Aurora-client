@@ -1,13 +1,15 @@
 /* eslint-disable import/no-unresolved */
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
+import axios from 'axios';
 import useInput from '../../hooks/useInput';
-import { IMessage } from '../../interfaces/data';
 import { RootState } from '../../reducers';
 import { getToken } from '../../sagas';
 import ChatPresenter from './ChatPresenter';
+import { IContent, IRoom } from '../../interfaces/data/chat';
+import { createSampleContents } from '../../util/sample';
 
 // 메시지 구독 및 수신
 // const subscription = stompClient.subscribe('/queue/test', onReceive);
@@ -54,11 +56,36 @@ const ChatContainer = () => {
         [msgTheme],
     );
 
-    const [roomId, setRoomId] = useState(0);
-    const [contents, setContents] = useState<IMessage[]>([]);
+    const { rooms } = useSelector((state: RootState) => state.chat);
+    const [room, setRoom] = useState<IRoom | null>(null);
+    const [contents, setContents] = useState<IContent[]>([]);
     const [message, onChangeMessage, setMessage] = useInput('');
+
+    const onChangeRoom = useCallback((newRoom: IRoom) => {
+        setRoom(newRoom);
+    }, []);
+    // 룸 선택시 그 룸의 대화 정보 불러옴
+    useEffect(() => {
+        if (room) {
+            // axios.get('').then((res) => {
+            //     setContents(res.data)
+            // });
+            setContents(createSampleContents(me.id, room.user.id));
+        }
+    }, [room]);
+
+    // 모든 룸 구독
+    useEffect(() => {
+        if (rooms) {
+            stompClient.connect({}, () => {
+                rooms.forEach((ele: IRoom) => {
+                    stompClient.subscribe(`/topic/${ele.id}`, onReceive);
+                });
+            });
+        }
+    }, [rooms]);
+
     const onReceive = (frame: Stomp.Frame) => {
-        // called when the client receives a STOMP message from the server
         let recv = JSON.parse(frame.body);
         const newMessage = {
             roomId: recv.roomId,
@@ -69,69 +96,33 @@ const ChatContainer = () => {
         setContents((prev) => [...prev, newMessage]);
     };
 
-    const sendMessage = () => {
-        stompClient.send('/pub/chat/message', headers, JSON.stringify({ roomId, message }));
-        setMessage('');
-    };
-
-    const onConnect = (frame: Stomp.Frame) => {
-        stompClient.subscribe(`/sub/chat/room/${roomId}`, onReceive);
-        sendMessage();
-    };
-
-    const onError = (frame: Stomp.Frame) => {
-        console.log(frame);
-        console.log('Error!!');
-        console.log(`Broker reported error: ${frame.headers}`);
-        console.log(`Additional details: ${frame.body}`);
-        // location.href = '/chat/room';
-    };
-
-    useEffect(() => {
-        // 유저
-        // axios 요청
-        // 첫 진입시 - 룸id []
-        // 방선택시 - 룸id, 참여자 {id, 이름, 아바타} IMessage[]
-        // stomp 메시지 송수신
-        // 메시지 보낼때
-        // const roomId = localStorage.getItem('wschat.roomId');
-        // axios.get(`/chat/room/${roomId}`).then((res) => {
-        //     stompClient.connect(headers, onConnect, onError);
-        // });
-    }, []);
-
-    useEffect(() => {
-        stompClient.connect({}, () => {
-            stompClient.subscribe('/topic/roomId', (data) => {
-                const newMessage: IMessage = JSON.parse(data.body) as IMessage;
-                addMessage(newMessage);
-            });
-        });
-    }, [contents]);
-
-    const onSubmit = useCallback(
+    const sendMessage = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const newMessage: IMessage = { roomId, sender: me.id, message, timeStamp: new Date().toLocaleString() };
-            stompClient.send('/hello', {}, JSON.stringify(newMessage));
+            const newContent: IContent = {
+                roomId: (room as IRoom).id,
+                sender: me.id,
+                message,
+                timeStamp: new Date().toLocaleString(),
+            };
+            stompClient.send('/pub/chat/message', headers, JSON.stringify(newContent));
+            setContents((prev) => [...prev, newContent]);
             setMessage('');
         },
         [message],
     );
-
-    const addMessage = useCallback((newMessage: IMessage) => {
-        setContents((prev) => [...prev, newMessage]);
-    }, []);
 
     return (
         <ChatPresenter
             me={me}
             onClick={onClick}
             msgTheme={msgTheme}
+            rooms={rooms}
+            onChangeRoom={onChangeRoom}
             contents={contents}
             message={message}
             onChangeMessage={onChangeMessage}
-            onSubmit={onSubmit}
+            sendMessage={sendMessage}
         />
     );
 };

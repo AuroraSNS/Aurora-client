@@ -1,11 +1,5 @@
 import { FormEvent } from 'react';
 
-export interface IMessage {
-    roomId: number;
-    sender: string;
-    message: string;
-    timeStamp: string;
-}
 export interface IOnSubmit {
     (e: FormEvent<HTMLFormElement>): void;
 }

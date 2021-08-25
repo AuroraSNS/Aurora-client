@@ -1,16 +1,22 @@
-import shortid from 'shortid';
 import faker from 'faker';
-import { now } from 'moment';
+import { IContent, IRoom } from '../interfaces/data/chat';
+import { IAuth } from '../interfaces/data/user';
 
-export const createSampleUser = () => ({
-    id: shortid.generate(),
+export const createSampleMe = () => ({
+    id: new Date().getTime(),
     name: faker.name.firstName(),
-    avatar: faker.image.avatar(),
+    avatar: '',
     email: faker.internet.email(),
     bio: faker.lorem.word(),
 });
 
-export const createSamplePosts = (n) => {
+export const createSampleUser = (): IAuth => ({
+    id: new Date().getTime(),
+    name: faker.name.firstName(),
+    avatar: '',
+});
+
+export const createSamplePosts = (n: number) => {
     const samplePosts = [];
     for (let i = 0; i < n; i += 1) {
         samplePosts.push(createSamplePost());
@@ -18,7 +24,7 @@ export const createSamplePosts = (n) => {
     return samplePosts;
 };
 
-export const createSampleComments = (n) => {
+export const createSampleComments = (n: number) => {
     const sampleComments = [];
     for (let i = 0; i < n; i += 1) {
         sampleComments.push(createSampleComment());
@@ -26,7 +32,7 @@ export const createSampleComments = (n) => {
     return sampleComments;
 };
 
-export const createSampleNotifications = (n) => {
+export const createSampleNotifications = (n: number) => {
     const sampleNotifications = [];
     for (let i = 0; i < n; i += 1) {
         sampleNotifications.push(createSampleNotification());
@@ -34,21 +40,53 @@ export const createSampleNotifications = (n) => {
     return sampleNotifications;
 };
 
+export const createSampleRooms = (n: number) => {
+    const sampleRooms = [];
+    for (let i = 0; i < n; i += 1) {
+        sampleRooms.push(createSampleRoom(i));
+    }
+    return sampleRooms;
+};
+
+export const createSampleContents = (id1: number, id2: number) => {
+    const sampleContents = [];
+    let randomNumber = Math.floor(Math.random() * (30 - 5 + 1)) + 5;
+    const user = [id1, id2];
+    for (let i = 0; i < randomNumber; i += 1) {
+        sampleContents.push(createSampleContent(user[Math.round(Math.random())]));
+    }
+    return sampleContents;
+};
+
+const createSampleContent = (id): IContent => ({
+    roomId: 1,
+    sender: id,
+    message: faker.random.words(),
+    timeStamp: new Date().toLocaleTimeString(),
+});
+
+const createSampleRoom = (id: number): IRoom => ({
+    id,
+    user: createSampleUser(),
+    lastMessage: faker.random.words(),
+    lastTimeStamp: new Date().toLocaleTimeString(),
+});
+
 const createSampleNotification = () => ({
-    id: shortid.generate(),
+    id: new Date().getTime(),
     auth: createSampleUser(),
     content: faker.random.words(),
     time: new Date().toLocaleTimeString(),
 });
 
 const createSampleComment = () => ({
-    id: shortid.generate(),
+    id: new Date().getTime(),
     auth: createSampleUser(),
     content: faker.random.words(),
 });
 
 const createSamplePost = () => ({
-    id: shortid.generate(),
+    id: new Date().getTime(),
     auth: createSampleUser(),
     mood: createRandomWeather(),
     content: faker.lorem.text(),

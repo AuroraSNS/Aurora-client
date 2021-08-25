@@ -1,5 +1,37 @@
 import styled from 'styled-components';
 
+export const ChatRoom = styled.div`
+    display: flex;
+    align-items: center;
+    padding: 9px 10px;
+    .room-info {
+        flex: 1;
+        margin-left: 13px;
+        & > span {
+            ${({ theme }) => theme.textStyles.P12}
+        }
+        & > div {
+            margin-top: 3px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            span:first-child {
+                ${({ theme }) => theme.textStyles.P12}
+                color: #707070;
+            }
+            span:last-child {
+                ${({ theme }) => theme.textStyles.P10}
+                color: #707070;
+            }
+        }
+    }
+    cursor: pointer;
+    &:hover {
+        background: rgba(128, 128, 128, 0.1);
+    }
+`;
+
 export const MainChat = styled.section`
     ${({ theme }) => theme.bgFilter}
     position: relative;
@@ -110,7 +142,7 @@ export const ThemeBox = styled.div`
     input#theme-moon + label::before {
         background: ${({ theme }) => theme.colors.moon};
     }
-    input#theme-gradient + label::before {
+    input#theme-gradient3 + label::before {
         background: ${({ theme }) => theme.colors.gradient3};
     }
 `;

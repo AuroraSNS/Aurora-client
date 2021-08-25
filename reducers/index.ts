@@ -4,6 +4,7 @@ import { combineReducers, Reducer, AnyAction } from 'redux';
 import user from './user';
 import post from './post';
 import comment from './comment';
+import chat from './chat';
 
 const rootReducer: Reducer<any, AnyAction> = (state, action) => {
     switch (action.type) {
@@ -15,6 +16,7 @@ const rootReducer: Reducer<any, AnyAction> = (state, action) => {
                 user,
                 post,
                 comment,
+                chat,
             });
             return combinedReducer(state, action);
         }
