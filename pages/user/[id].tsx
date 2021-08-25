@@ -4,12 +4,7 @@ import React from 'react';
 import UserContainer from '../../components/user/UserContainer';
 import wrapper from '../../store/configureStore';
 import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
-import {
-    loadAllPostsRequest,
-    loadAllStatisticsRequest,
-    loadUserPostsRequest,
-    loadUserStatisticsRequest,
-} from '../../actions/post';
+import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../actions/post';
 
 const User = () => <UserContainer />;
 
@@ -19,11 +14,9 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
     }
     if (context.params) {
-        // context.store.dispatch(loadAllStatisticsRequest());
         context.store.dispatch(loadUserStatisticsRequest(context.params.id as string));
         context.store.dispatch(loadUserProfileRequest(Number(context.params.id)));
         context.store.dispatch(loadUserPostsRequest(Number(context.params.id), 0, []));
-        // context.store.dispatch(loadAllPostsRequest(0));
     }
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();

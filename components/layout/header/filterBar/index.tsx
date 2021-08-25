@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllPostsRequest } from '../../../../actions/post';
+import { filterWeather, loadAllPostsRequest } from '../../../../actions/post';
 import { RootState } from '../../../../reducers';
 
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
@@ -11,13 +11,13 @@ const FilterBar = () => {
     const { filterList } = useSelector((state: RootState) => state.post);
 
     const onClick = useCallback(
-        (e: any) => {
-            if (e.target.name === 'weather') {
-                if (filterList.includes(e.target.value)) {
-                    const newSelectWeather = filterList.filter((v) => v !== e.target.value);
+        (e: React.MouseEvent<HTMLDivElement>) => {
+            if ((e.target as HTMLInputElement).name === 'weather') {
+                if (filterList.includes((e.target as HTMLInputElement).value)) {
+                    const newSelectWeather = filterList.filter((v) => v !== (e.target as HTMLInputElement).value);
                     dispatch(filterWeather(newSelectWeather));
                 } else {
-                    dispatch(filterWeather([...filterList, e.target.value]));
+                    dispatch(filterWeather([...filterList, (e.target as HTMLInputElement).value]));
                 }
             }
         },

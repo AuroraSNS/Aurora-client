@@ -21,6 +21,7 @@ import {
     LOAD_USER_PROFILE_FAILURE,
     LOAD_USER_PROFILE_SUCCESS,
     LOAD_USER_PROFILE_REQUEST,
+    MODIFY_LIKELIST,
 } from '../actions/user';
 import { UserAction } from '../interfaces/act/user';
 import { IMe, IUserState } from '../interfaces/data/user';
@@ -143,6 +144,15 @@ const reducer = (state = initialState, action: UserAction) =>
                 draft.modifyProfileDone = false;
                 draft.modifyProfileError = null;
                 break;
+            case MODIFY_LIKELIST: {
+                let tmp = (draft.me as IMe).likeList;
+                if (tmp.includes(action.postId)) {
+                    tmp = tmp.filter((postId) => postId !== action.postId);
+                } else {
+                    tmp.push(action.postId);
+                }
+                break;
+            }
             default:
                 break;
         }

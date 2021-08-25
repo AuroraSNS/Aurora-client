@@ -6,7 +6,7 @@ import Image from 'next/image';
 import React from 'react';
 import { IPost } from '../../../interfaces/data/post';
 import ConfirmModal from '../../common/ConfirmModal';
-import { IconFavorite, IconMore } from '../../common/Icon';
+import { IconDislike, IconLike, IconMore } from '../../common/Icon';
 import PostFormModalContainer from '../../common/postFormModal/PostFormModalContainer';
 import ToolTip from '../../common/ToolTip';
 import CommentBoxContainer from './commentBox/CommentBoxContainer';
@@ -19,6 +19,7 @@ import { Body, Footer, ImageContainer, Wrapper } from './style';
 type Props = {
     isMe: boolean;
     post: IPost;
+    commentCnt: number;
     commentBox: boolean;
     onChangeCommentBox: () => void;
     showModal: boolean;
@@ -30,11 +31,14 @@ type Props = {
     showRemoveModal: boolean;
     showRemoveModalToggle: () => void;
     removeOk: (id: number) => void;
+    isLike: boolean;
+    onClickLike: () => void;
 };
 
 const PostCardPresentert = ({
     isMe,
     post,
+    commentCnt,
     commentBox,
     onChangeCommentBox,
     showModal,
@@ -46,6 +50,8 @@ const PostCardPresentert = ({
     showRemoveModal,
     showRemoveModalToggle,
     removeOk,
+    isLike,
+    onClickLike,
 }: Props) => (
     <Wrapper mood={post.mood}>
         <PostHeaderContainer post={post} />
@@ -58,30 +64,27 @@ const PostCardPresentert = ({
                 {post.images[0] && (
                     <div className="imgBox">
                         <Image width={625} height={625} src={post.images[0]} alt="postimage" />
-                        {/* <img src={post.images[0]} alt="postimage" /> */}
                     </div>
                 )}
                 {post.images[1] && (
                     <div className="imgBox">
                         <Image width={625} height={625} src={post.images[1]} alt="postimage" />
-                        {/* <img src={post.images[1]} alt="postimage" /> */}
                     </div>
                 )}
                 {post.images[2] && (
                     <div className="imgBox">
                         <Image width={625} height={625} src={post.images[2]} alt="postimage" />
-                        {/* <img src={post.images[2]} alt="postimage" /> */}
                         <span>+</span>
                     </div>
                 )}
             </ImageContainer>
         </Body>
         <Footer>
-            <IconFavorite />
-            <span className="like-cnt">12</span>
+            <div onClick={onClickLike}>{isLike ? <IconLike /> : <IconDislike />}</div>
+            <span className="like-cnt">{post.likeCnt}</span>
             <ToolTip message="댓글 열기/닫기">
                 <span className="comment-cnt" onClick={onChangeCommentBox}>
-                    댓글 {post.commentCnt || 0}개
+                    댓글 {Math.max(post.commentCnt, commentCnt)}개
                 </span>
             </ToolTip>
             <div className="form-wrapper">

@@ -24,9 +24,9 @@ const PostFormModalContainer = ({ isFirst, onClose, post }: Props) => {
 
     const [showDropBox, showDropBoxToggle] = useToggle(false);
 
-    const onClickWeather = useCallback((e) => {
-        if (e.target.name === 'weather') {
-            setMood(e.target.value);
+    const onClickWeather = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+        if ((e.target as HTMLInputElement).name === 'weather') {
+            setMood((e.target as HTMLInputElement).value);
         }
     }, []);
 

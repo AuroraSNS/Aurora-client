@@ -5,6 +5,9 @@ export const Footer = styled.div`
     display: flex;
     align-items: center;
     position: relative;
+    svg {
+        cursor: pointer;
+    }
     .like-cnt {
         ${({ theme }) => theme.textStyles.P12}
         margin-left: 5px;

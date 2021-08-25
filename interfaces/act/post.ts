@@ -4,6 +4,9 @@ import {
     addPostRequest,
     addPostSuccess,
     filterWeather,
+    likePostFailure,
+    likePostRequest,
+    likePostSuccess,
     loadAllPostsFailure,
     loadAllPostsRequest,
     loadAllPostsSuccess,
@@ -47,4 +50,7 @@ export type PostAction =
     | ReturnType<typeof loadUserStatisticsRequest>
     | ReturnType<typeof loadUserStatisticsSuccess>
     | ReturnType<typeof loadUserStatisticsFailure>
-    | ReturnType<typeof filterWeather>;
+    | ReturnType<typeof filterWeather>
+    | ReturnType<typeof likePostRequest>
+    | ReturnType<typeof likePostSuccess>
+    | ReturnType<typeof likePostFailure>;

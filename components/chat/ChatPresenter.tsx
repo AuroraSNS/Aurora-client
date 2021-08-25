@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import { IMessage, IOnSubmit, ISetState } from '../../interfaces/data';
 import { IMe } from '../../interfaces/data/user';
 import Avatar from '../common/Avatar';
 import { IconMsg, IconSend } from '../common/Icon';
@@ -10,11 +10,15 @@ import { ChatList, MainChat, ThemeBox, Wrapper } from './style';
 
 type Props = {
     me: IMe;
-    onClick: (e: any) => void;
+    onClick: (e: React.MouseEvent<HTMLDivElement>) => void;
     msgTheme: string;
+    contents: IMessage[];
+    message: string;
+    onChangeMessage: ISetState;
+    onSubmit: IOnSubmit;
 };
 
-const ChatPresenter = ({ me, onClick, msgTheme }: Props) => (
+const ChatPresenter = ({ me, onClick, msgTheme, contents, message, onChangeMessage, onSubmit }: Props) => (
     <AppLayout title="Chat" filter={false}>
         <Wrapper>
             <MainChat>
@@ -30,10 +34,10 @@ const ChatPresenter = ({ me, onClick, msgTheme }: Props) => (
                         </>
                     ))}
                 </ThemeBox>
-                <MainChatContainer msgTheme={msgTheme} />
-                <form>
-                    <input type="text" />
-                    <button type="button">
+                <MainChatContainer msgTheme={msgTheme} contents={contents} />
+                <form onSubmit={onSubmit}>
+                    <input type="text" value={message} onChange={onChangeMessage} />
+                    <button type="submit">
                         <IconSend />
                     </button>
                 </form>

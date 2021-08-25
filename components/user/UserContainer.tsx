@@ -9,7 +9,6 @@ import UserPresenter from './UserPresenter';
 
 const UserContainer = () => {
     const router = useRouter();
-    const result = router.query;
     const dispatch = useDispatch();
     const { me, user, modifyProfileDone } = useSelector((state: RootState) => state.user);
     const { filterList } = useSelector((state: RootState) => state.post);
@@ -26,7 +25,9 @@ const UserContainer = () => {
     const [page, setPage] = useState(Math.ceil(Posts.length / 10));
 
     useEffect(() => {
-        dispatch(loadUserPostsRequest(user.id, 0, filterList));
+        if (user) {
+            dispatch(loadUserPostsRequest(user.id, 0, filterList));
+        }
     }, [filterList]);
 
     useEffect(() => {

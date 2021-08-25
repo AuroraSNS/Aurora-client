@@ -27,6 +27,8 @@ export const LOAD_USER_PROFILE_REQUEST = 'LOAD_USER_PROFILE_REQUEST' as const;
 export const LOAD_USER_PROFILE_SUCCESS = 'LOAD_USER_PROFILE_SUCCESS' as const;
 export const LOAD_USER_PROFILE_FAILURE = 'LOAD_USER_PROFILE_FAILURE' as const;
 
+export const MODIFY_LIKELIST = 'MODIFY_LIKELIST' as const;
+
 // 액션 크리에이터
 export const logInRequest = (data: ILogInForm) => ({
     type: LOG_IN_REQUEST,
@@ -119,4 +121,9 @@ export const modifyProfileFailure = (error: string) => ({
 
 export const modifyProfileClear = () => ({
     type: MODIFY_PROFILE_CLEAR,
+});
+
+export const modifyLikelist = (postId: number) => ({
+    type: MODIFY_LIKELIST,
+    postId,
 });

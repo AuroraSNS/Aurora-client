@@ -14,6 +14,7 @@ export interface IPost {
     content: string;
     images: string[];
     commentCnt: number;
+    likeCnt: number;
 }
 
 export interface IPostState {
@@ -42,4 +43,7 @@ export interface IPostState {
     loadUserStatisticsLoading: boolean;
     loadUserStatisticsDone: boolean;
     loadUserStatisticsError: null | string;
+    likePostLoading: boolean;
+    likePostDone: boolean;
+    likePostError: null | string;
 }

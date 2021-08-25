@@ -20,6 +20,7 @@ import { ICommentState } from '../interfaces/data/comment';
 // 초기 데이터 구조
 export const initialState: ICommentState = {
     comment: null,
+    commentCnt: 0,
     loadCommentLoading: false,
     loadCommentDone: false,
     loadCommentError: null,
@@ -46,7 +47,8 @@ const reducer = (state = initialState, action: ICommentAction) =>
             case LOAD_COMMENT_SUCCESS:
                 draft.loadCommentLoading = false;
                 draft.loadCommentDone = true;
-                draft.comment = action.data;
+                draft.comment = action.data.comments;
+                draft.commentCnt = action.data.commentCnt;
                 break;
             case LOAD_COMMENT_FAILURE:
                 draft.loadCommentLoading = false;

@@ -1,16 +1,18 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
+import { IMessage } from '../../../interfaces/data';
 import { IMe } from '../../../interfaces/data/user';
 import Avatar from '../../common/Avatar';
 import { Wrapper } from './style';
 
 type Props = {
     me: IMe;
+    contents: IMessage[];
     msgTheme: string;
 };
 
-const MainChatPresenter = ({ me, msgTheme }: Props) => (
+const MainChatPresenter = ({ me, contents, msgTheme }: Props) => (
     <Wrapper msgTheme={msgTheme}>
         <div className="chat__timestamp">Tuesday, June 30, 2020</div>
         <div className="message-row">

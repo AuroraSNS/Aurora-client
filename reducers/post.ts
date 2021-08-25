@@ -24,6 +24,9 @@ import {
     LOAD_USER_STATISTICS_SUCCESS,
     LOAD_USER_STATISTICS_FAILURE,
     FILTER_WEATHER,
+    LIKE_POST_REQUEST,
+    LIKE_POST_SUCCESS,
+    LIKE_POST_FAILURE,
 } from '../actions/post';
 
 import { PostAction } from '../interfaces/act/post';
@@ -56,6 +59,9 @@ export const initialState: IPostState = {
     loadUserStatisticsLoading: false,
     loadUserStatisticsDone: false,
     loadUserStatisticsError: null,
+    likePostLoading: false,
+    likePostDone: false,
+    likePostError: null,
 };
 
 const reducer = (state = initialState, action: PostAction) =>
@@ -165,6 +171,26 @@ const reducer = (state = initialState, action: PostAction) =>
                 break;
             case FILTER_WEATHER:
                 draft.filterList = action.data;
+                break;
+            case LIKE_POST_REQUEST:
+                draft.likePostLoading = true;
+                draft.likePostDone = false;
+                draft.likePostError = null;
+                break;
+            case LIKE_POST_SUCCESS: {
+                draft.likePostLoading = false;
+                draft.likePostDone = true;
+                const tmp = (draft.Posts as IPost[]).find((ele) => ele.id === action.postId);
+                if (action.like) {
+                    (tmp as IPost).likeCnt += 1;
+                } else {
+                    (tmp as IPost).likeCnt -= 1;
+                }
+                break;
+            }
+            case LIKE_POST_FAILURE:
+                draft.likePostLoading = false;
+                draft.likePostError = action.error;
                 break;
             default:
                 break;

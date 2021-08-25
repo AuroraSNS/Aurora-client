@@ -34,7 +34,12 @@ import {
     loadUserStatisticsSuccess,
     loadUserStatisticsFailure,
     LOAD_USER_STATISTICS_REQUEST,
+    LIKE_POST_REQUEST,
+    likePostRequest,
+    likePostSuccess,
+    likePostFailure,
 } from '../actions/post';
+import { modifyLikelist } from '../actions/user';
 import { IPost, IWeatherStatistics } from '../interfaces/data/post';
 
 let qs = require('qs');
@@ -189,6 +194,29 @@ function* loadUserStatistics(action: ReturnType<typeof loadUserStatisticsRequest
     }
 }
 
+function likePostAPI(postId: number, like: boolean) {
+    if (like) {
+        return axios({
+            method: 'POST',
+            url: `/like/${postId}`,
+        });
+    }
+    return axios({
+        method: 'DELETE',
+        url: `/like/${postId}`,
+    });
+}
+
+function* likePost(action: ReturnType<typeof likePostRequest>) {
+    try {
+        yield call(likePostAPI, action.postId, action.like);
+        yield put(modifyLikelist(action.postId));
+        yield put(likePostSuccess(action.postId, action.like));
+    } catch (err) {
+        yield put(likePostFailure(err.message));
+    }
+}
+
 function* watchLoadAllPosts() {
     yield throttle(5000, LOAD_ALL_POSTS_REQUEST, loadAllPosts);
 }
@@ -217,6 +245,10 @@ function* watchLoadUserStatistics() {
     yield takeLatest(LOAD_USER_STATISTICS_REQUEST, loadUserStatistics);
 }
 
+function* watchlikePost() {
+    yield takeLatest(LIKE_POST_REQUEST, likePost);
+}
+
 export default function* postSaga() {
     yield all([
         fork(watchLoadAllPosts),
@@ -226,5 +258,6 @@ export default function* postSaga() {
         fork(watchRemovePost),
         fork(watchLoadAllStatistics),
         fork(watchLoadUserStatistics),
+        fork(watchlikePost),
     ]);
 }

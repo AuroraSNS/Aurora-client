@@ -32,7 +32,10 @@ function loadCommentAPI(postId: number) {
 
 function* loadComment(action: ReturnType<typeof loadCommentRequest>) {
     try {
-        const result: AxiosResponse<IComment[] | []> = yield call(loadCommentAPI, action.postId);
+        const result: AxiosResponse<{ comments: IComment[]; commentCnt: number }> = yield call(
+            loadCommentAPI,
+            action.postId,
+        );
         yield put(loadCommentSuccess(result.data));
     } catch (err) {
         yield put(loadCommentFailure(err.message));

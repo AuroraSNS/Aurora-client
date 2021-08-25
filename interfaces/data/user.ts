@@ -14,6 +14,7 @@ export interface IUserProfile extends IAuth {
 
 export interface IMe extends IUserProfile {
     email: string;
+    likeList: number[];
 }
 
 export interface IUserState {

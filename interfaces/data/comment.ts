@@ -8,6 +8,7 @@ export interface IComment {
 
 export interface ICommentState {
     comment: IComment[] | null;
+    commentCnt: number;
     loadCommentLoading: boolean;
     loadCommentDone: boolean;
     loadCommentError: null | string;

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { removePostRequest } from '../../../actions/post';
+import { likePostRequest, removePostRequest } from '../../../actions/post';
 import useToggle from '../../../hooks/useToggle';
 import { IPost } from '../../../interfaces/data/post';
 import { RootState } from '../../../reducers';
@@ -16,6 +16,7 @@ const PostCardContainer = ({ post }: Props) => {
 
     const { me } = useSelector((state: RootState) => state.user);
     const { modifyPostDone } = useSelector((state: RootState) => state.post);
+    const { commentCnt } = useSelector((state: RootState) => state.comment);
 
     const [commentBox, onChangeCommentBox] = useToggle(false);
     const [showModal, showModalToggle] = useToggle(false);
@@ -71,11 +72,17 @@ const PostCardContainer = ({ post }: Props) => {
             scrollTo(document.documentElement, 0, 1250);
         });
     }, []);
-
+    const onClickLike = useCallback(() => {
+        if (me) {
+            // dispatch(likePostRequest(post.id, me.likeList.includes(post.id)));
+            dispatch(likePostRequest(post.id, true));
+        }
+    }, []);
     return (
         <PostCardPresentert
             isMe={me?.id === post.auth.id}
             post={post}
+            commentCnt={commentCnt}
             commentBox={commentBox}
             onChangeCommentBox={onChangeCommentBox}
             showModal={showModal}
@@ -87,6 +94,9 @@ const PostCardContainer = ({ post }: Props) => {
             showRemoveModal={showRemoveModal}
             showRemoveModalToggle={showRemoveModalToggle}
             removeOk={removeOk}
+            isLike
+            // isLike={me.likeList.includes(post.id)}
+            onClickLike={onClickLike}
         />
     );
 };

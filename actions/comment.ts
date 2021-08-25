@@ -21,7 +21,7 @@ export const loadCommentRequest = (postId: number) => ({
     postId,
 });
 
-export const loadCommentSuccess = (data: IComment[]) => ({
+export const loadCommentSuccess = (data: { comments: IComment[]; commentCnt: number }) => ({
     type: LOAD_COMMENT_SUCCESS,
     data,
 });

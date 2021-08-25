@@ -159,8 +159,8 @@ export const IconClear = () => (
     </svg>
 );
 
-export const IconFavorite = () => (
-    <svg id="favorite" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const IconLike = () => (
+    <svg className="like" width="15" height="15" viewBox="0 0 15 15" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M7.5 15L6.4125 13.921C2.55 10.1035 0 7.58583 0 4.49591C0 1.9782 1.815 0 4.125 0C5.43 0 6.6825 0.662125 7.5 1.70845C8.3175 0.662125 9.57 0 10.875 0C13.185 0 15 1.9782 15 4.49591C15 7.58583 12.45 10.1035 8.5875 13.9292L7.5 15Z"
             fill="url(#paint0_linear)"
@@ -174,8 +174,8 @@ export const IconFavorite = () => (
     </svg>
 );
 
-export const IconNotFavorite = () => (
-    <svg id="not-favorite" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+export const IconDislike = () => (
+    <svg className="like" width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             d="M7 13L6.13 12.1368C3.04 9.08283 1 7.06866 1 4.59673C1 2.58256 2.452 1 4.3 1C5.344 1 6.346 1.5297 7 2.36676C7.654 1.5297 8.656 1 9.7 1C11.548 1 13 2.58256 13 4.59673C13 7.06866 10.96 9.08284 7.87 12.1433L7 13Z"
             stroke="#707070"

@@ -31,15 +31,14 @@ export const LOAD_USER_STATISTICS_SUCCESS = 'LOAD_USER_STATISTICS_SUCCESS' as co
 export const LOAD_USER_STATISTICS_FAILURE = 'LOAD_USER_STATISTICS_FAILURE' as const;
 
 export const FILTER_WEATHER = 'FILTER_WEATHER' as const;
-// export const CHANGE_TIME = 'CHANGE_TIME' as const;
 
-// export const LOAD_LIKE_POST_REQUEST = 'LOAD_LIKE_POST_REQUEST' as const;
-// export const LOAD_LIKE_POST_SUCCESS = 'LOAD_LIKE_POST_SUCCESS' as const;
-// export const LOAD_LIKE_POST_FAILURE = 'LOAD_LIKE_POST_FAILURE' as const;
+export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST' as const;
+export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS' as const;
+export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
 
-// export const LIKE_POST_REQUEST = 'LIKE_POST_REQUEST' as const;
-// export const LIKE_POST_SUCCESS = 'LIKE_POST_SUCCESS' as const;
-// export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
+export const REMOVE_LIKE_REQUEST = 'REMOVE_LIKE_REQUEST' as const;
+export const REMOVE_LIKE_SUCCESS = 'REMOVE_LIKE_SUCCESS' as const;
+export const REMOVE_LIKE_FAILURE = 'REMOVE_LIKE_FAILURE' as const;
 
 // 액션 크리에이터
 export const loadAllPostsRequest = (page: number, filter: string[]) => ({
@@ -155,4 +154,21 @@ export const loadUserStatisticsFailure = (error: string) => ({
 export const filterWeather = (data: string[]) => ({
     type: FILTER_WEATHER,
     data,
+});
+
+export const likePostRequest = (postId: number, like: boolean) => ({
+    type: LIKE_POST_REQUEST,
+    postId,
+    like,
+});
+
+export const likePostSuccess = (postId: number, like: boolean) => ({
+    type: LIKE_POST_SUCCESS,
+    postId,
+    like,
+});
+
+export const likePostFailure = (error: string) => ({
+    type: LIKE_POST_FAILURE,
+    error,
 });

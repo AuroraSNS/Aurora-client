@@ -53,9 +53,9 @@ const Global = createGlobalStyle`
     }
   }
 
-  svg#not-favorite:hover, svg#favorite:hover {
+  svg.like:hover {
     will-change: transform;
-    animation: hearthBeat 1s linear infinite;
+    animation: hearthBeat 0.7s linear infinite;
   }
   .overlay {
         position: fixed;

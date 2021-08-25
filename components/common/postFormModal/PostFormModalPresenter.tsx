@@ -12,7 +12,7 @@ import { AttachBtnWrapper, DropBox, DropBoxMsg, Form, ImageUpload, PreviewImage,
 type Props = {
     me: IMe;
     onClose: () => void;
-    onClickWeather: (e: any) => void;
+    onClickWeather: (e: React.MouseEvent<HTMLDivElement>) => void;
     content: string;
     onChangeContent: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
     showDropBox: boolean;
