@@ -17,13 +17,15 @@ const MainChatPresenter = ({ me, msgTheme }: Props) => (
             <Avatar url={me.avatar} size={36} />
             <div className="message-row__content">
                 <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
+                    <div className="message__bubble">
+                        <span>Hi ~</span>
+                    </div>
                     <span className="message__time">20:08</span>
                 </div>
                 <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
+                    <div className="message__bubble">
+                        <span>Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세</span>
+                    </div>
                     <span className="message__time">20:08</span>
                 </div>
             </div>
@@ -32,127 +34,9 @@ const MainChatPresenter = ({ me, msgTheme }: Props) => (
             <Avatar url={me.avatar} size={36} />
             <div className="message-row__content">
                 <div className="message__info">
-                    <span className="message__bubble">Hi ~ How r u?</span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
-                    <span className="message__time">20:08</span>
-                </div>
-            </div>
-        </div>
-        <div className="message-row">
-            <Avatar url={me.avatar} size={36} />
-            <div className="message-row__content">
-                <div className="message__info">
-                    <span className="message__bubble">Hi ~</span>
-                    <span className="message__time">20:08</span>
-                </div>
-                <div className="message__info">
-                    <span className="message__bubble">
-                        Hi ~ 동해물과 백두산이 마르고 닳도록 하느님이 보우하사 우리나라만세
-                    </span>
+                    <div className="message__bubble">
+                        <span>Hi ~ How r u?</span>
+                    </div>
                     <span className="message__time">20:08</span>
                 </div>
             </div>

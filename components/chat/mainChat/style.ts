@@ -4,7 +4,7 @@ export const Wrapper = styled.div<{ msgTheme: string }>`
     ${({ theme }) => theme.textStyles.P12}
     ${({ theme }) => theme.scroll}
     overflow: auto;
-    /* height: 560px; */
+    height: 560px;
     position: relative;
     margin-top: 23px;
     .chat__timestamp {
@@ -28,15 +28,20 @@ export const Wrapper = styled.div<{ msgTheme: string }>`
     }
 
     .message__bubble {
-        ${({ theme }) => theme.textStyles.P14}
-        padding: 7px 15px;
         border-radius: 20px;
         border: 1px solid ${({ theme, msgTheme }) => theme.colors[msgTheme]};
+        ${({ theme, msgTheme }) => msgTheme === 'gradient3' && theme.borderGradient}
+        background-image: linear-gradient(white, white), radial-gradient(circle at top left, #ffbebe, #b6d8f8, #a18afc);
         margin-right: 5px;
         margin-left: 13px;
         max-width: 267px;
-        word-break: break-all;
-        line-height: 1.7;
+        & > span {
+            display: inline-block;
+            ${({ theme }) => theme.textStyles.P14}
+            padding: 7px 15px;
+            line-height: 1.7;
+            word-break: break-all;
+        }
     }
 
     .message__time {
@@ -50,7 +55,7 @@ export const Wrapper = styled.div<{ msgTheme: string }>`
     }
 
     .message-row__own .message__bubble {
-        background-color: ${({ theme, msgTheme }) => theme.colors[msgTheme]};
+        background: ${({ theme, msgTheme }) => theme.colors[msgTheme]};
         margin-right: 13px;
         margin-left: 5px;
     }
