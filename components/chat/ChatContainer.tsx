@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../reducers';
 import ChatPresenter from './ChatPresenter';
@@ -14,6 +14,7 @@ const ChatContainer = () => {
         },
         [msgTheme],
     );
+
     return <ChatPresenter me={me} onClick={onClick} msgTheme={msgTheme} />;
 };
 

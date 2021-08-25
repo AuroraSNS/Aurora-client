@@ -1,19 +1,16 @@
 import styled from 'styled-components';
 
 export const MainChat = styled.section`
+    ${({ theme }) => theme.bgFilter}
     position: relative;
     width: 70%;
     max-width: 710px;
-    height: inherit;
-    .content {
-        position: relative;
-        height: 100%;
-        background: #fff;
-        border-radius: 20px;
-        padding: 25px 20px;
-        display: flex;
-        flex-direction: column;
-    }
+    height: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
     form {
         margin-top: 10px;
         display: flex;
@@ -43,9 +40,6 @@ export const Wrapper = styled.div`
     height: 80vh;
     display: flex;
     margin-top: 55px;
-    .bg {
-        ${({ theme }) => theme.bgFilter}
-    }
     .user {
         display: flex;
         justify-content: center;
@@ -62,25 +56,23 @@ export const Wrapper = styled.div`
 `;
 
 export const ChatList = styled.section`
+    ${({ theme }) => theme.bgFilter}
     position: relative;
     width: 30%;
     max-width: 307px;
-    height: inherit;
-    .content {
+    height: 100%;
+    background: #fff;
+    border-radius: 20px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    .chat-list {
+        border-top: 1px solid #c4c5c76d;
+        padding-top: 23px;
         height: 100%;
-        background: #fff;
-        border-radius: 20px;
-        padding: 20px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        .chat-list {
-            border-top: 1px solid #c4c5c76d;
-            padding-top: 23px;
-            height: 100%;
-            overflow: auto;
-            ${({ theme }) => theme.scroll}
-        }
+        overflow: auto;
+        ${({ theme }) => theme.scroll}
     }
 `;
 
