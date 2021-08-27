@@ -1,15 +1,25 @@
 import { IAuth } from './user';
 
 export interface IRoom {
-    id: number;
+    roomId: number;
     user: IAuth;
     lastMessage: string;
     lastTimeStamp: string;
 }
 
 export interface IContent {
+    id: number;
+    sender: IAuth;
+    message: string;
+    timeStamp: string;
+}
+export interface ISendMsg {
     roomId: number;
-    sender: number;
+    message: string;
+}
+export interface IRecvMsg {
+    id: number;
+    sender: IAuth;
     message: string;
     timeStamp: string;
 }

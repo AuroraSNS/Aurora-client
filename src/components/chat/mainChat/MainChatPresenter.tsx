@@ -15,19 +15,20 @@ type Props = {
 const MainChatPresenter = ({ me, contents, msgTheme }: Props) => (
     <Wrapper msgTheme={msgTheme}>
         <div className="chat__timestamp">Tuesday, June 30, 2020</div>
-        {contents.map((content: IContent, idx: number) => (
-            <div key={idx} className={`message-row ${content.sender === me.id && 'message-row__own'}`}>
-                <Avatar url={me.avatar} size={36} />
-                <div className="message-row__content">
-                    <div className="message__info">
-                        <div className="message__bubble">
-                            <span>{content.message}</span>
+        {contents &&
+            contents.map((content: IContent) => (
+                <div key={contents.id} className={`message-row ${content.sender.id === me.id && 'message-row__own'}`}>
+                    <Avatar url={me.avatar} size={36} />
+                    <div className="message-row__content">
+                        <div className="message__info">
+                            <div className="message__bubble">
+                                <span>{content.message}</span>
+                            </div>
+                            <span className="message__time">{content.timeStamp}</span>
                         </div>
-                        <span className="message__time">{content.timeStamp}</span>
                     </div>
                 </div>
-            </div>
-        ))}
+            ))}
     </Wrapper>
 );
 

@@ -12,8 +12,8 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     const cookies = nookies.get(context);
     if (cookies.accessToken) {
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
+        context.store.dispatch(loadRoomsRequest(cookies.accessToken));
     }
-    context.store.dispatch(loadRoomsRequest(''));
     context.store.dispatch(loadAllStatisticsRequest());
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();

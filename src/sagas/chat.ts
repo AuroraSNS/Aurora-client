@@ -8,16 +8,16 @@ import { createSampleRooms } from '../util/sample';
 function loadRoomsAPI(token: string) {
     return axios({
         method: 'GET',
-        url: `/comments/`,
+        url: `/chat/rooms`,
         headers: { Authorization: `Bearer ${token}` },
     });
 }
 
 function* loadRooms(action: ReturnType<typeof loadRoomsRequest>) {
     try {
-        // const result: AxiosResponse<IRoom[]> = yield call(loadRoomsAPI, action.token);
-        // yield put(loadRoomsSuccess(result.data));
-        yield put(loadRoomsSuccess(createSampleRooms(5)));
+        const result: AxiosResponse<IRoom[]> = yield call(loadRoomsAPI, action.token);
+        yield put(loadRoomsSuccess(result.data));
+        // yield put(loadRoomsSuccess(createSampleRooms(5)));
     } catch (err) {
         yield put(loadRoomsFailure(err.message));
     }

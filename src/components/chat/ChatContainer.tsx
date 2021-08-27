@@ -8,7 +8,7 @@ import useInput from '../../hooks/useInput';
 import { RootState } from '../../reducers';
 import { getToken } from '../../sagas';
 import ChatPresenter from './ChatPresenter';
-import { IContent, IRoom } from '../../interfaces/data/chat';
+import { IContent, IRecvMsg, IRoom, ISendMsg } from '../../interfaces/data/chat';
 import { createSampleContents } from '../../util/sample';
 
 // 메시지 구독 및 수신
@@ -30,11 +30,11 @@ import { createSampleContents } from '../../util/sample';
 // - user: 메시지를 보내기 위한 사용자를 특정한다
 
 // STOMP Client 생성
-let sockJS = new SockJS('http://localhost:8080/webSocket');
+let sockJS = new SockJS('https://api.aurora.center/ws-stomp');
 let stompClient: Stomp.Client = Stomp.over(sockJS);
 
-stompClient.heartbeat.outgoing = 20000; // client will send heartbeats every 20000ms
-stompClient.heartbeat.incoming = 0; // client does not want to receive heartbeats from the server
+// stompClient.heartbeat.outgoing = 0; // client will send heartbeats every 20000ms
+// stompClient.heartbeat.incoming = 0; // client does not want to receive heartbeats from the server
 stompClient.debug = (str: string) => {
     console.log(str);
 };
@@ -67,28 +67,41 @@ const ChatContainer = () => {
     // 룸 선택시 그 룸의 대화 정보 불러옴
     useEffect(() => {
         if (room) {
-            // axios.get('').then((res) => {
-            //     setContents(res.data)
-            // });
-            setContents(createSampleContents(me.id, room.user.id));
+            axios({
+                method: 'GET',
+                url: `/chat/room/${room.roomId}`,
+                headers: { Authorization: `Bearer ${getToken()}` },
+            }).then((res) => {
+                setContents(res.data.messages);
+            });
+            // setContents(createSampleContents(me.id, room.user.id));
         }
     }, [room]);
+
+    console.log(contents);
 
     // 모든 룸 구독
     useEffect(() => {
         if (rooms) {
-            stompClient.connect({}, () => {
-                rooms.forEach((ele: IRoom) => {
-                    stompClient.subscribe(`/topic/${ele.id}`, onReceive);
-                });
-            });
+            console.log('연결 시도');
+            stompClient.connect(
+                headers,
+                () => {
+                    console.log('연결 성공');
+                    rooms.forEach((ele: IRoom) => {
+                        stompClient.subscribe(`/sub/chat/room/${ele.roomId}`, onReceive);
+                    });
+                },
+                () => {
+                    console.log('연결 실패');
+                },
+            );
         }
     }, [rooms]);
 
     const onReceive = (frame: Stomp.Frame) => {
         let recv = JSON.parse(frame.body);
-        const newMessage = {
-            roomId: recv.roomId,
+        const newMessage: IRecvMsg = {
             sender: recv.sender,
             message: recv.message,
             timeStamp: recv.timeStamp,
@@ -99,14 +112,18 @@ const ChatContainer = () => {
     const sendMessage = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            const newContent: IContent = {
-                roomId: (room as IRoom).id,
-                sender: me.id,
+            const newMessage: ISendMsg = {
+                roomId: (room as IRoom).roomId,
                 message,
-                timeStamp: new Date().toLocaleString(),
             };
-            stompClient.send('/pub/chat/message', headers, JSON.stringify(newContent));
-            setContents((prev) => [...prev, newContent]);
+            // const newContent: IContent = {
+            //     roomId: (room as IRoom).id,
+            //     message,
+            // };
+            console.log('send msg : ', newMessage);
+            stompClient.send('/pub/chat/message', headers, JSON.stringify(newMessage));
+            // setContents((prev) => [...prev, newContent]);
+            console.log('aa');
             setMessage('');
         },
         [message],

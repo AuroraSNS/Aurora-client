@@ -36,7 +36,7 @@ class MyDocument extends Document {
                         integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
                         crossOrigin="anonymous"
                     />
-                    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon" />
+                    <link rel="shortcut icon" href="../../public/favicon.ico" type="image/x-icon" />
                 </Head>
                 <body>
                     <Main />

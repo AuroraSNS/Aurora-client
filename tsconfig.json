@@ -14,6 +14,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "util/sample.ts", "components/user/userProfile/ProfileEditForm.jsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/util/sample.ts", "src/components/user/userProfile/ProfileEditForm.jsx"],
   "exclude": ["node_modules"]
 }

@@ -64,7 +64,7 @@ const ChatPresenter = ({
                     {rooms &&
                         rooms.map((room) => (
                             <ChatRoom
-                                key={room.id}
+                                key={room.roomId}
                                 onClick={() => {
                                     onChangeRoom(room);
                                 }}
@@ -76,7 +76,7 @@ const ChatPresenter = ({
                                         <span>
                                             {room.lastMessage.length > 12
                                                 ? `${room.lastMessage.slice(0, 12)}...`
-                                                : room.lastMessage.length}
+                                                : room.lastMessage}
                                         </span>
                                         <span>{room.lastTimeStamp}</span>
                                     </div>
