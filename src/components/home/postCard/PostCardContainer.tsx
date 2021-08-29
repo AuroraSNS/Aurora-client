@@ -1,10 +1,10 @@
 /* eslint-disable no-param-reassign */
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { likePostRequest, removePostRequest } from '../../../actions/post';
 import useToggle from '../../../hooks/useToggle';
 import { IPost } from '../../../interfaces/data/post';
-import { RootState } from '../../../reducers';
+import { likePostRequest, removePostRequest } from '../../../redux/modules/post';
+import { RootState } from '../../../redux/modules/reducer';
 import PostCardPresentert from './PostCardPresentert';
 
 type Props = {

@@ -20,8 +20,8 @@ import {
     modifyCommentSuccess,
     modifyCommentFailure,
     modifyCommentRequest,
-} from '../actions/comment';
-import { IComment } from '../interfaces/data/comment';
+} from '../modules/comment';
+import { IComment } from '../../interfaces/data/comment';
 
 function loadCommentAPI(postId: number) {
     return axios({

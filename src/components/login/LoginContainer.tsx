@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../reducers';
+import { RootState } from '../../redux/modules/reducer';
 import LoginPresenter from './LoginPresenter';
 
 const LoginContainer = () => {

@@ -1,10 +1,11 @@
 import { END } from 'redux-saga';
 import nookies from 'nookies';
 import ChatContainer from '../components/chat/ChatContainer';
-import wrapper from '../store/configureStore';
-import { loadProfileRequest } from '../actions/user';
-import { loadAllStatisticsRequest } from '../actions/post';
-import { loadRoomsRequest } from '../actions/chat';
+import wrapper from '../redux/create';
+
+import { loadRoomsRequest } from '../redux/modules/chat';
+import { loadProfileRequest } from '../redux/modules/user';
+import { loadAllStatisticsRequest } from '../redux/modules/post';
 
 const Chat = () => <ChatContainer />;
 

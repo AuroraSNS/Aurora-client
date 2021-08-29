@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadCommentRequest } from '../../../../actions/comment';
 import { IComment } from '../../../../interfaces/data/comment';
-import { RootState } from '../../../../reducers';
+import { loadCommentRequest } from '../../../../redux/modules/comment';
+import { RootState } from '../../../../redux/modules/reducer';
 import CommentBoxPresenter from './CommentBoxPresenter';
 
 type Props = {

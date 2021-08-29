@@ -1,10 +1,10 @@
 import React, { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addPostRequest, modifyPostRequest } from '../../../actions/post';
 import useInput from '../../../hooks/useInput';
 import useToggle from '../../../hooks/useToggle';
 import { IPost } from '../../../interfaces/data/post';
-import { RootState } from '../../../reducers';
+import { addPostRequest, modifyPostRequest } from '../../../redux/modules/post';
+import { RootState } from '../../../redux/modules/reducer';
 import PostFormModalPresenter from './PostFormModalPresenter';
 
 type Props = {

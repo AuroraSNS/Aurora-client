@@ -2,7 +2,7 @@ import { END } from 'redux-saga';
 import nookies from 'nookies';
 import React from 'react';
 import UserContainer from '../../components/user/UserContainer';
-import wrapper from '../../store/configureStore';
+import wrapper from '../../redux/create';
 import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
 import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../actions/post';
 

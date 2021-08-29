@@ -1,9 +1,9 @@
 import { END } from 'redux-saga';
 import nookies from 'nookies';
 import HomeContainer from '../components/home/HomeContainer';
-import wrapper from '../store/configureStore';
-import { loadAllPostsRequest, loadAllStatisticsRequest } from '../actions/post';
-import { loadProfileRequest } from '../actions/user';
+import wrapper from '../redux/create';
+import { loadAllPostsRequest, loadAllStatisticsRequest } from '../redux/modules/post';
+import { loadProfileRequest } from '../redux/modules/user';
 
 const Home = () => <HomeContainer />;
 

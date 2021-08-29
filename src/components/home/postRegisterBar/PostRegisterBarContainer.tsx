@@ -1,7 +1,7 @@
 import { useRouter } from 'next/dist/client/router';
 import { useCallback, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../reducers';
+import { RootState } from '../../../redux/modules/reducer';
 import PostRegisterBarPresenter from './PostRegisterBarPresenter';
 
 const PostRegisterBarContainer = () => {

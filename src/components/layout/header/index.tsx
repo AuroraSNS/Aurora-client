@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import { useSelector } from 'react-redux';
 import Image from 'next/image';
-import { RootState } from '../../../reducers';
+import { RootState } from '../../../redux/modules/reducer';
 import FilterBar from './filterBar';
 import { Wrapper, Logo } from './style';
 import UserInfo from './userInfo';

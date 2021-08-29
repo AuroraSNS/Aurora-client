@@ -3,8 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../actions/post';
 import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
-import { RootState } from '../../reducers';
-import { getToken } from '../../sagas';
+import { RootState } from '../../redux/modules/reducer';
+import { getToken } from '../../redux/sagas';
 import UserPresenter from './UserPresenter';
 
 const UserContainer = () => {

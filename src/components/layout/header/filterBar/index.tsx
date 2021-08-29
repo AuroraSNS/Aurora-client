@@ -1,7 +1,7 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { filterWeather, loadAllPostsRequest } from '../../../../actions/post';
-import { RootState } from '../../../../reducers';
+import { filterWeather } from '../../../../redux/modules/post';
+import { RootState } from '../../../../redux/modules/reducer';
 
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
 import { WeatherContainer, Wrapper } from './style';

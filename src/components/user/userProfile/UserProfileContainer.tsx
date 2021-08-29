@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import useToggle from '../../../hooks/useToggle';
 import { IUserProfile } from '../../../interfaces/data/user';
-import { RootState } from '../../../reducers';
+import { RootState } from '../../../redux/modules/reducer';
 import UserProfilePresenter from './UserProfilePresenter';
 
 const UserProfileContainer = () => {

@@ -1,9 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { all, call, fork, put, takeLatest } from 'redux-saga/effects';
-import { getToken } from '.';
-import { loadRoomsFailure, loadRoomsRequest, loadRoomsSuccess, LOAD_ROOMS_REQUEST } from '../actions/chat';
-import { IRoom } from '../interfaces/data/chat';
-import { createSampleRooms } from '../util/sample';
+import { IRoom } from '../../interfaces/data/chat';
+import { loadRoomsFailure, loadRoomsRequest, loadRoomsSuccess, LOAD_ROOMS_REQUEST } from '../modules/chat';
 
 function loadRoomsAPI(token: string) {
     return axios({

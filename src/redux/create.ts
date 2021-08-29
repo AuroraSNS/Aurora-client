@@ -3,10 +3,10 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
-import rootReducer from '../reducers';
+import rootReducer from './modules/reducer';
 import { IUserState } from '../interfaces/data/user';
 import { IPostState } from '../interfaces/data/post';
-import rootSaga from '../sagas';
+import rootSaga from './sagas';
 
 export interface CombinedState {
     index: string;

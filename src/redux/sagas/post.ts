@@ -38,9 +38,10 @@ import {
     likePostRequest,
     likePostSuccess,
     likePostFailure,
-} from '../actions/post';
-import { modifyLikelist } from '../actions/user';
-import { IPost, IWeatherStatistics } from '../interfaces/data/post';
+} from '../modules/post';
+
+import { IPost, IWeatherStatistics } from '../../interfaces/data/post';
+import { modifyLikelist } from '../modules/user';
 
 let qs = require('qs');
 

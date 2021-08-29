@@ -1,8 +1,9 @@
 import React, { FormEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCommentRequest } from '../../../../actions/comment';
+
 import useInput from '../../../../hooks/useInput';
-import { RootState } from '../../../../reducers';
+import { addCommentRequest } from '../../../../redux/modules/comment';
+import { RootState } from '../../../../redux/modules/reducer';
 import CommentFormPresenter from './CommentFormPresenter';
 
 type Props = {

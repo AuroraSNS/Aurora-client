@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 import { destroyCookie, setCookie } from 'nookies';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadAllPostsRequest, loadAllStatisticsRequest } from '../../actions/post';
-import { RootState } from '../../reducers';
+import { loadAllPostsRequest, loadAllStatisticsRequest } from '../../redux/modules/post';
+import { RootState } from '../../redux/modules/reducer';
 import { getUrlParameter } from '../../util/util';
 import HomePresenter from './HomePresenter';
 

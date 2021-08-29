@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 import { IContent } from '../../../interfaces/data/chat';
-import { RootState } from '../../../reducers';
+import { RootState } from '../../../redux/modules/reducer';
 import MainChatPresenter from './MainChatPresenter';
 
 type Props = {

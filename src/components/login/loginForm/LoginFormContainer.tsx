@@ -2,7 +2,7 @@ import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { logInRequest } from '../../../actions/user';
 import useInput from '../../../hooks/useInput';
-import { RootState } from '../../../reducers';
+import { RootState } from '../../../redux/modules/reducer';
 import LoginFormPresenter from './LoginFormPresenter';
 
 const LoginFormContainer = () => {

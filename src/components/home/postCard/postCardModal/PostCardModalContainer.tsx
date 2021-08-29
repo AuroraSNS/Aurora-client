@@ -1,8 +1,9 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { likePostRequest } from '../../../../actions/post';
+
 import { IPost } from '../../../../interfaces/data/post';
-import { RootState } from '../../../../reducers';
+import { likePostRequest } from '../../../../redux/modules/post';
+import { RootState } from '../../../../redux/modules/reducer';
 import PostCardModalPresenter from './PostCardModalPresenter';
 
 type Props = {

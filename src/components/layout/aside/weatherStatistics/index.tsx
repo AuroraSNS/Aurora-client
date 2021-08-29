@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 import ToolTip from '../../../common/ToolTip';
 import { Container, Wrapper } from './style';
-import { RootState } from '../../../../reducers';
+import { RootState } from '../../../../redux/modules/reducer';
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
 
 type Props = {

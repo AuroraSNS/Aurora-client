@@ -26,8 +26,8 @@ import {
     signUpRequest,
     signUpSuccess,
     SIGN_UP_REQUEST,
-} from '../actions/user';
-import { ILogInForm, IMe, IUserProfile } from '../interfaces/data/user';
+} from '../modules/user';
+import { ILogInForm, IMe, IUserProfile } from '../../interfaces/data/user';
 import { getToken } from '.';
 
 function logInAPI(data: ILogInForm) {
