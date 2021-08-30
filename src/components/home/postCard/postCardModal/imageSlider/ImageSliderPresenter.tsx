@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { IconLeft, IconRight } from '../../../../common/Icon';
 import { Container, Wrapper } from './style';
 
 type Props = {
@@ -14,14 +13,14 @@ type Props = {
 const ImageSliderPresenter = ({ idx, prev, next, images }: Props) => (
     <Wrapper>
         {idx > 0 && (
-            <span className="prev" onClick={prev}>
-                <IconLeft />
-            </span>
+            <button type="button" className="prev" onClick={prev}>
+                <div />
+            </button>
         )}
         {idx < images.length - 1 && (
-            <span className="next" onClick={next}>
-                <IconRight />
-            </span>
+            <button type="button" className="next" onClick={next}>
+                <div />
+            </button>
         )}
         <Container idx={idx} cnt={images.length}>
             <ul className="slides">

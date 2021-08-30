@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
-import { logOutRequest } from '../../actions/user';
+import { logOutRequest } from '../../redux/modules/user';
 
 const Signout = () => {
     const dispatch = useDispatch();

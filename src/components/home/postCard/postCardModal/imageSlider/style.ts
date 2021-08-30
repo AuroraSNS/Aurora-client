@@ -6,16 +6,26 @@ export const Wrapper = styled.div`
     position: relative;
     background-color: #f0f2f5;
     border-radius: 20px 0 0 20px;
-    span {
+    & > button {
         position: absolute;
         top: 50%;
         transform: translateY(-50%);
     }
     .prev {
         right: 97%;
+        div {
+            background: url('images/aurora_icon.png') no-repeat -338px -168px;
+            width: 11px;
+            height: 20px;
+        }
     }
     .next {
         left: 97%;
+        div {
+            background: url('images/aurora_icon.png') no-repeat -361px -168px;
+            width: 11px;
+            height: 20px;
+        }
     }
 `;
 

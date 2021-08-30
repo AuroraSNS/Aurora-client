@@ -3,15 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { ITodayWeather } from '../../../../interfaces/data';
 import { convertWeatherIcon } from '../../../../util/util';
-import {
-    IconWeather0,
-    IconWeather1,
-    IconWeather2,
-    IconWeather3,
-    IconWeather4,
-    IconWeather5,
-} from '../../../common/Icon';
-import { Container, Content, Wrapper } from './style';
+import { Container, IconWeather, Wrapper } from './style';
 
 const COORDS = 'coords';
 
@@ -73,20 +65,15 @@ const TodayWeather = () => {
                 <>
                     <div className="title">오늘의 날씨</div>
                     <Container>
-                        {weatherInfo?.icon === 0 && <IconWeather0 />}
-                        {weatherInfo?.icon === 1 && <IconWeather1 />}
-                        {weatherInfo?.icon === 2 && <IconWeather2 />}
-                        {weatherInfo?.icon === 3 && <IconWeather3 />}
-                        {weatherInfo?.icon === 4 && <IconWeather4 />}
-                        {weatherInfo?.icon === 5 && <IconWeather5 />}
-                        <Content>
+                        <IconWeather index={weatherInfo?.icon as number} />
+                        <div className="content">
                             <div>{weatherInfo?.temp}&#8451;</div>
                             <div>
                                 <span>{weatherInfo?.tempMin}&#8451;</span>
                                 <span>/</span>
                                 <span>{weatherInfo?.tempMax}&#8451;</span>
                             </div>
-                        </Content>
+                        </div>
                     </Container>
                 </>
             )}

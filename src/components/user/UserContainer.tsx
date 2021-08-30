@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../actions/post';
-import { loadProfileRequest, loadUserProfileRequest } from '../../actions/user';
+import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../redux/modules/post';
+
 import { RootState } from '../../redux/modules/reducer';
+import { loadProfileRequest, loadUserProfileRequest } from '../../redux/modules/user';
 import { getToken } from '../../redux/sagas';
 import UserPresenter from './UserPresenter';
 

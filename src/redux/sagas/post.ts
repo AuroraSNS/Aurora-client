@@ -199,12 +199,12 @@ function likePostAPI(postId: number, like: boolean) {
     if (like) {
         return axios({
             method: 'POST',
-            url: `/like/${postId}`,
+            url: `/likes/${postId}`,
         });
     }
     return axios({
         method: 'DELETE',
-        url: `/like/${postId}`,
+        url: `/likes/${postId}`,
     });
 }
 

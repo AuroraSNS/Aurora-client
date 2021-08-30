@@ -8,7 +8,7 @@ export const Wrapper = styled.section`
     flex-direction: column;
     margin-top: 60px;
     .title {
-        ${({ theme }) => theme.textStyles.H6}
+        ${({ theme }) => theme.textStyles.H6};
         text-align: center;
         margin-bottom: 30px;
     }
@@ -57,6 +57,31 @@ export const Container = styled.div<{
         .stick-moon {
             background: ${({ theme }) => theme.colors.moon};
             animation: ${(props) => upWeatherStick(props.moon)} 1s linear forwards;
+        }
+    }
+    .icon {
+        ${({ theme }) => theme.flexCenter};
+        width: 30px;
+        height: 30px;
+        .sun {
+            background: url('images/aurora_icon.png') no-repeat -11px -110px;
+            width: 28px;
+            height: 28px;
+        }
+        .cloud {
+            background: url('images/aurora_icon.png') no-repeat -52px -114px;
+            width: 29px;
+            height: 19px;
+        }
+        .rain {
+            background: url('images/aurora_icon.png') no-repeat -94px -112px;
+            width: 29px;
+            height: 25px;
+        }
+        .moon {
+            background: url('images/aurora_icon.png') no-repeat -136px -112px;
+            width: 25px;
+            height: 25px;
         }
     }
 `;

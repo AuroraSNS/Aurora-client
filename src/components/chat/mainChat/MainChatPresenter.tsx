@@ -17,7 +17,7 @@ const MainChatPresenter = ({ me, contents, msgTheme }: Props) => (
         <div className="chat__timestamp">Tuesday, June 30, 2020</div>
         {contents &&
             contents.map((content: IContent) => (
-                <div key={contents.id} className={`message-row ${content.sender.id === me.id && 'message-row__own'}`}>
+                <div key={content.id} className={`message-row ${content.sender.id === me.id && 'message-row__own'}`}>
                     <Avatar url={me.avatar} size={36} />
                     <div className="message-row__content">
                         <div className="message__info">

@@ -11,7 +11,7 @@ import {
     removeCommentRequest,
     removeCommentSuccess,
     removeCommentFailure,
-} from '../../actions/comment';
+} from '../../redux/modules/comment';
 
 export type ICommentAction =
     | ReturnType<typeof addCommentRequest>

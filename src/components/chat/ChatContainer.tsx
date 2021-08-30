@@ -1,6 +1,6 @@
 /* eslint-disable import/no-unresolved */
 import React, { FormEvent, useCallback, useEffect, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import Stomp from 'stompjs';
 import SockJS from 'sockjs-client';
 import axios from 'axios';
@@ -9,7 +9,6 @@ import { RootState } from '../../redux/modules/reducer';
 import { getToken } from '../../redux/sagas';
 import ChatPresenter from './ChatPresenter';
 import { IContent, IRecvMsg, IRoom, ISendMsg } from '../../interfaces/data/chat';
-import { createSampleContents } from '../../util/sample';
 
 // 메시지 구독 및 수신
 // const subscription = stompClient.subscribe('/queue/test', onReceive);
@@ -32,9 +31,6 @@ import { createSampleContents } from '../../util/sample';
 // STOMP Client 생성
 let sockJS = new SockJS('https://api.aurora.center/ws-stomp');
 let stompClient: Stomp.Client = Stomp.over(sockJS);
-
-// stompClient.heartbeat.outgoing = 0; // client will send heartbeats every 20000ms
-// stompClient.heartbeat.incoming = 0; // client does not want to receive heartbeats from the server
 stompClient.debug = (str: string) => {
     console.log(str);
 };
@@ -45,8 +41,9 @@ const headers = {
 
 const ChatContainer = () => {
     const { me } = useSelector((state: RootState) => state.user);
-    const [msgTheme, setMsgTheme] = useState('sun');
 
+    // 채팅방 테마 변경
+    const [msgTheme, setMsgTheme] = useState('sun');
     const onClick = useCallback(
         (e: React.MouseEvent<HTMLDivElement>) => {
             if ((e.target as HTMLInputElement).name === 'theme') {
@@ -64,44 +61,34 @@ const ChatContainer = () => {
     const onChangeRoom = useCallback((newRoom: IRoom) => {
         setRoom(newRoom);
     }, []);
+
     // 룸 선택시 그 룸의 대화 정보 불러옴
     useEffect(() => {
         if (room) {
-            axios({
-                method: 'GET',
-                url: `/chat/room/${room.roomId}`,
-                headers: { Authorization: `Bearer ${getToken()}` },
-            }).then((res) => {
-                setContents(res.data.messages);
-            });
-            // setContents(createSampleContents(me.id, room.user.id));
+            loadContents(room.roomId);
         }
     }, [room]);
 
-    console.log(contents);
+    const loadContents = useCallback(async (roomId) => {
+        const res = await axios.get(`/chat/room/${roomId}`, { headers: { Authorization: `Bearer ${getToken()}` } });
+        setContents(res.data.messages);
+    }, []);
 
     // 모든 룸 구독
     useEffect(() => {
         if (rooms) {
-            console.log('연결 시도');
-            stompClient.connect(
-                headers,
-                () => {
-                    console.log('연결 성공');
-                    rooms.forEach((ele: IRoom) => {
-                        stompClient.subscribe(`/sub/chat/room/${ele.roomId}`, onReceive);
-                    });
-                },
-                () => {
-                    console.log('연결 실패');
-                },
-            );
+            stompClient.connect(headers, () => {
+                rooms.forEach((ele: IRoom) => {
+                    stompClient.subscribe(`/sub/chat/room/${ele.roomId}`, onReceive);
+                });
+            });
         }
     }, [rooms]);
 
     const onReceive = (frame: Stomp.Frame) => {
         let recv = JSON.parse(frame.body);
         const newMessage: IRecvMsg = {
+            id: recv.id,
             sender: recv.sender,
             message: recv.message,
             timeStamp: recv.timeStamp,
@@ -116,14 +103,7 @@ const ChatContainer = () => {
                 roomId: (room as IRoom).roomId,
                 message,
             };
-            // const newContent: IContent = {
-            //     roomId: (room as IRoom).id,
-            //     message,
-            // };
-            console.log('send msg : ', newMessage);
             stompClient.send('/pub/chat/message', headers, JSON.stringify(newMessage));
-            // setContents((prev) => [...prev, newContent]);
-            console.log('aa');
             setMessage('');
         },
         [message],

@@ -1,9 +1,9 @@
 import { END } from 'redux-saga';
 import nookies from 'nookies';
 import NotificationContainer from '../components/notification/NotificationContainer';
-import { loadProfileRequest } from '../actions/user';
 import wrapper from '../redux/create';
-import { loadAllStatisticsRequest } from '../actions/post';
+import { loadAllStatisticsRequest } from '../redux/modules/post';
+import { loadProfileRequest } from '../redux/modules/user';
 
 const Notification = () => <NotificationContainer />;
 

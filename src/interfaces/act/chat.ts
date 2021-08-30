@@ -1,4 +1,4 @@
-import { loadRoomsFailure, loadRoomsRequest, loadRoomsSuccess } from '../../actions/chat';
+import { loadRoomsFailure, loadRoomsRequest, loadRoomsSuccess } from '../../redux/modules/chat';
 
 export type IChatAction =
     | ReturnType<typeof loadRoomsRequest>

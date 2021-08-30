@@ -9,6 +9,12 @@ export const Wrapper = styled.div`
     background-color: #f0f2f5;
     border-radius: 20px;
     padding: 0 16px;
+    div {
+        background: url('images/aurora_icon.png') no-repeat -19px -170px;
+        color: transparent;
+        width: 10px;
+        height: 12px;
+    }
     input {
         ${({ theme }) => theme.textStyles.P12}
         width: 100%;

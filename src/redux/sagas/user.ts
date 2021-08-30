@@ -27,23 +27,22 @@ import {
     signUpSuccess,
     SIGN_UP_REQUEST,
 } from '../modules/user';
-import { ILogInForm, IMe, IUserProfile } from '../../interfaces/data/user';
+import { ILogInForm, IMe, ISignUpForm, IUserProfile } from '../../interfaces/data/user';
 import { getToken } from '.';
 
 function logInAPI(data: ILogInForm) {
     return axios({
         method: 'POST',
-        url: '/api/user/login',
+        url: '/signin',
         data,
     });
 }
 
 function* logIn(action: ReturnType<typeof logInRequest>) {
     try {
-        // const result: AxiosResponse<{ accessToken: string; tokenType: string }> = yield call(logInAPI, action.data);
-        // setCookie(null, 'accessToken', result.data.accessToken, { path: '/' });
-        // sessionStorage.setItem('accessToken', result.data.accessToken);
-        yield delay(1000);
+        const result: AxiosResponse<{ accessToken: string }> = yield call(logInAPI, action.data);
+        setCookie(null, 'accessToken', result.data.accessToken, { path: '/' });
+        sessionStorage.setItem('accessToken', result.data.accessToken);
         yield put(logInSuccess());
     } catch (err) {
         yield put(logInFailure('로그인 실패'));
@@ -52,30 +51,30 @@ function* logIn(action: ReturnType<typeof logInRequest>) {
 
 function* logOut() {
     try {
-        // destroyCookie(null, 'accessToken');
-        // sessionStorage.removeItem('accessToken');
-        yield delay(1000);
+        destroyCookie(null, 'accessToken');
+        sessionStorage.removeItem('accessToken');
+        // yield delay(1000);
         yield put(logOutSuccess());
     } catch (err) {
         yield put(logOutFailure(err.message));
     }
 }
 
-// function signUpAPI(data: SignUpFormData) {
-//     return axios({
-//         method: 'POST',
-//         url: '/api/user/signup',
-//         data,
-//     });
-// }
+function signUpAPI(data: ISignUpForm) {
+    return axios({
+        method: 'POST',
+        url: '/signup',
+        data,
+    });
+}
 
 function* signUp(action: ReturnType<typeof signUpRequest>) {
-    // try {
-    //     yield call(signUpAPI, action.data);
-    //     yield put(signUpSuccess());
-    // } catch (err) {
-    //     yield put(signUpFailure(err.message));
-    // }
+    try {
+        yield call(signUpAPI, action.data);
+        yield put(signUpSuccess());
+    } catch (err) {
+        yield put(signUpFailure(err.message));
+    }
 }
 
 function loadProfileAPI(token: string) {

@@ -1,6 +1,5 @@
 import React from 'react';
 import { IOnSubmit, ISetState } from '../../../../interfaces/data';
-import { IconCheck } from '../../../common/Icon';
 import { Form } from './style';
 
 type Props = {
@@ -13,7 +12,7 @@ const CommentFormPresenter = ({ content, onChangeContent, onSubmit }: Props) => 
     <Form onSubmit={onSubmit}>
         <input type="text" placeholder="댓글을 입력하세요..." value={content} onChange={onChangeContent} />
         <button type="submit">
-            <IconCheck />
+            <div />
         </button>
     </Form>
 );

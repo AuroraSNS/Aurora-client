@@ -58,15 +58,15 @@ export const createSampleContents = (id1: number, id2: number) => {
     return sampleContents;
 };
 
-const createSampleContent = (id): IContent => ({
-    roomId: 1,
-    sender: id,
+const createSampleContent = (id: number): IContent => ({
+    id: 1,
+    sender: createSampleUser(),
     message: faker.random.words(),
     timeStamp: new Date().toLocaleTimeString(),
 });
 
-const createSampleRoom = (id: number): IRoom => ({
-    id,
+const createSampleRoom = (roomId: number): IRoom => ({
+    roomId,
     user: createSampleUser(),
     lastMessage: faker.random.words(),
     lastTimeStamp: new Date().toLocaleTimeString(),

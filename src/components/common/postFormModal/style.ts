@@ -72,7 +72,7 @@ export const DropBox = styled.div`
 export const AttachBtnWrapper = styled.div`
     display: flex;
     padding-left: 15px;
-    & > button {
+    button {
         width: 29px;
         height: 29px;
         background: #f0f2f5;
@@ -85,9 +85,6 @@ export const AttachBtnWrapper = styled.div`
 export const WeatherTab = styled.div`
     /* border: 1px solid gray; */
     display: flex;
-    svg {
-        cursor: pointer;
-    }
     & > input {
         display: none;
     }

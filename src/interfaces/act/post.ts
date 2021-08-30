@@ -25,7 +25,7 @@ import {
     removePostFailure,
     removePostRequest,
     removePostSuccess,
-} from '../../actions/post';
+} from '../../redux/modules/post';
 
 export type PostAction =
     | ReturnType<typeof loadAllPostsRequest>

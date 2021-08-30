@@ -22,5 +22,10 @@ export const Form = styled.form`
         margin-left: 20px;
         background: ${({ theme }) => theme.colors.gradient};
         border-radius: 50px;
+        div {
+            background: url('images/aurora_icon.png') no-repeat -44px -172px;
+            width: 14px;
+            height: 10px;
+        }
     }
 `;

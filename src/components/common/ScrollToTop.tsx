@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import styled from 'styled-components';
-import { IconLeft } from './Icon';
 
 const ScrollToTop = () => {
     const [visible, setVisible] = useState(false);
@@ -24,7 +23,7 @@ const ScrollToTop = () => {
 
     return (
         <Wrapper onClick={onClick} visible={visible}>
-            <IconLeft />
+            <div />
         </Wrapper>
     );
 };
@@ -34,7 +33,7 @@ const Wrapper = styled.div<{ visible: boolean }>`
     cursor: pointer;
     width: 42px;
     height: 42px;
-    background: #333;
+    background: #33333328;
     border-radius: 10px;
     position: fixed;
     right: 3vw;
@@ -42,11 +41,11 @@ const Wrapper = styled.div<{ visible: boolean }>`
     justify-content: center;
     align-items: center;
     z-index: 9;
-    svg {
+    div {
+        background: url('images/aurora_icon.png') no-repeat -338px -168px;
+        width: 11px;
+        height: 20px;
         transform: rotate(90deg);
-        * {
-            fill: #fff;
-        }
     }
     opacity: 0;
     animation: fade-in 2s forwards;

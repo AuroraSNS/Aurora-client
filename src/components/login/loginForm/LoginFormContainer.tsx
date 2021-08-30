@@ -1,11 +1,15 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logInRequest } from '../../../actions/user';
 import useInput from '../../../hooks/useInput';
 import { RootState } from '../../../redux/modules/reducer';
+import { logInRequest } from '../../../redux/modules/user';
 import LoginFormPresenter from './LoginFormPresenter';
 
-const LoginFormContainer = () => {
+type Props = {
+    onChangeView: () => void;
+};
+
+const LoginFormContainer = ({ onChangeView }: Props) => {
     const dispatch = useDispatch();
     const { logInLoading, logInDone, logInError } = useSelector((state: RootState) => state.user);
 
@@ -29,6 +33,7 @@ const LoginFormContainer = () => {
             logInLoading={logInLoading}
             logInDone={logInDone}
             logInError={logInError}
+            onChangeView={onChangeView}
         />
     );
 };

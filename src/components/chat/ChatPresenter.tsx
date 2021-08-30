@@ -3,7 +3,6 @@ import { IOnSubmit, ISetState } from '../../interfaces/data';
 import { IContent, IRoom } from '../../interfaces/data/chat';
 import { IMe } from '../../interfaces/data/user';
 import Avatar from '../common/Avatar';
-import { IconMsg, IconSend } from '../common/Icon';
 import AppLayout from '../layout/AppLayout';
 import MainChatContainer from './mainChat/MainChatContainer';
 import { ChatList, ChatRoom, MainChat, ThemeBox, Wrapper } from './style';
@@ -50,7 +49,7 @@ const ChatPresenter = ({
                 <form onSubmit={sendMessage}>
                     <input type="text" value={message} onChange={onChangeMessage} />
                     <button type="submit">
-                        <IconSend />
+                        <div />
                     </button>
                 </form>
             </MainChat>
@@ -58,7 +57,7 @@ const ChatPresenter = ({
                 <div className="user">
                     <Avatar url={me.avatar} size={36} />
                     <span>{me.name}</span>
-                    <IconMsg />
+                    <div className="msgIcon">msgIcon</div>
                 </div>
                 <div className="chat-list">
                     {rooms &&

@@ -2,6 +2,9 @@ export interface ILogInForm {
     email: string;
     password: string;
 }
+export interface ISignUpForm extends ILogInForm {
+    name: string;
+}
 export interface IAuth {
     id: number;
     name: string;

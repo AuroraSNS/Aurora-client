@@ -63,6 +63,11 @@ export const MainChat = styled.section`
             &:hover {
                 opacity: 1;
             }
+            div {
+                background: url('images/aurora_icon.png') no-repeat -615px -169px;
+                width: 18px;
+                height: 18px;
+            }
         }
     }
 `;
@@ -99,6 +104,12 @@ export const ChatList = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    .msgIcon {
+        color: transparent;
+        background: url('images/aurora_icon.png') no-repeat -534px -112px;
+        width: 28px;
+        height: 20px;
+    }
     .chat-list {
         border-top: 1px solid #c4c5c76d;
         padding-top: 23px;

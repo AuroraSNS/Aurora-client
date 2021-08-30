@@ -20,7 +20,7 @@ import {
     loadUserProfileRequest,
     loadUserProfileSuccess,
     modifyLikelist,
-} from '../../actions/user';
+} from '../../redux/modules/user';
 
 export type UserAction =
     | ReturnType<typeof logInRequest>

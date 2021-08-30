@@ -1,8 +1,9 @@
 import React, { ChangeEvent, FormEvent, useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { modifyProfileRequest } from '../../../../actions/user';
+
 import useInput from '../../../../hooks/useInput';
 import { RootState } from '../../../../redux/modules/reducer';
+import { modifyProfileRequest } from '../../../../redux/modules/user';
 import ProfileEditModalPresenter from './ProfileEditModalPresenter';
 
 type Props = {

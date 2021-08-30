@@ -15,7 +15,6 @@ function* loadRooms(action: ReturnType<typeof loadRoomsRequest>) {
     try {
         const result: AxiosResponse<IRoom[]> = yield call(loadRoomsAPI, action.token);
         yield put(loadRoomsSuccess(result.data));
-        // yield put(loadRoomsSuccess(createSampleRooms(5)));
     } catch (err) {
         yield put(loadRoomsFailure(err.message));
     }

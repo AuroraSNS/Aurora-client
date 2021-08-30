@@ -15,13 +15,15 @@ const WeatherStatistics = ({ isMain }: Props) => {
     return (
         <Wrapper>
             <div className="title">My Firends Weather</div>
-            <Container sun={statistics.sun} cloud={statistics.cloud} rain={statistics.rain} moon={statistics.moon}>
-                <ToolTip message={`${statistics.sun}%`} wh={31}>
+            <Container sun={statistics?.sun} cloud={statistics?.cloud} rain={statistics?.rain} moon={statistics?.moon}>
+                <ToolTip message={`${statistics?.sun}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-sun" />
                         </div>
-                        <IconSun />
+                        <div className="icon">
+                            <div className="sun" />
+                        </div>
                     </div>
                 </ToolTip>
                 <ToolTip message={`${statistics.cloud}%`} wh={31}>
@@ -29,7 +31,9 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <div className="stick">
                             <span className="stick-cloud" />
                         </div>
-                        <IconCloud />
+                        <div className="icon">
+                            <div className="cloud" />
+                        </div>
                     </div>
                 </ToolTip>
                 <ToolTip message={`${statistics.rain}%`} wh={31}>
@@ -37,7 +41,9 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <div className="stick">
                             <span className="stick-rain" />
                         </div>
-                        <IconRain />
+                        <div className="icon">
+                            <div className="rain" />
+                        </div>
                     </div>
                 </ToolTip>
                 <ToolTip message={`${statistics.moon}%`} wh={31}>
@@ -45,7 +51,9 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         <div className="stick">
                             <span className="stick-moon" />
                         </div>
-                        <IconMoon />
+                        <div className="icon">
+                            <div className="moon" />
+                        </div>
                     </div>
                 </ToolTip>
             </Container>

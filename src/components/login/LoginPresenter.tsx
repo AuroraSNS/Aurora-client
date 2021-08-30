@@ -1,11 +1,21 @@
 import React from 'react';
 import LoginFormContainer from './loginForm/LoginFormContainer';
+import SignupFormContainer from './signupForm/SignupFormContainer';
 import { Wrapper } from './style';
 
-const LoginPresenter = () => (
+type Props = {
+    view: boolean;
+    onChangeView: () => void;
+};
+
+const LoginPresenter = ({ view, onChangeView }: Props) => (
     <Wrapper>
         <div>
-            <LoginFormContainer />
+            {view ? (
+                <LoginFormContainer onChangeView={onChangeView} />
+            ) : (
+                <SignupFormContainer onChangeView={onChangeView} />
+            )}
         </div>
     </Wrapper>
 );

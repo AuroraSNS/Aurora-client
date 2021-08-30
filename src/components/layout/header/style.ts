@@ -15,16 +15,21 @@ export const Wrapper = styled.header`
     }
 `;
 
+export const LogInBtn = styled.button`
+    margin-right: 30px;
+    padding: 10px;
+    ${({ theme }) => theme.textStyles.H16}
+`;
+
 export const Logo = styled.div`
     /* border: 1px solid gray; */
     margin-left: 37px;
     flex: none;
-    img {
-        width: 150px;
-    }
-    @media screen and (max-width: 768px) {
-        img {
-            width: 100px;
-        }
+    a {
+        display: block;
+        width: 91px;
+        height: 24px;
+        color: transparent;
+        background: url('/images/aurora_icon.png') no-repeat -171px -17px;
     }
 `;
