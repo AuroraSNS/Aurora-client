@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
 import { UserAction } from '../../interfaces/act/user';
-import { ILogInForm, IMe, IUserProfile, IUserState } from '../../interfaces/data/user';
+import { ILogInForm, IMe, ISignUpForm, IUserProfile, IUserState } from '../../interfaces/data/user';
 
 // 액션 상수
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;
@@ -153,7 +153,7 @@ export default function reducer(state = initialState, action: UserAction) {
             case MODIFY_LIKELIST: {
                 let tmp = (draft.me as IMe).likeList;
                 if (tmp.includes(action.postId)) {
-                    tmp = tmp.filter((postId) => postId !== action.postId);
+                    (draft.me as IMe).likeList = tmp.filter((postId) => postId !== action.postId);
                 } else {
                     tmp.push(action.postId);
                 }
@@ -193,7 +193,7 @@ export const logOutFailure = (error: string) => ({
     error,
 });
 
-export const signUpRequest = (data: any) => ({
+export const signUpRequest = (data: ISignUpForm) => ({
     type: SIGN_UP_REQUEST,
     data,
 });

@@ -32,7 +32,7 @@ type Props = {
     showRemoveModalToggle: () => void;
     removeOk: (id: number) => void;
     isLike: boolean;
-    onClickLike: () => void;
+    onClickLike: (v: boolean) => void;
 };
 
 const PostCardPresentert = ({
@@ -80,7 +80,15 @@ const PostCardPresentert = ({
             </ImageContainer>
         </Body>
         <Footer>
-            <div onClick={onClickLike}>{isLike ? <IconLike /> : <IconDislike />}</div>
+            {isLike ? (
+                <div onClick={() => onClickLike(false)}>
+                    <IconLike />
+                </div>
+            ) : (
+                <div onClick={() => onClickLike(true)}>
+                    <IconDislike />
+                </div>
+            )}
             <span className="like-cnt">{post.likeCnt}</span>
             <ToolTip message="댓글 열기/닫기">
                 <span className="comment-cnt" onClick={onChangeCommentBox}>

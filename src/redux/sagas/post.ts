@@ -200,11 +200,13 @@ function likePostAPI(postId: number, like: boolean) {
         return axios({
             method: 'POST',
             url: `/likes/${postId}`,
+            headers: { Authorization: `Bearer ${getToken()}` },
         });
     }
     return axios({
         method: 'DELETE',
         url: `/likes/${postId}`,
+        headers: { Authorization: `Bearer ${getToken()}` },
     });
 }
 

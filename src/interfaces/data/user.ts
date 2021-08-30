@@ -4,6 +4,7 @@ export interface ILogInForm {
 }
 export interface ISignUpForm extends ILogInForm {
     name: string;
+    passwordConfirm: string;
 }
 export interface IAuth {
     id: number;

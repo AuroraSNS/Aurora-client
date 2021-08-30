@@ -6,15 +6,16 @@ import { Wrapper } from './style';
 type Props = {
     view: boolean;
     onChangeView: () => void;
+    viewLogin: () => void;
 };
 
-const LoginPresenter = ({ view, onChangeView }: Props) => (
+const LoginPresenter = ({ view, onChangeView, viewLogin }: Props) => (
     <Wrapper>
         <div>
             {view ? (
                 <LoginFormContainer onChangeView={onChangeView} />
             ) : (
-                <SignupFormContainer onChangeView={onChangeView} />
+                <SignupFormContainer onChangeView={onChangeView} viewLogin={viewLogin} />
             )}
         </div>
     </Wrapper>

@@ -8,14 +8,18 @@ import LoginPresenter from './LoginPresenter';
 const LoginContainer = () => {
     const router = useRouter();
     const { logInDone } = useSelector((state: RootState) => state.user);
-    const [view, onChangeView] = useToggle(true);
+    const [view, onChangeView, setView] = useToggle(true);
+
+    const viewLogin = useCallback(() => {
+        setView(true);
+    }, []);
 
     useEffect(() => {
         if (logInDone || localStorage.getItem('accessToken')) {
             router.push('/');
         }
     }, [router, logInDone]);
-    return <LoginPresenter view={view} onChangeView={onChangeView} />;
+    return <LoginPresenter view={view} onChangeView={onChangeView} viewLogin={viewLogin} />;
 };
 
 export default LoginContainer;

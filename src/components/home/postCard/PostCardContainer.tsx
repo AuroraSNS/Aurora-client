@@ -38,12 +38,16 @@ const PostCardContainer = ({ post }: Props) => {
         }
     }, [modifyPostDone]);
 
-    const onClickLike = useCallback(() => {
-        if (me) {
-            // dispatch(likePostRequest(post.id, me.likeList.includes(post.id)));
-            dispatch(likePostRequest(post.id, true));
-        }
-    }, []);
+    const onClickLike = useCallback(
+        (islike: boolean) => {
+            if (me) {
+                // dispatch(likePostRequest(post.id, me.likeList.includes(post.id)));
+                dispatch(likePostRequest(post.id, islike));
+            }
+        },
+        [me, post],
+    );
+
     return (
         <PostCardPresentert
             isMe={me?.id === post.auth.id}
@@ -60,8 +64,7 @@ const PostCardContainer = ({ post }: Props) => {
             showRemoveModal={showRemoveModal}
             showRemoveModalToggle={showRemoveModalToggle}
             removeOk={removeOk}
-            isLike
-            // isLike={me.likeList.includes(post.id)}
+            isLike={me?.likeList.includes(post.id) || false}
             onClickLike={onClickLike}
         />
     );

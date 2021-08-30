@@ -14,6 +14,8 @@ type Props = {
     onChangeName: ISetState;
     password: string;
     onChangePassword: ISetState;
+    passwordConfirm: string;
+    onChangePasswordConfirm: ISetState;
     onSubmit: IOnSubmit;
     signUpLoading: boolean;
     signUpError: boolean;
@@ -27,6 +29,8 @@ const SignupFormPresenter = ({
     onChangeName,
     password,
     onChangePassword,
+    passwordConfirm,
+    onChangePasswordConfirm,
     onSubmit,
     signUpLoading,
     signUpError,
@@ -43,6 +47,14 @@ const SignupFormPresenter = ({
             value={password}
             onChange={onChangePassword}
             placeholder="비밀번호"
+            required
+        />
+        <input
+            name="passwordConfirm"
+            type="password"
+            value={passwordConfirm}
+            onChange={onChangePasswordConfirm}
+            placeholder="비밀번호확인"
             required
         />
         {signUpError && <ErrorMessage message="이미 존재하는 이메일입니다." />}
