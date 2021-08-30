@@ -5,6 +5,7 @@ import user from './user';
 import post from './post';
 import comment from './comment';
 import chat from './chat';
+import notification from './notification';
 
 const rootReducer: Reducer<any, AnyAction> = (state, action) => {
     switch (action.type) {
@@ -17,6 +18,7 @@ const rootReducer: Reducer<any, AnyAction> = (state, action) => {
                 post,
                 comment,
                 chat,
+                notification,
             });
             return combinedReducer(state, action);
         }

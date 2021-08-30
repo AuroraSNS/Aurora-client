@@ -32,6 +32,12 @@ export const createSampleComments = (n: number) => {
     return sampleComments;
 };
 
+export const createSampleAllNotification = () => ({
+    chatting: Math.floor(Math.random() * 10),
+    notification: Math.floor(Math.random() * 10),
+    friend: Math.floor(Math.random() * 10),
+});
+
 export const createSampleNotifications = (n: number) => {
     const sampleNotifications = [];
     for (let i = 0; i < n; i += 1) {

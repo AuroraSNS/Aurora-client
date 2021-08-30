@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Tap = styled.a<{ selected: string; name: string }>`
     /* border: 1px solid gray; */
+    position: relative;
     margin-left: 50px;
     display: flex;
     align-items: center;
@@ -55,6 +56,32 @@ export const Tap = styled.a<{ selected: string; name: string }>`
         }
         .friend {
             background-position: -114px -66px;
+        }
+    }
+    span {
+        background-color: tomato;
+        width: 30px;
+        height: 30px;
+        border-radius: 15px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-weight: 600;
+        position: absolute;
+        left: -30px;
+        bottom: 15px;
+        animation: notificationAnimation 2s ease-in-out infinite;
+        @keyframes notificationAnimation {
+            0% {
+                transform: none;
+            }
+            50% {
+                transform: translateY(-5px) rotateY(360deg);
+            }
+            100% {
+                transform: none;
+            }
         }
     }
 `;

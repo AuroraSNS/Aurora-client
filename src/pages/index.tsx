@@ -4,6 +4,7 @@ import HomeContainer from '../components/home/HomeContainer';
 import wrapper from '../redux/create';
 import { loadAllPostsRequest, loadAllStatisticsRequest } from '../redux/modules/post';
 import { loadProfileRequest } from '../redux/modules/user';
+import { loadAllNotificationRequest } from '../redux/modules/notification';
 
 const Home = () => <HomeContainer />;
 
@@ -11,6 +12,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     const cookies = nookies.get(context);
     if (cookies.accessToken) {
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
+        context.store.dispatch(loadAllNotificationRequest(cookies.accessToken));
     }
     context.store.dispatch(loadAllStatisticsRequest());
     context.store.dispatch(loadAllPostsRequest(0, []));
