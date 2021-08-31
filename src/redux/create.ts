@@ -4,8 +4,8 @@ import { createWrapper, MakeStore } from 'next-redux-wrapper';
 import { composeWithDevTools } from 'redux-devtools-extension';
 
 import rootReducer from './modules/reducer';
-import { IUserState } from '../interfaces/data/user';
-import { IPostState } from '../interfaces/data/post';
+import { IUserState } from '../interfaces/user';
+import { IPostState } from '../interfaces/post';
 import rootSaga from './sagas';
 
 export interface CombinedState {

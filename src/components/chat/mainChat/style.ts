@@ -7,6 +7,7 @@ export const Wrapper = styled.div<{ msgTheme: string }>`
     height: 560px;
     position: relative;
     margin-top: 23px;
+    padding: 0 20px;
     .chat__timestamp {
         text-align: center;
         color: #707070;
@@ -58,5 +59,12 @@ export const Wrapper = styled.div<{ msgTheme: string }>`
         background: ${({ theme, msgTheme }) => theme.colors[msgTheme]};
         margin-right: 13px;
         margin-left: 5px;
+    }
+    .empty {
+        position: absolute;
+        ${({ theme }) => theme.textStyles.H18};
+        left: 50%;
+        transform: translateX(-50%);
+        top: 50%;
     }
 `;

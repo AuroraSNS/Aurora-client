@@ -21,7 +21,8 @@ import {
     modifyCommentFailure,
     modifyCommentRequest,
 } from '../modules/comment';
-import { IComment } from '../../interfaces/data/comment';
+import { IComment } from '../../interfaces/comment';
+import { addPostComment } from '../modules/post';
 
 function loadCommentAPI(postId: number) {
     return axios({
@@ -57,6 +58,7 @@ function* addComment(action: ReturnType<typeof addCommentRequest>) {
     try {
         yield call(addCommentAPI, action.postId, action.content);
         yield put(addCommentSuccess());
+        yield put(addPostComment(action.postId));
     } catch (err) {
         yield put(addCommentFailure(err.message));
     }

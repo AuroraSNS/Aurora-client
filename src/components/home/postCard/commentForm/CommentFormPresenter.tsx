@@ -1,5 +1,5 @@
 import React from 'react';
-import { IOnSubmit, ISetState } from '../../../../interfaces/data';
+import { IOnSubmit, ISetState } from '../../../../interfaces';
 import { Form } from './style';
 
 type Props = {

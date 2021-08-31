@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable radix */
 import React, { useEffect, useState } from 'react';
-import { ITodayWeather } from '../../../../interfaces/data';
+import { ITodayWeather } from '../../../../interfaces';
 import { convertWeatherIcon } from '../../../../util/util';
 import { Container, IconWeather, Wrapper } from './style';
 

@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
-import { ICommentAction } from '../../interfaces/act/comment';
-import { IComment, ICommentState } from '../../interfaces/data/comment';
+
+import { IComment, ICommentAction, ICommentState } from '../../interfaces/comment';
 
 export const LOAD_COMMENT_REQUEST = 'LOAD_COMMENT_REQUEST' as const;
 export const LOAD_COMMENT_SUCCESS = 'LOAD_COMMENT_SUCCESS' as const;

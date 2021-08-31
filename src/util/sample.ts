@@ -1,6 +1,6 @@
 import faker from 'faker';
-import { IContent, IRoom } from '../interfaces/data/chat';
-import { IAuth } from '../interfaces/data/user';
+import { IContent, IRoom } from '../interfaces/chat';
+import { IAuth } from '../interfaces/user';
 
 export const createSampleMe = () => ({
     id: new Date().getTime(),

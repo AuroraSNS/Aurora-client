@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { IPost } from '../../../../interfaces/data/post';
+import { IPost } from '../../../../interfaces/post';
 import { IconDislike, IconLike } from '../../../common/Icon';
 import Modal from '../../../common/Modal';
 import ImageSliderContainer from './imageSlider/ImageSliderContainer';

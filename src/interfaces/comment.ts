@@ -1,3 +1,4 @@
+import { IAuth } from './user';
 import {
     addCommentRequest,
     addCommentSuccess,
@@ -11,7 +12,30 @@ import {
     removeCommentRequest,
     removeCommentSuccess,
     removeCommentFailure,
-} from '../../redux/modules/comment';
+} from '../redux/modules/comment';
+
+export interface IComment {
+    id: number;
+    auth: IAuth;
+    content: string;
+}
+
+export interface ICommentState {
+    comment: IComment[] | null;
+    commentCnt: number;
+    loadCommentLoading: boolean;
+    loadCommentDone: boolean;
+    loadCommentError: null | string;
+    addCommentLoading: boolean;
+    addCommentDone: boolean;
+    addCommentError: null | string;
+    modifyCommentLoading: boolean;
+    modifyCommentDone: boolean;
+    modifyCommentError: null | string;
+    removeCommentLoading: boolean;
+    removeCommentDone: boolean;
+    removeCommentError: null | string;
+}
 
 export type ICommentAction =
     | ReturnType<typeof addCommentRequest>

@@ -9,6 +9,9 @@ export const Wrapper = styled.div`
         ${({ theme }) => theme.textStyles.P14}
         margin-left: 15px;
     }
+    & > button {
+        height: 20px;
+    }
     .more-overlay {
         position: fixed;
         top: 0;

@@ -1,6 +1,6 @@
 import React from 'react';
 import Avatar from '../../../common/Avatar';
-import { Container, FriendCard, Wrapper } from './style';
+import { Container, RecommendFriendCard, Wrapper } from './style';
 
 const Sample = [
     {
@@ -22,13 +22,13 @@ const RecommendFriend = () => (
         <div className="title">추천 친구</div>
         <Container>
             {Sample.map((ele) => (
-                <FriendCard key={ele.id}>
+                <RecommendFriendCard key={ele.id}>
                     <div>
                         <Avatar url="" size={44} />
                     </div>
                     <span>{ele.name}</span>
                     <button type="button">친구 추가</button>
-                </FriendCard>
+                </RecommendFriendCard>
             ))}
         </Container>
     </Wrapper>

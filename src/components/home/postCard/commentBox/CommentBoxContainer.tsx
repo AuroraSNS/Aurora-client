@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { IComment } from '../../../../interfaces/data/comment';
+import { IComment } from '../../../../interfaces/comment';
 import { loadCommentRequest } from '../../../../redux/modules/comment';
 import { RootState } from '../../../../redux/modules/reducer';
 import CommentBoxPresenter from './CommentBoxPresenter';

@@ -43,10 +43,10 @@ export const Wrapper = styled.section`
         margin-left: 15px;
         display: flex;
         flex-direction: column;
-        & > span:first-child {
+        a {
             ${({ theme }) => theme.textStyles.H14}
         }
-        & > span:last-child {
+        span {
             ${({ theme }) => theme.textStyles.P12}
         }
     }

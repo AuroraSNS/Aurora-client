@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import React from 'react';
-import { IPost } from '../../../../interfaces/data/post';
+import { IPost } from '../../../../interfaces/post';
 import Avatar from '../../../common/Avatar';
 import { IconCloud, IconMoon, IconRain, IconSun } from '../../../common/Icon';
 import { IconMood, Wrapper } from './style';
@@ -10,9 +11,15 @@ type Props = {
 
 const PostHeaderPresenter = ({ post }: Props) => (
     <Wrapper>
-        <Avatar size={44} url={post.auth.avatar} />
+        <Link href={`/user/${post.auth.id}`}>
+            <a>
+                <Avatar size={44} url={post.auth.avatar} />
+            </a>
+        </Link>
         <div className="info">
-            <span>{post.auth.name}</span>
+            <Link href={`/user/${post.auth.id}`}>
+                <a>{post.auth.name}</a>
+            </Link>
             <span>22 mins ago</span>
         </div>
         <IconMood mood={post.mood} />

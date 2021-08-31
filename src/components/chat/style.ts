@@ -124,13 +124,15 @@ export const ThemeBox = styled.div`
     right: 55px;
     top: 80px;
     display: flex;
+    div {
+        &:not(:last-child) {
+            margin-right: 8px;
+        }
+    }
     input {
         display: none;
     }
     label {
-        &:not(:last-child) {
-            margin-right: 8px;
-        }
         &::before {
             content: '';
             display: block;

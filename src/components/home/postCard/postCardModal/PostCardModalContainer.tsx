@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { IPost } from '../../../../interfaces/data/post';
+import { IPost } from '../../../../interfaces/post';
 import { likePostRequest } from '../../../../redux/modules/post';
 import { RootState } from '../../../../redux/modules/reducer';
 import PostCardModalPresenter from './PostCardModalPresenter';

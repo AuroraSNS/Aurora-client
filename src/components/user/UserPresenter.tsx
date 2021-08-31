@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPost } from '../../interfaces/data/post';
+import { IPost } from '../../interfaces/post';
 import ScrollToTop from '../common/ScrollToTop';
 import PostCardContainer from '../home/postCard/PostCardContainer';
 import { PostCardList } from '../home/style';

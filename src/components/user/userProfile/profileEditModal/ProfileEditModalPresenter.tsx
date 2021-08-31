@@ -1,6 +1,6 @@
 import React from 'react';
-import { IOnSubmit, ISetState } from '../../../../interfaces/data';
-import { IMe } from '../../../../interfaces/data/user';
+import { IOnSubmit, ISetState } from '../../../../interfaces';
+import { IMe } from '../../../../interfaces/user';
 import Avatar from '../../../common/Avatar';
 import { IconClear, IconGallery } from '../../../common/Icon';
 import Loading from '../../../common/Loading';

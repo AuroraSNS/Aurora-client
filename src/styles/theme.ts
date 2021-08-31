@@ -111,6 +111,8 @@ const bgFilter = css`
         content: '';
         display: block;
         position: absolute;
+        left: 0;
+        top: 0;
         width: 100%;
         height: 100%;
         background: linear-gradient(324.54deg, #d3bafc 0%, #b9d8f6 34.9%, #f8cbcb 68.23%, #fee6e6 100%);

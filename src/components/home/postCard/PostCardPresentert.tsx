@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import Image from 'next/image';
 import React from 'react';
-import { IPost } from '../../../interfaces/data/post';
+import { IPost } from '../../../interfaces/post';
 import ConfirmModal from '../../common/ConfirmModal';
 import { IconDislike, IconLike, IconMore } from '../../common/Icon';
 import PostFormModalContainer from '../../common/postFormModal/PostFormModalContainer';

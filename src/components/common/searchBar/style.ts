@@ -22,5 +22,4 @@ export const Wrapper = styled.div`
         padding: 7px;
         background-color: transparent;
     }
-    margin-top: 50px;
 `;

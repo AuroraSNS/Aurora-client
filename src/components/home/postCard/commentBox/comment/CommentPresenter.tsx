@@ -2,8 +2,8 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React from 'react';
-import { IOnSubmit, ISetState } from '../../../../../interfaces/data';
-import { IComment } from '../../../../../interfaces/data/comment';
+import { IOnSubmit, ISetState } from '../../../../../interfaces';
+import { IComment } from '../../../../../interfaces/comment';
 import Avatar from '../../../../common/Avatar';
 import ConfirmModal from '../../../../common/ConfirmModal';
 import { IconMore } from '../../../../common/Icon';

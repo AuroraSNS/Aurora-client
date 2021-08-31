@@ -1,5 +1,5 @@
 import React from 'react';
-import { IPost } from '../../../../interfaces/data/post';
+import { IPost } from '../../../../interfaces/post';
 import PostHeaderPresenter from './PostHeaderPresenter';
 
 type Props = {

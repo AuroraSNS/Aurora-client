@@ -2,7 +2,7 @@
 import { useEffect, useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useToggle from '../../../hooks/useToggle';
-import { IPost } from '../../../interfaces/data/post';
+import { IPost } from '../../../interfaces/post';
 import { likePostRequest, removePostRequest } from '../../../redux/modules/post';
 import { RootState } from '../../../redux/modules/reducer';
 import PostCardPresentert from './PostCardPresentert';

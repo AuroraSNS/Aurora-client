@@ -71,7 +71,7 @@ export const Tap = styled.a<{ selected: string; name: string }>`
         position: absolute;
         left: -30px;
         bottom: 15px;
-        animation: notificationAnimation 2s ease-in-out infinite;
+        /* animation: notificationAnimation 2s ease-in-out infinite; */
         @keyframes notificationAnimation {
             0% {
                 transform: none;

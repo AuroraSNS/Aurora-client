@@ -1,7 +1,8 @@
+/* eslint-disable no-fallthrough */
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
-import { PostAction } from '../../interfaces/act/post';
-import { IPost, IPostState, IWeatherStatistics } from '../../interfaces/data/post';
+
+import { IPost, IPostState, IWeatherStatistics, PostAction } from '../../interfaces/post';
 
 // 액션 상수
 export const LOAD_ALL_POSTS_REQUEST = 'LOAD_ALL_POSTS_REQUEST' as const;
@@ -42,6 +43,8 @@ export const LIKE_POST_FAILURE = 'LIKE_POST_FAILURE' as const;
 export const REMOVE_LIKE_REQUEST = 'REMOVE_LIKE_REQUEST' as const;
 export const REMOVE_LIKE_SUCCESS = 'REMOVE_LIKE_SUCCESS' as const;
 export const REMOVE_LIKE_FAILURE = 'REMOVE_LIKE_FAILURE' as const;
+
+export const ADD_POST_COMMENT = 'ADD_POST_COMMENT' as const;
 
 // 초기 데이터 구조
 export const initialState: IPostState = {
@@ -203,6 +206,13 @@ const reducer = (state = initialState, action: PostAction) =>
                 draft.likePostLoading = false;
                 draft.likePostError = action.error;
                 break;
+            case ADD_POST_COMMENT: {
+                const tmp = (draft.Posts as IPost[]).find((post: IPost) => post.id === action.postId);
+                if (tmp) {
+                    (tmp as IPost).commentCnt += 1;
+                }
+                break;
+            }
             default:
                 break;
         }
@@ -339,6 +349,11 @@ export const likePostSuccess = (postId: number, like: boolean) => ({
 export const likePostFailure = (error: string) => ({
     type: LIKE_POST_FAILURE,
     error,
+});
+
+export const addPostComment = (postId: number) => ({
+    type: ADD_POST_COMMENT,
+    postId,
 });
 
 export default reducer;

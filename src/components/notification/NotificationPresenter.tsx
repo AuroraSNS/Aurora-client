@@ -1,16 +1,24 @@
 import React from 'react';
-import { INotification } from '../../interfaces/data/notification';
-import NotificationBox from '../common/NotificationBox';
+import { INotification } from '../../interfaces/notification';
+import { IPost } from '../../interfaces/post';
+import PostCardModalContainer from '../home/postCard/postCardModal/PostCardModalContainer';
 import AppLayout from '../layout/AppLayout';
+import NotificationBoxContainer from './notificationBox/NotificationBoxContainer';
 
 type Props = {
-    noti: INotification[] | null;
+    newNoti: INotification[] | null;
+    prevNoti: INotification[] | null;
+    onClickNoti: (id: number, postId: number) => void;
+    showModal: boolean;
+    showModalToggle: () => void;
+    post: IPost | null;
 };
 
-const NotificationPresenter = ({ noti }: Props) => (
+const NotificationPresenter = ({ post, newNoti, prevNoti, onClickNoti, showModal, showModalToggle }: Props) => (
     <AppLayout title="Notification" filter={false}>
-        <NotificationBox notis={noti as INotification[]} newNoti />
-        <NotificationBox notis={noti as INotification[]} />
+        <NotificationBoxContainer notis={newNoti as INotification[]} newNoti onClickNoti={onClickNoti} />
+        <NotificationBoxContainer notis={prevNoti as INotification[]} />
+        {showModal && <PostCardModalContainer post={post as IPost} onClose={showModalToggle} />}
     </AppLayout>
 );
 

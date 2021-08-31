@@ -1,5 +1,5 @@
 import React from 'react';
-import { IComment } from '../../../../interfaces/data/comment';
+import { IComment } from '../../../../interfaces/comment';
 import CommentContainer from './comment/CommentContainer';
 import { Wrapper } from './style';
 

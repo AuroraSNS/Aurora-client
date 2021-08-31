@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/no-autofocus */
 import React, { RefObject } from 'react';
-import { IOnSubmit, ISetState } from '../../../interfaces/data';
-import { IPost } from '../../../interfaces/data/post';
-import { IMe } from '../../../interfaces/data/user';
+import { IOnSubmit, ISetState } from '../../../interfaces';
+import { IPost } from '../../../interfaces/post';
+import { IMe } from '../../../interfaces/user';
 import Avatar from '../Avatar';
 import { IconClear, IconCloud, IconGallery, IconImageAdd, IconMoon, IconRain, IconSun } from '../Icon';
 import Loading from '../Loading';

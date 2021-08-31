@@ -1,5 +1,5 @@
 import React from 'react';
-import { IMe } from '../../../interfaces/data/user';
+import { IMe } from '../../../interfaces/user';
 import Avatar from '../../common/Avatar';
 import PostFormModalContainer from '../../common/postFormModal/PostFormModalContainer';
 import { Wrapper } from './style';

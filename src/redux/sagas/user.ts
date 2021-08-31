@@ -27,7 +27,7 @@ import {
     signUpSuccess,
     SIGN_UP_REQUEST,
 } from '../modules/user';
-import { ILogInForm, IMe, ISignUpForm, IUserProfile } from '../../interfaces/data/user';
+import { ILogInForm, IMe, ISignUpForm, IUserProfile } from '../../interfaces/user';
 import { getToken } from '.';
 
 function logInAPI(data: ILogInForm) {
@@ -40,9 +40,9 @@ function logInAPI(data: ILogInForm) {
 
 function* logIn(action: ReturnType<typeof logInRequest>) {
     try {
-        const result: AxiosResponse<{ accessToken: string }> = yield call(logInAPI, action.data);
-        setCookie(null, 'accessToken', result.data.accessToken, { path: '/' });
-        sessionStorage.setItem('accessToken', result.data.accessToken);
+        const result: AxiosResponse<{ token: string }> = yield call(logInAPI, action.data);
+        setCookie(null, 'accessToken', result.data.token, { path: '/' });
+        sessionStorage.setItem('accessToken', result.data.token);
         yield put(logInSuccess());
     } catch (err) {
         yield put(logInFailure('로그인 실패'));

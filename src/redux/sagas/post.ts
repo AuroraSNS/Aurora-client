@@ -40,7 +40,7 @@ import {
     likePostFailure,
 } from '../modules/post';
 
-import { IPost, IWeatherStatistics } from '../../interfaces/data/post';
+import { IPost, IWeatherStatistics } from '../../interfaces/post';
 import { modifyLikelist } from '../modules/user';
 
 let qs = require('qs');

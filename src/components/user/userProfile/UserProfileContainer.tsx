@@ -1,7 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import useToggle from '../../../hooks/useToggle';
+import { ISendNoti } from '../../../interfaces/notification';
 import { RootState } from '../../../redux/modules/reducer';
+import { getSocket } from '../../../util/util';
 import UserProfilePresenter from './UserProfilePresenter';
 
 const UserProfileContainer = () => {
@@ -15,12 +17,28 @@ const UserProfileContainer = () => {
         }
     }, [modifyProfileDone]);
 
+    const { socket, headers } = getSocket();
+
+    const friendRequest = useCallback(() => {
+        if (me) {
+            const newNoti: ISendNoti = {
+                type: 'FRIEND_REQUEST',
+                from: me.id,
+                to: user.id,
+                targetId: null,
+                message: '',
+            };
+            socket.send('/pub/notification', headers, JSON.stringify(newNoti));
+        }
+    }, []);
+
     return (
         <UserProfilePresenter
             user={user}
             isMe={me?.id === user?.id}
             showProfileModal={showProfileModal}
             showProfileModalToggle={showProfileModalToggle}
+            friendRequest={friendRequest}
         />
     );
 };

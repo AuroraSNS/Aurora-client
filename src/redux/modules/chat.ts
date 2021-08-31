@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
-import { IChatAction } from '../../interfaces/act/chat';
-import { IChatState, IRoom } from '../../interfaces/data/chat';
+
+import { IChatAction, IChatState, IRoom } from '../../interfaces/chat';
 
 export const LOAD_ROOMS_REQUEST = 'LOAD_ROOMS_REQUEST' as const;
 export const LOAD_ROOMS_SUCCESS = 'LOAD_ROOMS_SUCCESS' as const;

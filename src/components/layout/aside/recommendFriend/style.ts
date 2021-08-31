@@ -19,7 +19,7 @@ export const Container = styled.div`
     justify-content: space-evenly;
 `;
 
-export const FriendCard = styled.div`
+export const RecommendFriendCard = styled.div`
     width: 63px;
     height: 111px;
     ${({ theme }) => theme.flexCenter}

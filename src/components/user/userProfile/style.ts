@@ -34,4 +34,16 @@ export const Wrapper = styled.div`
             opacity: 1;
         }
     }
+    .friend {
+        width: 60px;
+        height: 22px;
+        ${({ theme }) => theme.textStyles.P12}
+        border-radius: 50px;
+        background: ${({ theme }) => theme.colors.gradient2};
+        opacity: 0.8;
+        color: #fff;
+        &:hover {
+            opacity: 1;
+        }
+    }
 `;

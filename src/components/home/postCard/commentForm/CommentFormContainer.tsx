@@ -1,9 +1,11 @@
 import React, { FormEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import useInput from '../../../../hooks/useInput';
+import { ISendNoti } from '../../../../interfaces/notification';
+import { IPost } from '../../../../interfaces/post';
 import { addCommentRequest } from '../../../../redux/modules/comment';
 import { RootState } from '../../../../redux/modules/reducer';
+import { getSocket } from '../../../../util/util';
 import CommentFormPresenter from './CommentFormPresenter';
 
 type Props = {
@@ -21,10 +23,26 @@ const CommentFormContainer = ({ postId }: Props) => {
         }
     }, [addCommentDone]);
 
+    const { socket, headers } = getSocket();
+
+    const { me } = useSelector((state: RootState) => state.user);
+    const { Posts } = useSelector((state: RootState) => state.post);
+
     const onSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
             dispatch(addCommentRequest(postId, content));
+
+            const you = Posts.find((post: IPost) => post.id === postId).auth;
+
+            const newNoti: ISendNoti = {
+                type: 'POST',
+                from: me.id,
+                to: you.id,
+                targetId: postId,
+                message: `${me.name}님이 ${you.name}님 게시물에 댓글을 달았습니다.`,
+            };
+            socket.send('/pub/notification', headers, JSON.stringify(newNoti));
         },
         [content],
     );

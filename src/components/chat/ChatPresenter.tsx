@@ -1,7 +1,7 @@
 import React from 'react';
-import { IOnSubmit, ISetState } from '../../interfaces/data';
-import { IContent, IRoom } from '../../interfaces/data/chat';
-import { IMe } from '../../interfaces/data/user';
+import { IOnSubmit, ISetState } from '../../interfaces';
+import { IContent, IRoom } from '../../interfaces/chat';
+import { IMe } from '../../interfaces/user';
 import Avatar from '../common/Avatar';
 import AppLayout from '../layout/AppLayout';
 import MainChatContainer from './mainChat/MainChatContainer';
@@ -39,10 +39,10 @@ const ChatPresenter = ({
                 </div>
                 <ThemeBox onClick={onClick}>
                     {['sun', 'rain', 'cloud', 'moon', 'gradient3'].map((themename: string) => (
-                        <>
+                        <div key={themename}>
                             <input type="radio" name="theme" id={`theme-${themename}`} value={themename} />
                             <label htmlFor={`theme-${themename}`} />
-                        </>
+                        </div>
                     ))}
                 </ThemeBox>
                 <MainChatContainer msgTheme={msgTheme} contents={contents} />

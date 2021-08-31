@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
-import { UserAction } from '../../interfaces/act/user';
-import { ILogInForm, IMe, ISignUpForm, IUserProfile, IUserState } from '../../interfaces/data/user';
+
+import { ILogInForm, IMe, ISignUpForm, IUserProfile, IUserState, UserAction } from '../../interfaces/user';
 
 // 액션 상수
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;

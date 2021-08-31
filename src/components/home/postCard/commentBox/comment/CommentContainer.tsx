@@ -2,7 +2,7 @@ import React, { FormEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../../../../hooks/useInput';
 import useToggle from '../../../../../hooks/useToggle';
-import { IComment } from '../../../../../interfaces/data/comment';
+import { IComment } from '../../../../../interfaces/comment';
 import { modifyCommentRequest, removeCommentRequest } from '../../../../../redux/modules/comment';
 import { RootState } from '../../../../../redux/modules/reducer';
 import CommentPresenter from './CommentPresenter';

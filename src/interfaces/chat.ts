@@ -1,4 +1,5 @@
 import { IAuth } from './user';
+import { loadRoomsFailure, loadRoomsRequest, loadRoomsSuccess } from '../redux/modules/chat';
 
 export interface IRoom {
     roomId: number;
@@ -30,3 +31,8 @@ export interface IChatState {
     loadRoomsDone: boolean;
     loadRoomsError: null | string;
 }
+
+export type IChatAction =
+    | ReturnType<typeof loadRoomsRequest>
+    | ReturnType<typeof loadRoomsSuccess>
+    | ReturnType<typeof loadRoomsFailure>;
