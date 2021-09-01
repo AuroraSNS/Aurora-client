@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const IconMood = styled.div<{ mood: string }>`
-    background-image: url('images/aurora_icon.png');
+    background-image: url('/images/aurora_icon.png');
     background-repeat: no-repeat;
     ${({ mood }) =>
         mood === 'sun' &&

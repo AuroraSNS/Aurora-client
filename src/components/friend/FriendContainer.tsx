@@ -25,7 +25,6 @@ const FriendContainer = () => {
                 type: 'FRIEND_ACCEPT',
                 from: me.id,
                 to: user.id,
-                targetId: id,
                 message: `${user.name}님이 친구요청을 수락하셨습니다.`,
             };
             socket.send('/pub/notification', headers, JSON.stringify(newNoti));
@@ -47,7 +46,13 @@ const FriendContainer = () => {
                     <div className="box">
                         {friendList &&
                             friendList.map((friend: IAuth) => (
-                                <FriendCard key={friend.id} user={friend} onClick={removeFriend} text="친구 끊기" />
+                                <FriendCard
+                                    key={friend.id}
+                                    id={friend.id}
+                                    user={friend}
+                                    onClick={removeFriend}
+                                    text="친구 끊기"
+                                />
                             ))}
                     </div>
                 </FriendList>

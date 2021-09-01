@@ -226,9 +226,10 @@ export const loadProfileFailure = (error: string) => ({
     error,
 });
 
-export const loadUserProfileRequest = (userId: number) => ({
+export const loadUserProfileRequest = (userId: number, token: string) => ({
     type: LOAD_USER_PROFILE_REQUEST,
     userId,
+    token,
 });
 
 export const loadUserProfileSuccess = (data: IUserProfile) => ({

@@ -26,7 +26,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         </div>
                     </div>
                 </ToolTip>
-                <ToolTip message={`${statistics.cloud}%`} wh={31}>
+                <ToolTip message={`${statistics?.cloud}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-cloud" />
@@ -36,7 +36,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         </div>
                     </div>
                 </ToolTip>
-                <ToolTip message={`${statistics.rain}%`} wh={31}>
+                <ToolTip message={`${statistics?.rain}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-rain" />
@@ -46,7 +46,7 @@ const WeatherStatistics = ({ isMain }: Props) => {
                         </div>
                     </div>
                 </ToolTip>
-                <ToolTip message={`${statistics.moon}%`} wh={31}>
+                <ToolTip message={`${statistics?.moon}%`} wh={31}>
                     <div>
                         <div className="stick">
                             <span className="stick-moon" />

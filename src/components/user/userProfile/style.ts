@@ -35,7 +35,7 @@ export const Wrapper = styled.div`
         }
     }
     .friend {
-        width: 60px;
+        width: 100px;
         height: 22px;
         ${({ theme }) => theme.textStyles.P12}
         border-radius: 50px;

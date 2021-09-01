@@ -16,7 +16,7 @@ export const Wrapper = styled.section`
 export const IconWeather = styled.div<{
     index: number;
 }>`
-    background-image: url('images/aurora_icon.png');
+    background-image: url('/images/aurora_icon.png');
     background-repeat: no-repeat;
     margin-right: 20px;
     ${({ index }) =>

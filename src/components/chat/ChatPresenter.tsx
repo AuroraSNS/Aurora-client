@@ -34,8 +34,8 @@ const ChatPresenter = ({
         <Wrapper>
             <MainChat>
                 <div className="user">
-                    <Avatar url={me.avatar} size={36} />
-                    <span>{me.name}</span>
+                    <Avatar url={me?.avatar} size={36} />
+                    <span>{me?.name || '로그인이 필요합니다.'}</span>
                 </div>
                 <ThemeBox onClick={onClick}>
                     {['sun', 'rain', 'cloud', 'moon', 'gradient3'].map((themename: string) => (
@@ -55,8 +55,8 @@ const ChatPresenter = ({
             </MainChat>
             <ChatList>
                 <div className="user">
-                    <Avatar url={me.avatar} size={36} />
-                    <span>{me.name}</span>
+                    <Avatar url={me?.avatar} size={36} />
+                    <span>{me?.name || '로그인이 필요합니다.'}</span>
                     <div className="msgIcon">msgIcon</div>
                 </div>
                 <div className="chat-list">

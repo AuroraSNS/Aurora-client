@@ -24,9 +24,12 @@ const NotificationContainer = () => {
         showModalToggle();
     }, []);
 
-    const onClickNoti = useCallback((id: number, postId: number) => {
-        loadPost(postId);
-        dispatch(readNotificationRequest('POST', id));
+    const onClickNoti = useCallback((type: string, id: number, postId: number) => {
+        if (type === 'POST') {
+            loadPost(postId);
+        } else {
+            dispatch(readNotificationRequest(type, id));
+        }
     }, []);
 
     useEffect(() => {

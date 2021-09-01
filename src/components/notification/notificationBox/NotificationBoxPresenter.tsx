@@ -6,19 +6,19 @@ import { NotificationMsg, Wrapper } from './style';
 type Props = {
     notis: INotification[] | null;
     newNoti?: boolean;
-    onClickNoti?: (id: number, postId: number) => void;
+    onClickNoti?: (type: string, id: number, postId: number) => void;
 };
 
 const NotificationBoxPresenter = ({ newNoti, notis, onClickNoti }: Props) => (
     <Wrapper newNoti={newNoti as boolean}>
         <div className="title">{newNoti ? '새로운 알림' : '이전 알림'}</div>
         <div className="notifications">
-            {notis?.map(({ id, message, timeStamp, targetId }: INotification) => (
+            {notis?.map(({ id, type, message, timeStamp, targetId }: INotification) => (
                 <NotificationMsg
                     key={id}
                     onClick={() => {
                         if (newNoti && onClickNoti) {
-                            onClickNoti(id, targetId);
+                            onClickNoti(type, id, targetId);
                         }
                     }}
                 >

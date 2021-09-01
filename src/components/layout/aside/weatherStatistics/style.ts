@@ -64,22 +64,22 @@ export const Container = styled.div<{
         width: 30px;
         height: 30px;
         .sun {
-            background: url('images/aurora_icon.png') no-repeat -11px -110px;
+            background: url('/images/aurora_icon.png') no-repeat -11px -110px;
             width: 28px;
             height: 28px;
         }
         .cloud {
-            background: url('images/aurora_icon.png') no-repeat -52px -114px;
+            background: url('/images/aurora_icon.png') no-repeat -52px -114px;
             width: 29px;
             height: 19px;
         }
         .rain {
-            background: url('images/aurora_icon.png') no-repeat -94px -112px;
+            background: url('/images/aurora_icon.png') no-repeat -94px -112px;
             width: 29px;
             height: 25px;
         }
         .moon {
-            background: url('images/aurora_icon.png') no-repeat -136px -112px;
+            background: url('/images/aurora_icon.png') no-repeat -136px -112px;
             width: 25px;
             height: 25px;
         }

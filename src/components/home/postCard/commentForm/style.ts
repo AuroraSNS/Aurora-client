@@ -23,7 +23,7 @@ export const Form = styled.form`
         background: ${({ theme }) => theme.colors.gradient};
         border-radius: 50px;
         div {
-            background: url('images/aurora_icon.png') no-repeat -44px -172px;
+            background: url('/images/aurora_icon.png') no-repeat -44px -172px;
             width: 14px;
             height: 10px;
         }

@@ -42,7 +42,7 @@ const Wrapper = styled.div<{ visible: boolean }>`
     align-items: center;
     z-index: 9;
     div {
-        background: url('images/aurora_icon.png') no-repeat -338px -168px;
+        background: url('/images/aurora_icon.png') no-repeat -338px -168px;
         width: 11px;
         height: 20px;
         transform: rotate(90deg);

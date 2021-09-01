@@ -64,7 +64,7 @@ export const MainChat = styled.section`
                 opacity: 1;
             }
             div {
-                background: url('images/aurora_icon.png') no-repeat -615px -169px;
+                background: url('/images/aurora_icon.png') no-repeat -615px -169px;
                 width: 18px;
                 height: 18px;
             }
@@ -106,7 +106,7 @@ export const ChatList = styled.section`
     justify-content: center;
     .msgIcon {
         color: transparent;
-        background: url('images/aurora_icon.png') no-repeat -534px -112px;
+        background: url('/images/aurora_icon.png') no-repeat -534px -112px;
         width: 28px;
         height: 20px;
     }

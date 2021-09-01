@@ -38,6 +38,7 @@ export interface IAuth {
 
 export interface IUserProfile extends IAuth {
     bio: string;
+    status: string;
 }
 
 export interface IMe extends IUserProfile {

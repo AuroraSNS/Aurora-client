@@ -8,7 +8,7 @@ import NotificationBoxContainer from './notificationBox/NotificationBoxContainer
 type Props = {
     newNoti: INotification[] | null;
     prevNoti: INotification[] | null;
-    onClickNoti: (id: number, postId: number) => void;
+    onClickNoti: (type: string, id: number, postId: number) => void;
     showModal: boolean;
     showModalToggle: () => void;
     post: IPost | null;

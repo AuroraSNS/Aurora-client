@@ -10,7 +10,7 @@ export const Wrapper = styled.div`
     border-radius: 20px;
     padding: 0 16px;
     div {
-        background: url('images/aurora_icon.png') no-repeat -19px -170px;
+        background: url('/images/aurora_icon.png') no-repeat -19px -170px;
         color: transparent;
         width: 10px;
         height: 12px;

@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import useToggle from '../../../hooks/useToggle';
 import { ISendNoti } from '../../../interfaces/notification';
+import { removeFriendRequest } from '../../../redux/modules/friend';
 import { RootState } from '../../../redux/modules/reducer';
+import { loadUserProfileRequest } from '../../../redux/modules/user';
+import { getToken } from '../../../redux/sagas';
 import { getSocket } from '../../../util/util';
 import UserProfilePresenter from './UserProfilePresenter';
 
@@ -25,20 +28,29 @@ const UserProfileContainer = () => {
                 type: 'FRIEND_REQUEST',
                 from: me.id,
                 to: user.id,
-                targetId: null,
                 message: '',
             };
             socket.send('/pub/notification', headers, JSON.stringify(newNoti));
+            setTimeout(() => {
+                dispatch(loadUserProfileRequest(user.id, getToken() as string));
+            }, 1000);
         }
+    }, []);
+
+    const dispatch = useDispatch();
+
+    const removeFriend = useCallback((id: number) => {
+        dispatch(removeFriendRequest(id));
     }, []);
 
     return (
         <UserProfilePresenter
             user={user}
-            isMe={me?.id === user?.id}
+            me={me}
             showProfileModal={showProfileModal}
             showProfileModalToggle={showProfileModalToggle}
             friendRequest={friendRequest}
+            removeFriend={removeFriend}
         />
     );
 };

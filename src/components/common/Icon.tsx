@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const IconClear = styled.div`
-    background: url('images/aurora_icon.png') no-repeat -316px -175px;
+    background: url('/images/aurora_icon.png') no-repeat -316px -175px;
     width: 7px;
     height: 7px;
 `;
 
 export const IconGallery = styled.div`
-    background: url('images/aurora_icon.png') no-repeat -288px -170px;
+    background: url('/images/aurora_icon.png') no-repeat -288px -170px;
     width: 14px;
     height: 14px;
 `;
 
 export const IconMore = styled.div`
-    background: url('images/aurora_icon.png') no-repeat -129px -178px;
+    background: url('/images/aurora_icon.png') no-repeat -129px -178px;
     width: 15px;
     height: 3px;
 `;

@@ -15,7 +15,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
     }
     if (context.params) {
         context.store.dispatch(loadUserStatisticsRequest(context.params.id as string));
-        context.store.dispatch(loadUserProfileRequest(Number(context.params.id)));
+        context.store.dispatch(loadUserProfileRequest(Number(context.params.id), cookies.accessToken));
         context.store.dispatch(loadUserPostsRequest(Number(context.params.id), 0, []));
     }
     context.store.dispatch(END);

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-useless-escape */
 import { keyframes } from 'styled-components';
 import Stomp from 'stompjs';
@@ -22,16 +23,26 @@ import { getToken } from '../redux/sagas';
 // - queue: 일 대 일의 커넥션에서 메시지를 전송한다
 // - user: 메시지를 보내기 위한 사용자를 특정한다
 
-const sockJS = new SockJS('https://api.aurora.center/ws-stomp');
-const stompClient: Stomp.Client = Stomp.over(sockJS);
-stompClient.debug = (str: string) => {
-    console.log(str);
-};
 const headers = {
     Authorization: getToken() as string,
 };
+let sockJS = new SockJS('https://api.aurora.center/ws-stomp');
+let socket: Stomp.Client = Stomp.over(sockJS);
+socket.debug = (str: string) => {
+    console.log(str);
+};
+socket.connect(
+    headers,
+    () => {
+        console.log('연결 성공');
+    },
+    () => {
+        console.log('연결 실패');
+    },
+);
+
 export const getSocket = () => ({
-    socket: stompClient,
+    socket,
     headers,
 });
 

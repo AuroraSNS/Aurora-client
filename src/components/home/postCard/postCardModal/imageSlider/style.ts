@@ -14,7 +14,7 @@ export const Wrapper = styled.div`
     .prev {
         right: 97%;
         div {
-            background: url('images/aurora_icon.png') no-repeat -338px -168px;
+            background: url('/images/aurora_icon.png') no-repeat -338px -168px;
             width: 11px;
             height: 20px;
         }
@@ -22,7 +22,7 @@ export const Wrapper = styled.div`
     .next {
         left: 97%;
         div {
-            background: url('images/aurora_icon.png') no-repeat -361px -168px;
+            background: url('/images/aurora_icon.png') no-repeat -361px -168px;
             width: 11px;
             height: 20px;
         }

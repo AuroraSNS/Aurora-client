@@ -5,7 +5,7 @@ import NotificationBoxPresenter from './NotificationBoxPresenter';
 type Props = {
     notis: INotification[] | null;
     newNoti?: boolean;
-    onClickNoti?: (id: number, postId: number) => void;
+    onClickNoti?: (type: string, id: number, postId: number) => void;
 };
 
 const NotificationBoxContainer = ({ newNoti, notis, onClickNoti }: Props) => (

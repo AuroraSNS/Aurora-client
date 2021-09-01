@@ -84,7 +84,7 @@ function* readNotification(action: ReturnType<typeof readNotificationRequest>) {
     try {
         yield call(readNotificationAPI, action.notiType, action.id);
         yield put(loadAllNotificationRequest(getToken() as string));
-        if (action.notiType === 'POST') {
+        if (action.notiType === 'POST' || action.notiType === 'FRIEND_ACCEPT') {
             yield put(loadNotificationRequest(getToken() as string));
         } else {
             yield put(loadFriendListRequest(getToken() as string));

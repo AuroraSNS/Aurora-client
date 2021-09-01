@@ -97,16 +97,18 @@ function* loadProfile(action: ReturnType<typeof loadProfileRequest>) {
     }
 }
 
-function loadUserProfileAPI(userId: number) {
+function loadUserProfileAPI(userId: number, token: string) {
+    console.log(getToken());
     return axios({
         method: 'GET',
         url: `/user/${userId}`,
+        headers: { Authorization: `Bearer ${token}` },
     });
 }
 
 function* loadUserProfile(action: ReturnType<typeof loadUserProfileRequest>) {
     try {
-        const result: AxiosResponse<IUserProfile> = yield call(loadUserProfileAPI, action.userId);
+        const result: AxiosResponse<IUserProfile> = yield call(loadUserProfileAPI, action.userId, action.token);
         yield put(loadUserProfileSuccess(result.data));
         // yield put(loadUserProfileSuccess(createSampleUser()));
     } catch (err) {

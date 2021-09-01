@@ -30,7 +30,7 @@ export const ImageWrapper = styled.div`
         right: -30px;
         ${({ theme }) => theme.smbtn}
         .clear {
-            background: url('images/aurora_icon.png') no-repeat -316px -175px;
+            background: url('/images/aurora_icon.png') no-repeat -316px -175px;
             width: 7px;
             height: 7px;
         }

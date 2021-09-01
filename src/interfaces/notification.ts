@@ -1,5 +1,4 @@
 import { IAuth } from './user';
-
 import {
     loadAllNotificationSuccess,
     loadAllNotificationFailure,
@@ -28,7 +27,7 @@ export interface ISendNoti {
     type: string;
     from: number;
     to: number;
-    targetId: number | null;
+    targetId?: number;
     message: string;
 }
 

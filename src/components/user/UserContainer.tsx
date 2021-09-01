@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../redux/modules/post';
@@ -9,7 +8,6 @@ import { getToken } from '../../redux/sagas';
 import UserPresenter from './UserPresenter';
 
 const UserContainer = () => {
-    const router = useRouter();
     const dispatch = useDispatch();
     const { me, user, modifyProfileDone } = useSelector((state: RootState) => state.user);
     const { filterList } = useSelector((state: RootState) => state.post);
@@ -48,7 +46,7 @@ const UserContainer = () => {
     useEffect(() => {
         if (modifyProfileDone) {
             dispatch(loadProfileRequest(getToken() as string));
-            dispatch(loadUserProfileRequest(me.id));
+            dispatch(loadUserProfileRequest(me.id, getToken() as string));
             dispatch(loadUserPostsRequest(me.id, 0, filterList));
         }
     }, [modifyProfileDone]);
