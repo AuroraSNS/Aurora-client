@@ -20,6 +20,8 @@ import {
     loadUserProfileRequest,
     loadUserProfileSuccess,
     modifyLikelist,
+    searchUserRequest,
+    searchUserSuccess,
 } from '../redux/modules/user';
 
 export interface ILogInForm {
@@ -49,6 +51,7 @@ export interface IMe extends IUserProfile {
 export interface IUserState {
     me: null | IMe;
     user: IUserProfile | null;
+    searchList: IAuth[] | null;
     logInLoading: boolean;
     logInDone: boolean;
     logInError: null | string;
@@ -90,4 +93,6 @@ export type UserAction =
     | ReturnType<typeof modifyProfileSuccess>
     | ReturnType<typeof modifyProfileFailure>
     | ReturnType<typeof modifyProfileClear>
-    | ReturnType<typeof modifyLikelist>;
+    | ReturnType<typeof modifyLikelist>
+    | ReturnType<typeof searchUserRequest>
+    | ReturnType<typeof searchUserSuccess>;

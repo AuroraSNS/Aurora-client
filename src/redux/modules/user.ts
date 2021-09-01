@@ -1,7 +1,7 @@
 /* eslint-disable no-param-reassign */
 import produce from 'immer';
 
-import { ILogInForm, IMe, ISignUpForm, IUserProfile, IUserState, UserAction } from '../../interfaces/user';
+import { IAuth, ILogInForm, IMe, ISignUpForm, IUserProfile, IUserState, UserAction } from '../../interfaces/user';
 
 // 액션 상수
 export const LOG_IN_REQUEST = 'LOG_IN_REQUEST' as const;
@@ -30,12 +30,17 @@ export const LOAD_USER_PROFILE_REQUEST = 'LOAD_USER_PROFILE_REQUEST' as const;
 export const LOAD_USER_PROFILE_SUCCESS = 'LOAD_USER_PROFILE_SUCCESS' as const;
 export const LOAD_USER_PROFILE_FAILURE = 'LOAD_USER_PROFILE_FAILURE' as const;
 
+export const SEARCH_USER_REQUEST = 'SEARCH_USER_REQUEST' as const;
+export const SEARCH_USER_SUCCESS = 'SEARCH_USER_SUCCESS' as const;
+export const SEARCH_USER_FAILURE = 'SEARCH_USER_FAILURE' as const;
+
 export const MODIFY_LIKELIST = 'MODIFY_LIKELIST' as const;
 
 // initial state
 export const initialState: IUserState = {
     me: null,
     user: null,
+    searchList: null,
     logInLoading: false,
     logInDone: false,
     logInError: null,
@@ -159,6 +164,12 @@ export default function reducer(state = initialState, action: UserAction) {
                 }
                 break;
             }
+            case SEARCH_USER_REQUEST:
+                draft.searchList = null;
+                break;
+            case SEARCH_USER_SUCCESS:
+                draft.searchList = action.data;
+                break;
             default:
                 break;
         }
@@ -263,4 +274,14 @@ export const modifyProfileClear = () => ({
 export const modifyLikelist = (postId: number) => ({
     type: MODIFY_LIKELIST,
     postId,
+});
+
+export const searchUserRequest = (searchString: string) => ({
+    type: SEARCH_USER_REQUEST,
+    searchString,
+});
+
+export const searchUserSuccess = (data: IAuth[]) => ({
+    type: SEARCH_USER_SUCCESS,
+    data,
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import RecommendFriend from './recommendFriend';
-import SearchBar from '../../common/searchBar';
+import SearchBar from './searchBar';
 import { Wrapper } from './style';
 import TodayWeather from './todayWeather';
 import WeatherStatistics from './weatherStatistics';

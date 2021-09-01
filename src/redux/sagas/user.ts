@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import { destroyCookie, setCookie } from 'nookies';
-import { all, fork, put, takeLatest, call, delay } from 'redux-saga/effects';
+import { all, fork, put, takeLatest, call, delay, debounce } from 'redux-saga/effects';
 import axios, { AxiosResponse } from 'axios';
 import {
     loadProfileFailure,
@@ -22,12 +22,15 @@ import {
     modifyProfileRequest,
     modifyProfileSuccess,
     MODIFY_PROFILE_REQUEST,
+    searchUserRequest,
+    searchUserSuccess,
+    SEARCH_USER_REQUEST,
     signUpFailure,
     signUpRequest,
     signUpSuccess,
     SIGN_UP_REQUEST,
 } from '../modules/user';
-import { ILogInForm, IMe, ISignUpForm, IUserProfile } from '../../interfaces/user';
+import { IAuth, ILogInForm, IMe, ISignUpForm, IUserProfile } from '../../interfaces/user';
 import { getToken } from '.';
 
 function logInAPI(data: ILogInForm) {
@@ -134,6 +137,25 @@ function* modifyProfile(action: ReturnType<typeof modifyProfileRequest>) {
     }
 }
 
+function searchUserAPI(name: string) {
+    return axios({
+        method: 'GET',
+        url: '/user/search',
+        params: {
+            name,
+        },
+    });
+}
+
+function* searchUser(action: ReturnType<typeof searchUserRequest>) {
+    try {
+        const result: AxiosResponse<IAuth[]> = yield call(searchUserAPI, action.searchString);
+        yield put(searchUserSuccess(result.data));
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
 function* watchLogIn() {
     yield takeLatest(LOG_IN_REQUEST, logIn);
 }
@@ -158,6 +180,10 @@ function* watchModifyProfile() {
     yield takeLatest(MODIFY_PROFILE_REQUEST, modifyProfile);
 }
 
+function* watchSearchUser() {
+    yield debounce(1000, SEARCH_USER_REQUEST, searchUser);
+}
+
 export default function* userSaga() {
     yield all([
         fork(watchLogIn),
@@ -166,5 +192,6 @@ export default function* userSaga() {
         fork(watchModifyProfile),
         fork(watchLoadProfile),
         fork(watchLoadUserProfile),
+        fork(watchSearchUser),
     ]);
 }
