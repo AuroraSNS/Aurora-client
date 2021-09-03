@@ -73,12 +73,9 @@ function signUpAPI(data: ISignUpForm) {
 
 function* signUp(action: ReturnType<typeof signUpRequest>) {
     try {
-        const res: any = yield call(signUpAPI, action.data);
-        console.log(res);
+        yield call(signUpAPI, action.data);
         yield put(signUpSuccess());
     } catch (err) {
-        console.log('err', err.message);
-        console.error('err', err);
         yield put(signUpFailure(err.message));
     }
 }
