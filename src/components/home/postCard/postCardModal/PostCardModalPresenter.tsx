@@ -12,11 +12,11 @@ import CommentBoxContainer from '../commentBox/CommentBoxContainer';
 import PostHeaderContainer from '../postHeader/PostHeaderContainer';
 
 type Props = {
-    onClickLike: () => void;
     onClose: () => void;
     post: IPost;
     commentCnt: number;
     isLike: boolean;
+    onClickLike: (v: boolean) => void;
 };
 
 const PostCardModalPresenter = ({ onClickLike, onClose, post, commentCnt, isLike }: Props) => (
@@ -29,8 +29,16 @@ const PostCardModalPresenter = ({ onClickLike, onClose, post, commentCnt, isLike
                     <p>{post.content}</p>
                 </div>
                 <div>
-                    <div onClick={onClickLike}>{isLike ? <IconLike /> : <IconDislike />}</div>
-                    <span className="comment-cnt">댓글 {Math.max(post.commentCnt, commentCnt)}개</span>
+                    {isLike ? (
+                        <div onClick={() => onClickLike(false)}>
+                            <IconLike />
+                        </div>
+                    ) : (
+                        <div onClick={() => onClickLike(true)}>
+                            <IconDislike />
+                        </div>
+                    )}
+                    <span className="comment-cnt">댓글 {post.commentCnt}개</span>
                 </div>
                 <CommentFormContainer postId={post.id} />
                 <CommentBoxContainer postId={post.id} vertical />

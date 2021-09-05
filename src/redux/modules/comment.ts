@@ -145,9 +145,10 @@ export const modifyCommentFailure = (error: string) => ({
     error,
 });
 
-export const removeCommentRequest = (commentId: number) => ({
+export const removeCommentRequest = (commentId: number, postId: number) => ({
     type: REMOVE_COMMENT_REQUEST,
     commentId,
+    postId,
 });
 
 export const removeCommentSuccess = () => ({

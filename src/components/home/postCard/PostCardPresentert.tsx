@@ -92,7 +92,7 @@ const PostCardPresentert = ({
             <span className="like-cnt">{post.likeCnt}</span>
             <ToolTip message="댓글 열기/닫기">
                 <span className="comment-cnt" onClick={onChangeCommentBox}>
-                    댓글 {Math.max(post.commentCnt, commentCnt)}개
+                    댓글 {post.commentCnt}개
                 </span>
             </ToolTip>
             <div className="form-wrapper">

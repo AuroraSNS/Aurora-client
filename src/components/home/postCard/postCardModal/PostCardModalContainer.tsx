@@ -16,21 +16,23 @@ const PostCardModalContainer = ({ post, onClose }: Props) => {
     const { me } = useSelector((state: RootState) => state.user);
     const { commentCnt } = useSelector((state: RootState) => state.comment);
 
-    const onClickLike = useCallback(() => {
-        if (me) {
-            // dispatch(likePostRequest(post.id, me.likeList.includes(post.id)));
-            dispatch(likePostRequest(post.id, true));
-        }
-    }, []);
+    const onClickLike = useCallback(
+        (islike: boolean) => {
+            if (me) {
+                // dispatch(likePostRequest(post.id, me.likeList.includes(post.id)));
+                dispatch(likePostRequest(post.id, islike));
+            }
+        },
+        [me, post],
+    );
 
     return (
         <PostCardModalPresenter
-            onClickLike={onClickLike}
             onClose={onClose}
             post={post}
             commentCnt={commentCnt}
-            isLike
-            // isLike={me.likeList.includes(post.id)}
+            isLike={me?.likeList.includes(post.id) || false}
+            onClickLike={onClickLike}
         />
     );
 };

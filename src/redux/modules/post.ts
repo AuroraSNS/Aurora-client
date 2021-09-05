@@ -45,6 +45,7 @@ export const REMOVE_LIKE_SUCCESS = 'REMOVE_LIKE_SUCCESS' as const;
 export const REMOVE_LIKE_FAILURE = 'REMOVE_LIKE_FAILURE' as const;
 
 export const ADD_POST_COMMENT = 'ADD_POST_COMMENT' as const;
+export const REMOVE_POST_COMMENT = 'REMOVE_POST_COMMENT' as const;
 
 // 초기 데이터 구조
 export const initialState: IPostState = {
@@ -213,6 +214,13 @@ const reducer = (state = initialState, action: PostAction) =>
                 }
                 break;
             }
+            case REMOVE_POST_COMMENT: {
+                const tmp = (draft.Posts as IPost[]).find((post: IPost) => post.id === action.postId);
+                if (tmp) {
+                    (tmp as IPost).commentCnt -= 1;
+                }
+                break;
+            }
             default:
                 break;
         }
@@ -353,6 +361,11 @@ export const likePostFailure = (error: string) => ({
 
 export const addPostComment = (postId: number) => ({
     type: ADD_POST_COMMENT,
+    postId,
+});
+
+export const removePostComment = (postId: number) => ({
+    type: REMOVE_POST_COMMENT,
     postId,
 });
 

@@ -129,6 +129,7 @@ function* modifyProfile(action: ReturnType<typeof modifyProfileRequest>) {
     try {
         yield call(modifyProfileAPI, action.data);
         yield put(modifyProfileSuccess());
+        yield put(loadProfileRequest(getToken() as string));
     } catch (err) {
         yield put(modifyProfileFailure(err.message));
     }

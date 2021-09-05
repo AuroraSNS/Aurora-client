@@ -36,7 +36,7 @@ const CommentBoxContainer = ({ postId, ht, vertical }: Props) => {
         }
     }, [addCommentDone, modifyCommentDone, removeCommentDone]);
 
-    return <CommentBoxPresenter comments={comments} ht={ht as string} vertical={vertical as boolean} />;
+    return <CommentBoxPresenter postId={postId} comments={comments} ht={ht as string} vertical={vertical as boolean} />;
 };
 
 CommentBoxContainer.defaultProps = {

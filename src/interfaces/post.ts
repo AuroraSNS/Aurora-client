@@ -24,6 +24,7 @@ import {
     modifyPostFailure,
     modifyPostRequest,
     modifyPostSuccess,
+    removePostComment,
     removePostFailure,
     removePostRequest,
     removePostSuccess,
@@ -104,4 +105,5 @@ export type PostAction =
     | ReturnType<typeof likePostRequest>
     | ReturnType<typeof likePostSuccess>
     | ReturnType<typeof likePostFailure>
-    | ReturnType<typeof addPostComment>;
+    | ReturnType<typeof addPostComment>
+    | ReturnType<typeof removePostComment>;

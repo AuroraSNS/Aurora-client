@@ -15,7 +15,9 @@ const SearchBar = () => {
     const dispatch = useDispatch();
 
     const onSearch = useCallback(() => {
-        dispatch(searchUserRequest(search));
+        if (search.length > 0) {
+            dispatch(searchUserRequest(search));
+        }
     }, [dispatch, search]);
 
     return (

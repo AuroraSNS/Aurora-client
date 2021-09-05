@@ -96,6 +96,7 @@ function* removeComment(action: ReturnType<typeof removeCommentRequest>) {
     try {
         yield call(removeCommentAPI, action.commentId);
         yield put(removeCommentSuccess());
+        yield put(removePostComment(action.postId));
     } catch (err) {
         yield put(removeCommentFailure(err.message));
     }

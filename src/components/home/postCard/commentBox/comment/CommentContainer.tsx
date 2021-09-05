@@ -8,11 +8,12 @@ import { RootState } from '../../../../../redux/modules/reducer';
 import CommentPresenter from './CommentPresenter';
 
 type Props = {
+    postId: number;
     comment: IComment;
     vertical?: boolean;
 };
 
-const CommentContainer = ({ comment, vertical }: Props) => {
+const CommentContainer = ({ postId, comment, vertical }: Props) => {
     const dispatch = useDispatch();
     const { me } = useSelector((state: RootState) => state.user);
     const { modifyCommentDone } = useSelector((state: RootState) => state.comment);
@@ -37,7 +38,7 @@ const CommentContainer = ({ comment, vertical }: Props) => {
 
     const removeOk = useCallback(
         (id: number) => {
-            dispatch(removeCommentRequest(id));
+            dispatch(removeCommentRequest(id, postId));
             showRemoveModalToggle();
             showMoreOptionsToggle();
         },
