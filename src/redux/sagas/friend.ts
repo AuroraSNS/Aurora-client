@@ -4,11 +4,16 @@ import { getToken } from '.';
 import { IAuth } from '../../interfaces/user';
 import {
     addFriendRequest,
+    addRecommendFriendRequest,
+    addRecommendFriendSuccess,
     ADD_FRIEND_REQUEST,
+    ADD_RECOMMEND_FRIEND_REQUEST,
     loadFriendListFailure,
     loadFriendListRequest,
     loadFriendListSuccess,
+    loadRecommendFriendSuccess,
     LOAD_FRIEND_LIST_REQUEST,
+    LOAD_RECOMMEND_FRIEND_REQUEST,
     removeFriendRequest,
     REMOVE_FRIEND_REQUEST,
 } from '../modules/friend';
@@ -45,6 +50,14 @@ function* addFriend(action: ReturnType<typeof addFriendRequest>) {
         console.log(err);
     }
 }
+function* addRecommendFriend(action: ReturnType<typeof addRecommendFriendRequest>) {
+    try {
+        yield call(addFriendAPI, action.friendId);
+        yield put(addRecommendFriendSuccess(action.friendId));
+    } catch (err) {
+        console.log(err);
+    }
+}
 
 function removeFriendAPI(friendId: number) {
     return axios({
@@ -63,16 +76,45 @@ function* removeFriend(action: ReturnType<typeof removeFriendRequest>) {
     }
 }
 
+function loadRecommendFriendAPI() {
+    return axios({
+        method: 'GET',
+        url: `/user/random`,
+    });
+}
+
+function* loadRecommendFriend() {
+    try {
+        const result: AxiosResponse<IAuth[]> = yield call(loadRecommendFriendAPI);
+        yield put(loadRecommendFriendSuccess(result.data));
+    } catch (err) {
+        console.log(err);
+    }
+}
+
 function* watchLoadFriendList() {
     yield takeLatest(LOAD_FRIEND_LIST_REQUEST, loadFriendList);
 }
 function* watchAddFriend() {
     yield takeLatest(ADD_FRIEND_REQUEST, addFriend);
 }
+function* watchAddRecommendFriend() {
+    yield takeLatest(ADD_RECOMMEND_FRIEND_REQUEST, addRecommendFriend);
+}
 function* watchRemoveFriend() {
     yield takeLatest(REMOVE_FRIEND_REQUEST, removeFriend);
 }
 
+function* watchLoadRecommendFriend() {
+    yield takeLatest(LOAD_RECOMMEND_FRIEND_REQUEST, loadRecommendFriend);
+}
+
 export default function* friendSaga() {
-    yield all([fork(watchLoadFriendList), fork(watchAddFriend), fork(watchRemoveFriend)]);
+    yield all([
+        fork(watchLoadFriendList),
+        fork(watchLoadRecommendFriend),
+        fork(watchAddFriend),
+        fork(watchAddRecommendFriend),
+        fork(watchRemoveFriend),
+    ]);
 }

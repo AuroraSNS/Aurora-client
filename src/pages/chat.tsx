@@ -6,6 +6,7 @@ import wrapper from '../redux/create';
 import { loadRoomsRequest } from '../redux/modules/chat';
 import { loadProfileRequest } from '../redux/modules/user';
 import { loadAllStatisticsRequest } from '../redux/modules/post';
+import { loadRecommendFriendRequest } from '../redux/modules/friend';
 
 const Chat = () => <ChatContainer />;
 
@@ -15,6 +16,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
         context.store.dispatch(loadRoomsRequest(cookies.accessToken));
     }
+    context.store.dispatch(loadRecommendFriendRequest());
     context.store.dispatch(loadAllStatisticsRequest());
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();

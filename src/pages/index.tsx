@@ -5,6 +5,7 @@ import wrapper from '../redux/create';
 import { loadAllPostsRequest, loadAllStatisticsRequest } from '../redux/modules/post';
 import { loadProfileRequest } from '../redux/modules/user';
 import { loadAllNotificationRequest } from '../redux/modules/notification';
+import { loadRecommendFriendRequest } from '../redux/modules/friend';
 
 const Home = () => <HomeContainer />;
 
@@ -14,6 +15,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
         context.store.dispatch(loadProfileRequest(cookies.accessToken));
         context.store.dispatch(loadAllNotificationRequest(cookies.accessToken));
     }
+    context.store.dispatch(loadRecommendFriendRequest());
     context.store.dispatch(loadAllStatisticsRequest());
     context.store.dispatch(loadAllPostsRequest(0, []));
     context.store.dispatch(END);

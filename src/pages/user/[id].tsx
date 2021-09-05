@@ -5,6 +5,7 @@ import UserContainer from '../../components/user/UserContainer';
 import wrapper from '../../redux/create';
 import { loadUserPostsRequest, loadUserStatisticsRequest } from '../../redux/modules/post';
 import { loadProfileRequest, loadUserProfileRequest } from '../../redux/modules/user';
+import { loadRecommendFriendRequest } from '../../redux/modules/friend';
 
 const User = () => <UserContainer />;
 
@@ -18,6 +19,7 @@ export const getServerSideProps = wrapper.getServerSideProps(async (context) => 
         context.store.dispatch(loadUserProfileRequest(Number(context.params.id), cookies.accessToken));
         context.store.dispatch(loadUserPostsRequest(Number(context.params.id), 0, []));
     }
+    context.store.dispatch(loadRecommendFriendRequest());
     context.store.dispatch(END);
     await context.store.sagaTask?.toPromise();
 });
