@@ -22,7 +22,7 @@ import {
     modifyCommentRequest,
 } from '../modules/comment';
 import { IComment } from '../../interfaces/comment';
-import { addPostComment } from '../modules/post';
+import { addPostComment, removePostComment } from '../modules/post';
 
 function loadCommentAPI(postId: number) {
     return axios({
