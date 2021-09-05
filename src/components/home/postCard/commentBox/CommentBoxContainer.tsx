@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IComment } from '../../../../interfaces/comment';
-import { loadCommentRequest } from '../../../../redux/modules/comment';
+import { loadCommentClear, loadCommentRequest } from '../../../../redux/modules/comment';
 import { RootState } from '../../../../redux/modules/reducer';
 import CommentBoxPresenter from './CommentBoxPresenter';
 
@@ -25,8 +25,9 @@ const CommentBoxContainer = ({ postId, ht, vertical }: Props) => {
     }, []);
 
     useEffect(() => {
-        if (loadCommentDone) {
+        if (loadCommentDone && !comments) {
             setComments(comment);
+            dispatch(loadCommentClear());
         }
     }, [loadCommentDone]);
 

@@ -12,6 +12,7 @@ import {
     removeCommentRequest,
     removeCommentSuccess,
     removeCommentFailure,
+    loadCommentClear,
 } from '../redux/modules/comment';
 
 export interface IComment {
@@ -44,6 +45,7 @@ export type ICommentAction =
     | ReturnType<typeof loadCommentRequest>
     | ReturnType<typeof loadCommentSuccess>
     | ReturnType<typeof loadCommentFailure>
+    | ReturnType<typeof loadCommentClear>
     | ReturnType<typeof modifyCommentRequest>
     | ReturnType<typeof modifyCommentSuccess>
     | ReturnType<typeof modifyCommentFailure>

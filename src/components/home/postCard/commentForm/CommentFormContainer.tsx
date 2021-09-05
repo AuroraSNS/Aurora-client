@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { FormEvent, useCallback, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import useInput from '../../../../hooks/useInput';
@@ -14,6 +15,7 @@ type Props = {
 
 const CommentFormContainer = ({ postId }: Props) => {
     const dispatch = useDispatch();
+    const router = useRouter();
     const { addCommentDone } = useSelector((state: RootState) => state.comment);
     const [content, onChangeContent, setContent] = useInput('');
 
@@ -31,18 +33,22 @@ const CommentFormContainer = ({ postId }: Props) => {
     const onSubmit = useCallback(
         (e: FormEvent<HTMLFormElement>) => {
             e.preventDefault();
-            dispatch(addCommentRequest(postId, content));
+            if (me) {
+                dispatch(addCommentRequest(postId, content));
 
-            const you = Posts.find((post: IPost) => post.id === postId).auth;
+                const you = Posts.find((post: IPost) => post.id === postId).auth;
 
-            const newNoti: ISendNoti = {
-                type: 'POST',
-                from: me.id,
-                to: you.id,
-                targetId: postId,
-                message: `${me.name}님이 ${you.name}님 게시물에 댓글을 달았습니다.`,
-            };
-            socket.send('/pub/notification', headers, JSON.stringify(newNoti));
+                const newNoti: ISendNoti = {
+                    type: 'POST',
+                    from: me.id,
+                    to: you.id,
+                    targetId: postId,
+                    message: `${me.name}님이 ${you.name}님 게시물에 댓글을 달았습니다.`,
+                };
+                socket.send('/pub/notification', headers, JSON.stringify(newNoti));
+            } else {
+                router.push('/login');
+            }
         },
         [content],
     );

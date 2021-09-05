@@ -6,6 +6,7 @@ import { IComment, ICommentAction, ICommentState } from '../../interfaces/commen
 export const LOAD_COMMENT_REQUEST = 'LOAD_COMMENT_REQUEST' as const;
 export const LOAD_COMMENT_SUCCESS = 'LOAD_COMMENT_SUCCESS' as const;
 export const LOAD_COMMENT_FAILURE = 'LOAD_COMMENT_FAILURE' as const;
+export const LOAD_COMMENT_CLEAR = 'LOAD_COMMENT_CLEAR' as const;
 
 export const ADD_COMMENT_REQUEST = 'ADD_COMMENT_REQUEST' as const;
 export const ADD_COMMENT_SUCCESS = 'ADD_COMMENT_SUCCESS' as const;
@@ -55,6 +56,11 @@ const reducer = (state = initialState, action: ICommentAction) =>
             case LOAD_COMMENT_FAILURE:
                 draft.loadCommentLoading = false;
                 draft.loadCommentError = action.error;
+                break;
+            case LOAD_COMMENT_FAILURE:
+                draft.loadCommentLoading = false;
+                draft.loadCommentDone = false;
+                draft.loadCommentError = null;
                 break;
             case ADD_COMMENT_REQUEST:
                 draft.addCommentLoading = true;
@@ -113,6 +119,10 @@ export const loadCommentSuccess = (data: { comments: IComment[]; commentCnt: num
 export const loadCommentFailure = (error: string) => ({
     type: LOAD_COMMENT_FAILURE,
     error,
+});
+
+export const loadCommentClear = () => ({
+    type: LOAD_COMMENT_CLEAR,
 });
 
 export const addCommentRequest = (postId: number, content: string) => ({
