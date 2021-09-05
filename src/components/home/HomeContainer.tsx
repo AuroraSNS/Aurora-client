@@ -46,13 +46,6 @@ const HomeContainer = () => {
         }
     }, [addPostDone, removePostDone, modifyPostDone, dispatch, page]);
 
-    // 게시물 더 불러오기
-    useEffect(() => {
-        if (loadAllPostsDone) {
-            setPage(Math.ceil(Posts.length / 10));
-        }
-    }, [loadAllPostsDone, Posts.length]);
-
     // 무한스크롤
     useEffect(() => {
         function onScroll() {
@@ -62,6 +55,7 @@ const HomeContainer = () => {
             ) {
                 if (loadAllPostsLoading || !hasMorePosts) return;
                 dispatch(loadAllPostsRequest(page, filterList));
+                setPage((prev) => prev + 1);
             }
         }
         window.addEventListener('scroll', onScroll);

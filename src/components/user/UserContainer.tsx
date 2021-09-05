@@ -38,12 +38,6 @@ const UserContainer = () => {
     }, [addPostDone, removePostDone, modifyPostDone, dispatch, page]);
 
     useEffect(() => {
-        if (loadUserPostsDone) {
-            setPage(Math.ceil(Posts.length / 10));
-        }
-    }, [loadUserPostsDone, Posts.length]);
-
-    useEffect(() => {
         if (modifyProfileDone) {
             dispatch(loadProfileRequest(getToken() as string));
             dispatch(loadUserProfileRequest(me.id, getToken() as string));
@@ -59,6 +53,7 @@ const UserContainer = () => {
             ) {
                 if (loadUserPostsLoading || !hasMorePosts) return;
                 dispatch(loadUserPostsRequest(user.id, page, filterList));
+                setPage((prev) => prev + 1);
             }
         }
         window.addEventListener('scroll', onScroll);

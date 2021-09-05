@@ -221,11 +221,11 @@ function* likePost(action: ReturnType<typeof likePostRequest>) {
 }
 
 function* watchLoadAllPosts() {
-    yield throttle(5000, LOAD_ALL_POSTS_REQUEST, loadAllPosts);
+    yield throttle(1000, LOAD_ALL_POSTS_REQUEST, loadAllPosts);
 }
 
 function* watchLoadUserPosts() {
-    yield throttle(5000, LOAD_USER_POSTS_REQUEST, loadUserPosts);
+    yield throttle(1000, LOAD_USER_POSTS_REQUEST, loadUserPosts);
 }
 
 function* watchAddPost() {
